@@ -1,8 +1,11 @@
 import "./App.css";
-import { useDataSize } from "./components/SetDataSize";
+import DataSetSize from "./components/data-set-size/DataSetSize";
+import { useDataSize } from "./components/data-set-size/SetDataSize";
 
 const App = () => {
-  const [value, add, subtract, handleChange] = useDataSize(1);
+  // Manages the size of the data set to be sorted
+  // Passed as prop to DataSetSize component
+  const dataSize = useDataSize(2);
 
   return (
     <div className="App">
@@ -10,13 +13,9 @@ const App = () => {
       <h3>
         <i>*still a work in progress don't flame :(*</i>
       </h3>
-      <div className="data-size-form">
-        <input name="dataSize" value={value} onChange={handleChange}></input>
-        <div className="data-size-form-buttons">
-          <button onClick={subtract}>-</button>
-          <button onClick={add}>+</button>
-        </div>
-      </div>
+      {/*This is the form that manages the size of the data array that is to be sorted
+      (minimum size = 2) */}
+      <DataSetSize dataSize={dataSize} />
     </div>
   );
 };
