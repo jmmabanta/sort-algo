@@ -34,8 +34,8 @@ Builds app for production in the `build` folder.
 ### `yarn deploy`
 
 Deploys the production build into the public GitHub pages site for all to see!\
-**NOTES:**
 
+**NOTES:**
 - Make sure you change `"hostname"` in `package.json` to fit the url of your own GitHub page.
 - The production build will be pushed to the `gh-pages` branch.
   - The `master` branch might not be updated so make sure to push any commits onto that also.
