@@ -3,7 +3,7 @@ import "./App.css";
 import DataSetSize from "./components/data-set/DataSetSize";
 import { useDataSize } from "./components/data-set/SetDataSize";
 
-import DataSet from "./components/DataSet";
+import DataSet from "./components/data-set/DataSet";
 
 const App = () => {
   // Manages the size of the data set to be sorted
