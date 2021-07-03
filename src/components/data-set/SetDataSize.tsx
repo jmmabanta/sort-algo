@@ -15,16 +15,16 @@ export const useDataSize = (initialValue: number): DataSizeType => {
 
   // Used for the + and - buttons
   const add = () => setValue((e) => e + 1);
-  const subtract = () => setValue((e) => (e > 2 ? e - 1 : 2));
+  const subtract = () => setValue((e) => (e > 1 ? e - 1 : 1));
 
   // Used for direct user input in the field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regexCheck = /^[0-9\b]+$/; // Checks if input is a valid number
     if (
       e.target.value === "" ||
-      (regexCheck.test(e.target.value) && parseInt(e.target.value) >= 2)
+      (regexCheck.test(e.target.value) && parseInt(e.target.value) >= 1)
     )
-      setValue(parseInt(e.target.value) || 2);
+      setValue(parseInt(e.target.value) || 1);
   };
 
   return { value, add, subtract, handleChange };

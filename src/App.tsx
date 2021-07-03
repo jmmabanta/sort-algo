@@ -8,7 +8,7 @@ import DataSet from "./components/data-set/DataSet";
 const App = () => {
   // Manages the size of the data set to be sorted
   // Passed as prop to DataSetSize component
-  const dataSize = useDataSize(2);
+  const dataSize = useDataSize(6);
   return (
     <div className="App">
       <h1>Sorting Algorithms</h1>

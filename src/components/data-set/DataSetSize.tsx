@@ -12,6 +12,7 @@ interface DataProps {
 const DataSetSize = (props: DataProps) => {
   return (
     <div className="data-size-form">
+      <h2>Data Set Size:</h2>
       <input
         name="dataSize"
         value={props.dataSize.value}
