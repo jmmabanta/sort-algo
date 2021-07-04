@@ -8,7 +8,10 @@ interface DataSizeType {
   incrementSize: (delta: number) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   dataSet: number[];
+  sortData: (sortAlgo: SortingAlgorithm) => void;
 }
+
+export type SortingAlgorithm = (dataSet: number[]) => number[];
 
 // Generates random data b/w -100 and 100 inclusive
 const generateData = (size: number): number[] => {
@@ -50,5 +53,9 @@ export const useDataState = (initialValue: number): DataSizeType => {
     }
   };
 
-  return { size, incrementSize, handleChange, dataSet };
+  const sortData = (sortAlgo: SortingAlgorithm) => {
+    setDataSet((e) => sortAlgo(e));
+  };
+
+  return { size, incrementSize, handleChange, dataSet, sortData };
 };
