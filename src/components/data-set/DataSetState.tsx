@@ -1,0 +1,54 @@
+/* The state manager for the data set size */
+
+import React, { useState } from 'react';
+
+// Defines types for the hook
+interface DataSizeType {
+  size: number;
+  incrementSize: (delta: number) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  dataSet: number[];
+}
+
+// Generates random data b/w -100 and 100 inclusive
+const generateData = (size: number): number[] => {
+  let data: number[] = [size];
+  for (let i = 0; i < size; i++) {
+    data[i] = Math.floor(Math.random() * 201) - 100;
+  }
+  return data;
+};
+
+export const useDataState = (initialValue: number): DataSizeType => {
+  const [size, setSize] = useState(initialValue);
+  const [dataSet, setDataSet] = useState(generateData(size));
+
+  // Used for buttons
+  const incrementSize = (delta: number) => {
+    setSize((e) => {
+      let newSize = e;
+      if (delta > 0) {
+        newSize += delta;
+      } else {
+        newSize = newSize > delta * -1 ? newSize + delta : delta * -1;
+      }
+      setDataSet(generateData(newSize));
+      return newSize;
+    });
+  };
+
+  // Used for direct user input in the field
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const regexCheck = /^[0-9\b]+$/; // Checks if input is a valid number
+    if (
+      e.target.value === '' ||
+      (regexCheck.test(e.target.value) && parseInt(e.target.value) >= 1)
+    ) {
+      const newValue = parseInt(e.target.value) || 1;
+      setSize(newValue);
+      setDataSet(generateData(newValue));
+    }
+  };
+
+  return { size, incrementSize, handleChange, dataSet };
+};
