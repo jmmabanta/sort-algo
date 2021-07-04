@@ -2,7 +2,7 @@ interface DataSetProps {
   size: number;
 }
 
-const generate_data = (size: number): number[] => {
+const generateData = (size: number): number[] => {
   let data: number[] = [size];
   for (let i = 0; i < size; i++) {
     data[i] = Math.floor(Math.random() * 200) - 100;
@@ -11,13 +11,13 @@ const generate_data = (size: number): number[] => {
 };
 
 const DataSet = (props: DataSetProps) => {
-  const testArray = generate_data(props.size);
+  const testArray = generateData(props.size);
   const display =
-    "[" +
+    '[' +
     testArray.map((num) => {
-      return " " + num;
+      return ' ' + num;
     }) +
-    " ]";
+    ' ]';
   return (
     <div>
       <h2>Data:</h2>

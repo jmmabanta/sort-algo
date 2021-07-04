@@ -1,6 +1,6 @@
 /* The state manager for the data set size */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 // Defines types for the hook
 interface DataSizeType {
@@ -21,7 +21,7 @@ export const useDataSize = (initialValue: number): DataSizeType => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regexCheck = /^[0-9\b]+$/; // Checks if input is a valid number
     if (
-      e.target.value === "" ||
+      e.target.value === '' ||
       (regexCheck.test(e.target.value) && parseInt(e.target.value) >= 1)
     )
       setValue(parseInt(e.target.value) || 1);
