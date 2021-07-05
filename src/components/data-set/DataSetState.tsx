@@ -13,11 +13,11 @@ type DataSizeType = {
 
 type SortingAlgorithm = (dataSet: number[]) => number[];
 
-// Generates random data b/w -100 and 100 inclusive
+// Generates random data b/w 10 and 1000 inclusive
 const generateData = (size: number): number[] => {
   let data: number[] = [size];
   for (let i = 0; i < size; i++) {
-    data[i] = Math.floor(Math.random() * 201) - 100;
+    data[i] = Math.floor(Math.random() * 991) + 10;
   }
   return data;
 };

@@ -1,5 +1,3 @@
-import './App.css';
-
 import DataSetSize from './components/data-set/DataSetSize';
 import { useDataState } from './components/data-set/DataSetState';
 import DataSetDisplay from './components/data-set/DataSetDisplay';

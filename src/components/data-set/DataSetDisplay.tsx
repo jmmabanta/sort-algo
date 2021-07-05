@@ -5,12 +5,12 @@ interface DataSetProps {
 const DataSetDisplay = (props: DataSetProps) => {
   const display =
     '[' +
-    props.dataSet.map((num) => {
-      return ' ' + num;
+    props.dataSet.map((num, index) => {
+      return ' ' + index + ': ' + num;
     }) +
     ' ]';
   return (
-    <div>
+    <div className="data_container">
       <h2>Data:</h2>
       <h3>{display}</h3>
       <p>There are {props.dataSet.length} random elements in the data set.</p>
