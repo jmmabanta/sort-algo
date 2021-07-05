@@ -5,7 +5,7 @@ import SortData from './components/sort/SortData';
 
 const App = () => {
   // Manages the data set used for sorting
-  const dataState = useDataState(6);
+  const dataState = useDataState(200);
 
   return (
     <div className="App">
