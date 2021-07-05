@@ -12,6 +12,7 @@ const DataSetSize = (props: DataProps) => {
   return (
     <div className="data-size-form">
       <h2>Data Set Size:</h2>
+      <p>Minimum = 15 | Maximum = what you can handle</p>
       <input
         name="dataSize"
         value={props.dataSize.size}
