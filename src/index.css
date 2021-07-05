@@ -10,3 +10,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.App {
+  text-align: center;
+}
+
+.data_bar {
+  display: inline-block;
+  background-color: cornflowerblue;
+  height: 45vh;
+}

@@ -13,11 +13,11 @@ type DataSizeType = {
 
 type SortingAlgorithm = (dataSet: number[]) => number[];
 
-// Generates random data b/w -100 and 100 inclusive
+// Generates random data
 const generateData = (size: number): number[] => {
   let data: number[] = [size];
   for (let i = 0; i < size; i++) {
-    data[i] = Math.floor(Math.random() * 201) - 100;
+    data[i] = Math.random() * 45 + 1;
   }
   return data;
 };
@@ -33,7 +33,7 @@ export const useDataState = (initialValue: number): DataSizeType => {
       if (delta > 0) {
         newSize += delta;
       } else {
-        newSize = newSize > delta * -1 ? newSize + delta : delta * -1;
+        newSize = newSize > delta * -1 + 15 ? newSize + delta : 15;
       }
       setDataSet(generateData(newSize));
       return newSize;
@@ -47,7 +47,7 @@ export const useDataState = (initialValue: number): DataSizeType => {
       e.target.value === '' ||
       (regexCheck.test(e.target.value) && parseInt(e.target.value) >= 1)
     ) {
-      const newValue = parseInt(e.target.value) || 1;
+      const newValue = parseInt(e.target.value) > 15 ? parseInt(e.target.value) : 15;
       setSize(newValue);
       setDataSet(generateData(newValue));
     }
