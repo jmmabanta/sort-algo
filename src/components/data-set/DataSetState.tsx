@@ -3,15 +3,15 @@
 import React, { useState } from 'react';
 
 // Defines types for the hook
-interface DataSizeType {
+type DataSizeType = {
   size: number;
   incrementSize: (delta: number) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   dataSet: number[];
   sortData: (sortAlgo: SortingAlgorithm) => void;
-}
+};
 
-export type SortingAlgorithm = (dataSet: number[]) => number[];
+type SortingAlgorithm = (dataSet: number[]) => number[];
 
 // Generates random data b/w -100 and 100 inclusive
 const generateData = (size: number): number[] => {
