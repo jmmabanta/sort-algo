@@ -16,7 +16,7 @@ const App = () => {
         <i>*still a work in progress don't flame :(*</i>
       </h3>
       <DataSetSize dataSize={dataState} />
-      <DataSetDisplay dataSet={dataState.dataSet} size={dataState.size} />
+      <DataSetDisplay dataSet={dataState.dataSet} />
       <SortData sortData={dataState.sortData} />
     </div>
   );
