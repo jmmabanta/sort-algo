@@ -16,7 +16,6 @@ const DataSetDisplay = (props: DataSetProps) => {
   let width = calculateWidth(props.dataSet.length, 20);
   return (
     <div className="data_container">
-      <h2>Data:</h2>
       <div className="data_set">
         {props.dataSet.map((value, index) => {
           return (

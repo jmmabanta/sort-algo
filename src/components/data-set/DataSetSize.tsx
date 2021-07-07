@@ -2,8 +2,6 @@ import React from 'react';
 
 interface DataProps {
   dataSize: {
-    size: number;
-    incrementSize: (delta: number) => void;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
 }
@@ -11,17 +9,16 @@ interface DataProps {
 const DataSetSize = (props: DataProps) => {
   return (
     <div className="data-size-form">
-      <h2>Data Set Size:</h2>
-      <p>Minimum = 15 | Maximum = what you can handle</p>
       <input
-        name="dataSize"
-        value={props.dataSize.size}
+        type="range"
+        name="data_size"
+        min={100}
+        max={500}
+        step={10}
+        defaultValue={100}
+        onInput={props.dataSize.handleChange}
         onChange={props.dataSize.handleChange}
-      ></input>
-      <div className="data-size-form-buttons">
-        <button onClick={() => props.dataSize.incrementSize(-1)}>-</button>
-        <button onClick={() => props.dataSize.incrementSize(1)}>+</button>
-      </div>
+      />
     </div>
   );
 };
