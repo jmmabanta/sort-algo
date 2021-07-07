@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/sort-algo/static/css/main.978f0860.chunk.css",
-    "main.js": "/sort-algo/static/js/main.50ed0469.chunk.js",
-    "main.js.map": "/sort-algo/static/js/main.50ed0469.chunk.js.map",
+    "main.js": "/sort-algo/static/js/main.4ad83a10.chunk.js",
+    "main.js.map": "/sort-algo/static/js/main.4ad83a10.chunk.js.map",
     "runtime-main.js": "/sort-algo/static/js/runtime-main.6a3bf6b6.js",
     "runtime-main.js.map": "/sort-algo/static/js/runtime-main.6a3bf6b6.js.map",
-    "static/js/2.ce2bc0fa.chunk.js": "/sort-algo/static/js/2.ce2bc0fa.chunk.js",
-    "static/js/2.ce2bc0fa.chunk.js.map": "/sort-algo/static/js/2.ce2bc0fa.chunk.js.map",
+    "static/js/2.c7fd4b82.chunk.js": "/sort-algo/static/js/2.c7fd4b82.chunk.js",
+    "static/js/2.c7fd4b82.chunk.js.map": "/sort-algo/static/js/2.c7fd4b82.chunk.js.map",
     "index.html": "/sort-algo/index.html",
     "static/css/main.978f0860.chunk.css.map": "/sort-algo/static/css/main.978f0860.chunk.css.map",
-    "static/js/2.ce2bc0fa.chunk.js.LICENSE.txt": "/sort-algo/static/js/2.ce2bc0fa.chunk.js.LICENSE.txt"
+    "static/js/2.c7fd4b82.chunk.js.LICENSE.txt": "/sort-algo/static/js/2.c7fd4b82.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6a3bf6b6.js",
-    "static/js/2.ce2bc0fa.chunk.js",
+    "static/js/2.c7fd4b82.chunk.js",
     "static/css/main.978f0860.chunk.css",
-    "static/js/main.50ed0469.chunk.js"
+    "static/js/main.4ad83a10.chunk.js"
   ]
 }
