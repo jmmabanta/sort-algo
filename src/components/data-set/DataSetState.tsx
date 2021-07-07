@@ -25,7 +25,6 @@ export const useDataState = (initialValue: number): DataSizeType => {
 
   // Used for direct user input in the field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(parseInt(e.target.value));
     setDataSet((oldData) => generateData(parseInt(e.target.value)));
   };
 
