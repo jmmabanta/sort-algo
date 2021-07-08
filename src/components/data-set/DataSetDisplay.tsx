@@ -9,11 +9,11 @@ const calculateHeight = (dataSet: number[], value: number, maxHeight: number) =>
 };
 
 const calculateWidth = (dataSize: number, maxWidth: number) => {
-  return 55 / (2 * (dataSize - 1));
+  return maxWidth / (2 * (dataSize - 1));
 };
 
 const DataSetDisplay = (props: DataSetProps) => {
-  let width = calculateWidth(props.dataSet.length, 20);
+  let width = calculateWidth(props.dataSet.length, 60);
   return (
     <div className="data_container">
       <div className="data_set">

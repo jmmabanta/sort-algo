@@ -12,20 +12,20 @@ type DataSizeType = {
 export type SortingAlgorithm = (dataSet: number[]) => number[];
 
 // Generates random data
-const generateData = (size: number): number[] => {
+const generateData = (size: number, height: number): number[] => {
   let data: number[] = [size];
   for (let i = 0; i < size; i++) {
-    data[i] = Math.random() * 45 + 1;
+    data[i] = Math.random() * height + 1;
   }
   return data;
 };
 
-export const useDataState = (initialValue: number): DataSizeType => {
-  const [dataSet, setDataSet] = useState(generateData(initialValue));
+export const useDataState = (initialValue: number, height: number): DataSizeType => {
+  const [dataSet, setDataSet] = useState(generateData(initialValue, height));
 
   // Used for direct user input in the field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDataSet((oldData) => generateData(parseInt(e.target.value)));
+    setDataSet((oldData) => generateData(parseInt(e.target.value), height));
   };
 
   const sortData = (sortAlgo: SortingAlgorithm) => {
