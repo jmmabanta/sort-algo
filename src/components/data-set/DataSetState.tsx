@@ -9,7 +9,7 @@ type DataSizeType = {
   sortData: (sortAlgo: SortingAlgorithm) => void;
 };
 
-type SortingAlgorithm = (dataSet: number[]) => number[];
+export type SortingAlgorithm = (dataSet: number[]) => number[];
 
 // Generates random data
 const generateData = (size: number): number[] => {

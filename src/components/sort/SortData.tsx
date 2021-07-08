@@ -1,7 +1,8 @@
 import selectionSort from './algorithms/SelectionSort';
+import { SortingAlgorithm } from './../data-set/DataSetState';
 
 interface SortProps {
-  sortData: (sortAlgo: (dataSet: number[]) => number[]) => void;
+  sortData: (sortAlgo: SortingAlgorithm) => void;
 }
 
 const SortData = (props: SortProps) => {
