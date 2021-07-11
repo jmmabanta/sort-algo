@@ -1,7 +1,7 @@
 import DataSetSize from './components/data-set/DataSetSize';
 import { useDataState } from './components/data-set/DataSetState';
-import DataSetDisplay from './components/data-set/DataSetDisplay';
-import SortData from './components/sort/SortData';
+import DataSetDisplay from './components/DataSetDisplay';
+import SortDataButtons from './components/sort/SortDataButtons';
 
 const App = () => {
   // Manages the data set used for sorting
@@ -15,7 +15,7 @@ const App = () => {
       </h3>
       <DataSetDisplay dataSet={dataState.dataSet} />
       <DataSetSize dataSize={dataState} />
-      <SortData sortData={dataState.sortData} />
+      <SortDataButtons sortData={dataState.sortData} />
     </div>
   );
 };

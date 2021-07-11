@@ -1,11 +1,11 @@
 import selectionSort from './algorithms/SelectionSort';
-import { SortingAlgorithm } from './../data-set/DataSetState';
+import { SortingAlgorithm } from '../data-set/DataSetState';
 
 interface SortProps {
   sortData: (sortAlgo: SortingAlgorithm) => void;
 }
 
-const SortData = (props: SortProps) => {
+const SortDataButtons = (props: SortProps) => {
   return (
     <div>
       <button onClick={() => props.sortData(selectionSort)}>Selection Sort Test</button>
@@ -13,4 +13,4 @@ const SortData = (props: SortProps) => {
   );
 };
 
-export default SortData;
+export default SortDataButtons;
