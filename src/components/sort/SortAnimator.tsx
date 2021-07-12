@@ -44,6 +44,14 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
+  // Speed of animation (in ms)
+  // Base speed is the speed in which a dataSet of length 100
+  // goes at, and is then scaled to larger sizes
+  const ANIMATION_SPEED = (baseSpeed: number) => {
+    const multiplier = dataSet.length / 100;
+    return baseSpeed / (multiplier * multiplier);
+  };
+
   /*
   SORTING ALGORITHM ANIMATIONS HERE
 
@@ -64,14 +72,6 @@ const SortAnimator = (dataSet: number[]) => {
   Sorting then utilizes each element of the animation array to modify the
   CSS styling of the bars to demonstrate the sorting.
   */
-
-  // Speed of animation (in ms)
-  // Base speed is the speed in which a dataSet of length 100
-  // goes at, and is then scaled to larger sizes
-  const ANIMATION_SPEED = (baseSpeed: number) => {
-    const multiplier = dataSet.length / 100;
-    return baseSpeed / (multiplier * multiplier);
-  };
 
   const animateSelectionSort = () => {
     const animations = selectionSort(dataSet);
