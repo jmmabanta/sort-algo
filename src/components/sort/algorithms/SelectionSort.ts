@@ -6,8 +6,7 @@ const selectionSort = (dataSet: number[]) => {
     let minIndex = i;
     for (let j = i + 1; j < sortedData.length; j++) {
       if (sortedData[j] < sortedData[minIndex]) minIndex = j;
-      animations.push(['compare', minIndex, j, 0]);
-      animations.push(['compare', minIndex, j, 1]);
+      animations.push(['compare', minIndex, j]);
     }
     animations.push(['swap', i, minIndex]);
     let temp = sortedData[i];

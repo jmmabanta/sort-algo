@@ -5,8 +5,12 @@ export type AlgorithmType = 'selection' | undefined;
 
 // Main Colors
 const PRIMARY_COLOR = 'cornflowerblue';
-const COMPARISON_COLOR = 'darksalmon';
+const COMPARISON_COLOR = 'red';
 const SORTED_COLOR = 'palegreen';
+
+// Base Animation Speed (speed for a data set size of 100)
+// Make this a slider later
+const BASE_SPEED = 0.5;
 
 const SortAnimator = (dataSet: number[]) => {
   /*
@@ -66,8 +70,6 @@ const SortAnimator = (dataSet: number[]) => {
       - For example, in selection sort: type can be 'compare' or 'swap'
     - indexOne: number = The first bar
     - indexTwo: number = The second bar
-    - reset?: number = (Optional -- only for compare) used to determine
-        if colors should reset back to normal
 
   Sorting then utilizes each element of the animation array to modify the
   CSS styling of the bars to demonstrate the sorting.
@@ -76,24 +78,25 @@ const SortAnimator = (dataSet: number[]) => {
   const animateSelectionSort = () => {
     const animations = selectionSort(dataSet);
     const startTime = new Date();
-    // let logged = false;
+    const dataBars = document.getElementsByClassName(
+      'data_bar'
+    ) as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < animations.length; i++) {
-      const dataBars = document.getElementsByClassName(
-        'data_bar'
-      ) as HTMLCollectionOf<HTMLElement>;
-      // if (!logged) {
-      //   console.log(dataBars);
-      //   logged = true;
-      // }
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
       const barTwoStyles = dataBars[barTwoIndex as number].style;
       switch (type) {
         case 'compare':
-          // setTimeout(() => {
-          //   barOneStyles.backgroundColor = COMPARISON_COLOR;
-          //   barTwoStyles.backgroundColor = COMPARISON_COLOR;
-          // }, i * ANIMATION_SPEED);
+          // Sets to comparison color
+          setTimeout(() => {
+            barOneStyles.backgroundColor = COMPARISON_COLOR;
+            barTwoStyles.backgroundColor = COMPARISON_COLOR;
+          }, i * ANIMATION_SPEED(BASE_SPEED));
+          // Resets back to original color
+          setTimeout(() => {
+            barOneStyles.backgroundColor = PRIMARY_COLOR;
+            barTwoStyles.backgroundColor = PRIMARY_COLOR;
+          }, (i + 1) * ANIMATION_SPEED(BASE_SPEED));
           break;
         case 'swap':
           setTimeout(() => {
@@ -107,9 +110,10 @@ const SortAnimator = (dataSet: number[]) => {
               const endTime = new Date();
               console.log(endTime.getTime() - startTime.getTime());
             }
-          }, i * ANIMATION_SPEED(0.25));
+          }, i * ANIMATION_SPEED(BASE_SPEED));
           break;
         default:
+          // This should in theory never print
           console.log('Unknown operator??????');
           break;
       }
