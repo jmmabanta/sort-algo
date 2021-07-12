@@ -1,14 +1,11 @@
-import selectionSort from './algorithms/SelectionSort';
-import { SortingAlgorithm } from '../data-set/DataSetState';
-
-interface SortProps {
-  sortData: (sortAlgo: SortingAlgorithm) => void;
+interface ButtonProps {
+  toggleAnim: () => void;
 }
 
-const SortDataButtons = (props: SortProps) => {
+const SortDataButtons = (props: ButtonProps) => {
   return (
     <div>
-      <button onClick={() => props.sortData(selectionSort)}>Selection Sort Test</button>
+      <button onClick={props.toggleAnim}>Selection Sort Test</button>
     </div>
   );
 };

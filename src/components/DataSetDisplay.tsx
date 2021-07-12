@@ -4,7 +4,11 @@ interface DataSetProps {
 
 // Both calculateHeight and calculateWidth are used for CSS styling
 // Measured in vh and vw
-const calculateHeight = (dataSet: number[], value: number, maxHeight: number) => {
+const calculateHeight = (
+  dataSet: number[],
+  value: number,
+  maxHeight: number
+) => {
   return (value * maxHeight) / Math.max(...dataSet);
 };
 

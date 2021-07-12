@@ -8,7 +8,7 @@ interface DataProps {
 
 const DataSetSize = (props: DataProps) => {
   return (
-    <div className="data-size-form">
+    <div className="data_size_form">
       <input
         type="range"
         name="data_size"

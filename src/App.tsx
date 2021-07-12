@@ -2,10 +2,13 @@ import DataSetSize from './components/data-set/DataSetSize';
 import { useDataState } from './components/data-set/DataSetState';
 import DataSetDisplay from './components/DataSetDisplay';
 import SortDataButtons from './components/sort/SortDataButtons';
+import SortAnimator from './components/sort/SortAnimator';
 
 const App = () => {
   // Manages the data set used for sorting
   const dataState = useDataState(100, 45);
+
+  const animState = SortAnimator();
 
   return (
     <div className="App">
@@ -15,7 +18,7 @@ const App = () => {
       </h3>
       <DataSetDisplay dataSet={dataState.dataSet} />
       <DataSetSize dataSize={dataState} />
-      <SortDataButtons sortData={dataState.sortData} />
+      <SortDataButtons toggleAnim={animState.toggleAnimating} />
     </div>
   );
 };
