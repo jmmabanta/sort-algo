@@ -1,11 +1,19 @@
+import { AlgorithmType } from './SortAnimator';
+
 interface ButtonProps {
-  toggleAnim: () => void;
+  sortData: (algorithm: AlgorithmType) => void;
 }
 
 const SortDataButtons = (props: ButtonProps) => {
   return (
     <div>
-      <button onClick={props.toggleAnim}>Selection Sort Test</button>
+      <button
+        onClick={() => {
+          props.sortData('selection');
+        }}
+      >
+        Selection Sort Test
+      </button>
     </div>
   );
 };

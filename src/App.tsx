@@ -18,7 +18,7 @@ const App = () => {
       </h3>
       <DataSetDisplay dataSet={dataState.dataSet} />
       <DataSetSize dataSize={dataState} />
-      <SortDataButtons toggleAnim={animState.toggleAnimating} />
+      <SortDataButtons sortData={animState.sortData} />
     </div>
   );
 };
