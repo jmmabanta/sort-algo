@@ -10,7 +10,7 @@ const SORTED_COLOR = 'palegreen';
 
 // Base Animation Speed (speed for a data set size of 100)
 // Make this a slider later
-const BASE_SPEED = 0.5;
+const BASE_SPEED = 1;
 
 const SortAnimator = (dataSet: number[]) => {
   /*
@@ -77,7 +77,6 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateSelectionSort = () => {
     const animations = selectionSort(dataSet);
-    const startTime = new Date();
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
@@ -107,8 +106,6 @@ const SortAnimator = (dataSet: number[]) => {
             if (i === animations.length - 1) {
               dataBars[dataBars.length - 1].style.backgroundColor =
                 SORTED_COLOR;
-              const endTime = new Date();
-              console.log(endTime.getTime() - startTime.getTime());
             }
           }, i * ANIMATION_SPEED(BASE_SPEED));
           break;
