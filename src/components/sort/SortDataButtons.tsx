@@ -1,7 +1,7 @@
 import { AlgorithmType } from './SortAnimator';
 
 interface ButtonProps {
-  sortData: (algorithm: AlgorithmType) => void;
+  sortData: (algorithm?: AlgorithmType) => void;
 }
 
 const SortDataButtons = (props: ButtonProps) => {

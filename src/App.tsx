@@ -8,7 +8,7 @@ const App = () => {
   // Manages the data set used for sorting
   const dataState = useDataState(100, 45);
 
-  const animState = SortAnimator();
+  const animState = SortAnimator(dataState.dataSet);
 
   return (
     <div className="App">
@@ -17,8 +17,10 @@ const App = () => {
         <i>*still a work in progress don't flame :(*</i>
       </h3>
       <DataSetDisplay dataSet={dataState.dataSet} />
-      <DataSetSize dataSize={dataState} />
-      <SortDataButtons sortData={animState.sortData} />
+      <div id="user_inputs">
+        <DataSetSize dataSize={dataState} />
+        <SortDataButtons sortData={animState.sortData} />
+      </div>
     </div>
   );
 };

@@ -1,19 +1,20 @@
 const selectionSort = (dataSet: number[]) => {
   let sortedData = dataSet.slice();
-  let animations = [];
-  if (sortedData.length === 1) return sortedData;
+  let animations: (string | number)[][] = [];
+  if (sortedData.length === 1) return animations;
   for (let i = 0; i < sortedData.length - 1; i++) {
     let minIndex = i;
     for (let j = i + 1; j < sortedData.length; j++) {
-      if (sortedData[j] < sortedData[minIndex]) {
-        minIndex = j;
-      }
+      if (sortedData[j] < sortedData[minIndex]) minIndex = j;
+      animations.push(['compare', minIndex, j, 0]);
+      animations.push(['compare', minIndex, j, 1]);
     }
+    animations.push(['swap', i, minIndex]);
     let temp = sortedData[i];
     sortedData[i] = sortedData[minIndex];
     sortedData[minIndex] = temp;
   }
-  return sortedData;
+  return animations;
 };
 
 export default selectionSort;
