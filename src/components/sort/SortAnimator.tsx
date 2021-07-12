@@ -8,9 +8,6 @@ const PRIMARY_COLOR = 'cornflowerblue';
 const COMPARISON_COLOR = 'darksalmon';
 const SORTED_COLOR = 'palegreen';
 
-// Speed of animation (in ms)
-const ANIMATION_SPEED = 0.25;
-
 const SortAnimator = (dataSet: number[]) => {
   /*
   State essentially toggles visibility of slider
@@ -68,8 +65,17 @@ const SortAnimator = (dataSet: number[]) => {
   CSS styling of the bars to demonstrate the sorting.
   */
 
+  // Speed of animation (in ms)
+  // Base speed is the speed in which a dataSet of length 100
+  // goes at, and is then scaled to larger sizes
+  const ANIMATION_SPEED = (baseSpeed: number) => {
+    const multiplier = dataSet.length / 100;
+    return baseSpeed / (multiplier * multiplier);
+  };
+
   const animateSelectionSort = () => {
     const animations = selectionSort(dataSet);
+    const startTime = new Date();
     // let logged = false;
     for (let i = 0; i < animations.length; i++) {
       const dataBars = document.getElementsByClassName(
@@ -95,10 +101,13 @@ const SortAnimator = (dataSet: number[]) => {
             barOneStyles.height = barTwoStyles.height;
             barTwoStyles.height = barOneHeight;
             barOneStyles.backgroundColor = SORTED_COLOR;
-            if (i === animations.length - 1)
+            if (i === animations.length - 1) {
               dataBars[dataBars.length - 1].style.backgroundColor =
                 SORTED_COLOR;
-          }, i * ANIMATION_SPEED);
+              const endTime = new Date();
+              console.log(endTime.getTime() - startTime.getTime());
+            }
+          }, i * ANIMATION_SPEED(0.25));
           break;
         default:
           console.log('Unknown operator??????');
