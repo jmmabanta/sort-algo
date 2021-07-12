@@ -1,6 +1,5 @@
-/* The state manager for the data set size */
-
 import React, { useState } from 'react';
+import { PRIMARY_COLOR } from '../sort/SortAnimator';
 
 // Defines types for the hook
 type DataSizeType = {
@@ -17,6 +16,14 @@ const generateData = (size: number, height: number): number[] => {
   return data;
 };
 
+let isSorted = false;
+
+export const setIsSorted = (value: boolean) => {
+  isSorted = value;
+};
+
+export const getIsSorted = () => isSorted;
+
 export const useDataState = (
   initialValue: number,
   height: number
@@ -25,7 +32,26 @@ export const useDataState = (
 
   // Used for direct user input in the field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDataSet((oldData) => generateData(parseInt(e.target.value), height));
+    const newSize = parseInt(e.target.value);
+    setDataSet((oldData) => generateData(newSize, height));
+    if (isSorted) {
+      resetStyling();
+      const sortButtons = document.getElementById(
+        'sort_buttons'
+      ) as HTMLElement;
+      sortButtons.style.visibility = 'visible';
+      isSorted = false;
+    }
+  };
+
+  const resetStyling = () => {
+    console.log('RESETTING STYLES!!!!');
+    const dataBars = document.getElementsByClassName(
+      'data_bar'
+    ) as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < dataBars.length; i++) {
+      dataBars[i].style.backgroundColor = PRIMARY_COLOR;
+    }
   };
 
   return { handleChange, dataSet };

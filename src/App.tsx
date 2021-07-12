@@ -17,10 +17,8 @@ const App = () => {
         <i>*still a work in progress don't flame :(*</i>
       </h3>
       <DataSetDisplay dataSet={dataState.dataSet} />
-      <div id="user_inputs">
-        <DataSetSize dataSize={dataState} />
-        <SortDataButtons sortData={animState.sortData} />
-      </div>
+      <DataSetSize dataSize={dataState} />
+      <SortDataButtons sortData={animState.sortData} />
     </div>
   );
 };

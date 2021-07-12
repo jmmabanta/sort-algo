@@ -6,7 +6,7 @@ interface ButtonProps {
 
 const SortDataButtons = (props: ButtonProps) => {
   return (
-    <div>
+    <div id="sort_buttons">
       <button
         onClick={() => {
           props.sortData('selection');

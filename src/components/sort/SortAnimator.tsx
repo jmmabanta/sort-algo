@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import selectionSort from './algorithms/SelectionSort';
+import { setIsSorted } from '../data-set/DataSetState';
 
 export type AlgorithmType = 'selection' | undefined;
 
 // Main Colors
-const PRIMARY_COLOR = 'cornflowerblue';
+export const PRIMARY_COLOR = 'cornflowerblue';
 const COMPARISON_COLOR = 'red';
 const SORTED_COLOR = 'palegreen';
 
@@ -27,7 +28,7 @@ const SortAnimator = (dataSet: number[]) => {
   Currently unused, implement later when selection sort animation works.
   */
   useEffect(() => {
-    const userInputs = document.getElementById('user_inputs') as HTMLElement;
+    const userInputs = document.getElementById('data_size_form') as HTMLElement;
     if (animating) {
       console.log('Currently Animating');
       userInputs.style.visibility = 'hidden';
@@ -38,11 +39,15 @@ const SortAnimator = (dataSet: number[]) => {
   }, [animating]);
 
   const sortData = (algorithm?: AlgorithmType) => {
+    setIsSorted(true);
+    const sortButtons = document.getElementById('sort_buttons') as HTMLElement;
+    sortButtons.style.visibility = 'hidden';
     switch (algorithm) {
       case 'selection':
         animateSelectionSort();
         break;
       default:
+        setIsSorted(false);
         console.log('No algorithm specified :/');
         break;
     }
