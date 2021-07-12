@@ -18,7 +18,7 @@ const SortAnimator = (dataSet: number[]) => {
   A band-aid fix that stops user from changing data set
   While its being sorted
   */
-  const [animating] = useState(false);
+  const [animating, setAnimating] = useState(false);
 
   /*
   Hides all forms of user interaction with the data set during animation:
@@ -76,6 +76,7 @@ const SortAnimator = (dataSet: number[]) => {
   */
 
   const animateSelectionSort = () => {
+    setAnimating(true);
     const animations = selectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
@@ -106,6 +107,7 @@ const SortAnimator = (dataSet: number[]) => {
             if (i === animations.length - 1) {
               dataBars[dataBars.length - 1].style.backgroundColor =
                 SORTED_COLOR;
+              setAnimating(false);
             }
           }, i * ANIMATION_SPEED(BASE_SPEED));
           break;
