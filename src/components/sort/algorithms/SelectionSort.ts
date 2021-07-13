@@ -1,7 +1,7 @@
-const selectionSort = (dataSet: number[]) => {
-  let sortedData = dataSet.slice();
-  let animations: (string | number)[][] = [];
-  if (sortedData.length === 1) return animations;
+const SelectionSort = (dataSet: number[]) => {
+  const sortedData = dataSet.slice();
+  const animations: (string | number)[][] = [];
+  if (sortedData.length <= 1) return animations;
   for (let i = 0; i < sortedData.length - 1; i++) {
     let minIndex = i;
     for (let j = i + 1; j < sortedData.length; j++) {
@@ -16,4 +16,4 @@ const selectionSort = (dataSet: number[]) => {
   return animations;
 };
 
-export default selectionSort;
+export default SelectionSort;

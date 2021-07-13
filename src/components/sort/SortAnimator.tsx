@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import selectionSort from './algorithms/SelectionSort';
+import SelectionSort from './algorithms/SelectionSort';
 import { setIsSorted } from '../data-set/DataSetState';
 
 export type AlgorithmType = 'selection' | undefined;
@@ -82,7 +82,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateSelectionSort = () => {
     setAnimating(true);
-    const animations = selectionSort(dataSet);
+    const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
