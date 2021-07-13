@@ -9,6 +9,8 @@ export const PRIMARY_COLOR = 'cornflowerblue';
 const COMPARISON_COLOR = 'red';
 const SORTED_COLOR = 'palegreen';
 
+let baseSpeed = 0.5;
+
 const SortAnimator = (dataSet: number[]) => {
   /*
   State essentially toggles visibility of slider
@@ -47,7 +49,6 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
-  let baseSpeed = 0.5;
   const setBaseSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
     baseSpeed = 1 / parseFloat(e.target.value);
   };
