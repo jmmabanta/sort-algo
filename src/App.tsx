@@ -1,11 +1,14 @@
 import DataSetSize from './components/data-set/DataSetSize';
 import { useDataState } from './components/data-set/DataSetState';
-import DataSetDisplay from './components/data-set/DataSetDisplay';
-import SortData from './components/sort/SortData';
+import DataSetDisplay from './components/DataSetDisplay';
+import SortDataButtons from './components/sort/SortDataButtons';
+import SortAnimator from './components/sort/SortAnimator';
 
 const App = () => {
   // Manages the data set used for sorting
   const dataState = useDataState(100, 45);
+
+  const animState = SortAnimator(dataState.dataSet);
 
   return (
     <div className="App">
@@ -14,8 +17,8 @@ const App = () => {
         <i>*still a work in progress don't flame :(*</i>
       </h3>
       <DataSetDisplay dataSet={dataState.dataSet} />
-      <DataSetSize dataSize={dataState} />
-      <SortData sortData={dataState.sortData} />
+      <DataSetSize dataSize={dataState} setSpeed={animState.setBaseSpeed} />
+      <SortDataButtons sortData={animState.sortData} />
     </div>
   );
 };
