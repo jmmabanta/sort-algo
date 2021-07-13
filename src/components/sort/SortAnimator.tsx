@@ -30,10 +30,8 @@ const SortAnimator = (dataSet: number[]) => {
   useEffect(() => {
     const userInputs = document.getElementById('data_size_form') as HTMLElement;
     if (animating) {
-      console.log('Currently Animating');
       userInputs.style.visibility = 'hidden';
     } else {
-      console.log('Animating Stopped');
       userInputs.style.visibility = 'visible';
     }
   }, [animating]);

@@ -4,6 +4,7 @@ import { PRIMARY_COLOR } from '../sort/SortAnimator';
 // Defines types for the hook
 type DataSizeType = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  regenerateNewData: () => void;
   dataSet: number[];
 };
 
@@ -34,25 +35,25 @@ export const useDataState = (
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSize = parseInt(e.target.value);
     setDataSet((oldData) => generateData(newSize, height));
-    if (isSorted) {
-      resetStyling();
-      const sortButtons = document.getElementById(
-        'sort_buttons'
-      ) as HTMLElement;
-      sortButtons.style.visibility = 'visible';
-      isSorted = false;
-    }
+    resetStyling();
+  };
+
+  const regenerateNewData = () => {
+    setDataSet((oldData) => generateData(oldData.length, height));
+    resetStyling();
   };
 
   const resetStyling = () => {
-    console.log('RESETTING STYLES!!!!');
+    if (!isSorted) return;
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
-    for (let i = 0; i < dataBars.length; i++) {
+    const sortButtons = document.getElementById('sort_buttons') as HTMLElement;
+    for (let i = 0; i < dataBars.length; i++)
       dataBars[i].style.backgroundColor = PRIMARY_COLOR;
-    }
+    sortButtons.style.visibility = 'visible';
+    isSorted = false;
   };
 
-  return { handleChange, dataSet };
+  return { handleChange, regenerateNewData, dataSet };
 };
