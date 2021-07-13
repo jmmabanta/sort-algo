@@ -50,7 +50,6 @@ const SortAnimator = (dataSet: number[]) => {
   let baseSpeed = 0.5;
   const setBaseSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
     baseSpeed = 1 / parseFloat(e.target.value);
-    console.log(baseSpeed);
   };
 
   // Speed of animation (in ms)
