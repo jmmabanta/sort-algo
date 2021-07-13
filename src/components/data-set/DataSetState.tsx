@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { PRIMARY_COLOR } from '../sort/SortAnimator';
 
-// Defines types for the hook
-type DataSizeType = {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  regenerateNewData: () => void;
-  dataSet: number[];
-};
-
 // Generates random data
 const generateData = (size: number, height: number): number[] => {
   let data: number[] = [size];
@@ -25,10 +18,7 @@ export const setIsSorted = (value: boolean) => {
 
 export const getIsSorted = () => isSorted;
 
-export const useDataState = (
-  initialValue: number,
-  height: number
-): DataSizeType => {
+export const useDataState = (initialValue: number, height: number) => {
   const [dataSet, setDataSet] = useState(generateData(initialValue, height));
 
   // Used for direct user input in the field

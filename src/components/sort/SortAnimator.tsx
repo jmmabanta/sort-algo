@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import selectionSort from './algorithms/SelectionSort';
 import { setIsSorted } from '../data-set/DataSetState';
 
@@ -8,10 +8,6 @@ export type AlgorithmType = 'selection' | undefined;
 export const PRIMARY_COLOR = 'cornflowerblue';
 const COMPARISON_COLOR = 'red';
 const SORTED_COLOR = 'palegreen';
-
-// Base Animation Speed (speed for a data set size of 100)
-// Make this a slider later
-const BASE_SPEED = 1;
 
 const SortAnimator = (dataSet: number[]) => {
   /*
@@ -28,7 +24,7 @@ const SortAnimator = (dataSet: number[]) => {
   Currently unused, implement later when selection sort animation works.
   */
   useEffect(() => {
-    const userInputs = document.getElementById('data_size_form') as HTMLElement;
+    const userInputs = document.getElementById('data_form') as HTMLElement;
     if (animating) {
       userInputs.style.visibility = 'hidden';
     } else {
@@ -51,10 +47,16 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
+  let baseSpeed = 0.5;
+  const setBaseSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
+    baseSpeed = 1 / parseFloat(e.target.value);
+    console.log(baseSpeed);
+  };
+
   // Speed of animation (in ms)
   // Base speed is the speed in which a dataSet of length 100
   // goes at, and is then scaled to larger sizes
-  const ANIMATION_SPEED = (baseSpeed: number) => {
+  const ANIMATION_SPEED = () => {
     const multiplier = dataSet.length / 100;
     return baseSpeed / (multiplier * multiplier);
   };
@@ -94,12 +96,12 @@ const SortAnimator = (dataSet: number[]) => {
           setTimeout(() => {
             barOneStyles.backgroundColor = COMPARISON_COLOR;
             barTwoStyles.backgroundColor = COMPARISON_COLOR;
-          }, i * ANIMATION_SPEED(BASE_SPEED));
+          }, i * ANIMATION_SPEED());
           // Resets back to original color
           setTimeout(() => {
             barOneStyles.backgroundColor = PRIMARY_COLOR;
             barTwoStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1) * ANIMATION_SPEED(BASE_SPEED));
+          }, (i + 1) * ANIMATION_SPEED());
           break;
         case 'swap':
           setTimeout(() => {
@@ -112,7 +114,7 @@ const SortAnimator = (dataSet: number[]) => {
                 SORTED_COLOR;
               setAnimating(false);
             }
-          }, i * ANIMATION_SPEED(BASE_SPEED));
+          }, i * ANIMATION_SPEED());
           break;
         default:
           // This should in theory never print
@@ -122,7 +124,7 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
-  return { sortData };
+  return { sortData, setBaseSpeed };
 };
 
 export default SortAnimator;
