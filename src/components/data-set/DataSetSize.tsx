@@ -23,16 +23,18 @@ const DataSetSize = (props: DataProps) => {
           onInput={props.dataSize.handleChange}
           onChange={props.dataSize.handleChange}
         />
-        <button onClick={props.dataSize.regenerateNewData}>🔄️</button>
+        <button onClick={props.dataSize.regenerateNewData}>
+          Make New Array
+        </button>
       </div>
       <div id="set_speed">
         <b>Sort Speed: </b>
         <input
           type="range"
           min={0.2}
-          max={4.0}
+          max={2.0}
           step={0.1}
-          defaultValue={2}
+          defaultValue={1}
           onInput={props.setSpeed}
           onChange={props.setSpeed}
         ></input>

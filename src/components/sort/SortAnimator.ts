@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import SelectionSort from './algorithms/SelectionSort';
 import { setIsSorted } from '../data-set/DataSetState';
 
-export type AlgorithmType = 'selection' | undefined;
+import SelectionSort from './algorithms/SelectionSort';
+import InsertionSort from './algorithms/InsertionSort';
+
+export type AlgorithmType = 'selection' | 'insertion' | undefined;
 
 // Main Colors
 export const PRIMARY_COLOR = 'cornflowerblue';
 const COMPARISON_COLOR = 'red';
+const KEY_COLOR = 'fuchsia';
 const SORTED_COLOR = 'palegreen';
 
-let baseSpeed = 0.5;
+let baseSpeed = 1;
 
 const SortAnimator = (dataSet: number[]) => {
   /*
@@ -41,6 +44,9 @@ const SortAnimator = (dataSet: number[]) => {
     switch (algorithm) {
       case 'selection':
         animateSelectionSort();
+        break;
+      case 'insertion':
+        animateInsertionSort();
         break;
       default:
         setIsSorted(false);
@@ -80,8 +86,19 @@ const SortAnimator = (dataSet: number[]) => {
   CSS styling of the bars to demonstrate the sorting.
   */
 
+  // The final 'green' swipe of the data bars when things are done sorting
+  const sortedAnimation = (dataBars: HTMLCollectionOf<HTMLElement>) => {
+    for (let i = 0; i < dataBars.length; i++) {
+      setTimeout(() => {
+        dataBars[i].style.backgroundColor = SORTED_COLOR;
+        if (i === dataBars.length - 1) setAnimating(false);
+      }, i * (ANIMATION_SPEED() * 5));
+    }
+  };
+
   const animateSelectionSort = () => {
     setAnimating(true);
+    const startTime = new Date();
     const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
@@ -108,16 +125,59 @@ const SortAnimator = (dataSet: number[]) => {
             const barOneHeight = barOneStyles.height;
             barOneStyles.height = barTwoStyles.height;
             barTwoStyles.height = barOneHeight;
-            barOneStyles.backgroundColor = SORTED_COLOR;
             if (i === animations.length - 1) {
-              dataBars[dataBars.length - 1].style.backgroundColor =
-                SORTED_COLOR;
-              setAnimating(false);
+              const endTime = new Date();
+              console.log(endTime.getTime() - startTime.getTime());
+              sortedAnimation(dataBars);
             }
           }, i * ANIMATION_SPEED());
           break;
         default:
           // This should in theory never print
+          console.log('Unknown operator??????');
+          break;
+      }
+    }
+  };
+
+  const animateInsertionSort = () => {
+    setAnimating(true);
+    const animations = InsertionSort(dataSet);
+    const dataBars = document.getElementsByClassName(
+      'data_bar'
+    ) as HTMLCollectionOf<HTMLElement>;
+    const startTime = new Date();
+    for (let i = 0; i < animations.length; i++) {
+      const [type, barOneIndex] = animations[i];
+      const barOneStyles = dataBars[barOneIndex as number].style;
+      const barTwoStyles = dataBars[(barOneIndex as number) + 1].style;
+      switch (type) {
+        case 'compare':
+          setTimeout(() => {
+            barOneStyles.backgroundColor = COMPARISON_COLOR;
+            barTwoStyles.backgroundColor = KEY_COLOR;
+          }, i * ANIMATION_SPEED());
+          setTimeout(() => {
+            barOneStyles.backgroundColor = KEY_COLOR;
+            barTwoStyles.backgroundColor = PRIMARY_COLOR;
+          }, (i + 1) * ANIMATION_SPEED());
+          setTimeout(() => {
+            barOneStyles.backgroundColor = PRIMARY_COLOR;
+          }, (i + 2) * ANIMATION_SPEED());
+          break;
+        case 'swap':
+          setTimeout(() => {
+            const barOneHeight = barOneStyles.height;
+            barOneStyles.height = barTwoStyles.height;
+            barTwoStyles.height = barOneHeight;
+            if (i === animations.length - 1) {
+              const endTime = new Date();
+              console.log(endTime.getTime() - startTime.getTime());
+              sortedAnimation(dataBars);
+            }
+          }, i * ANIMATION_SPEED());
+          break;
+        default:
           console.log('Unknown operator??????');
           break;
       }

@@ -14,6 +14,13 @@ const SortDataButtons = (props: ButtonProps) => {
       >
         Selection Sort Test
       </button>
+      <button
+        onClick={() => {
+          props.sortData('insertion');
+        }}
+      >
+        Insertion Sort Test
+      </button>
     </div>
   );
 };
