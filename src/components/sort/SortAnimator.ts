@@ -104,6 +104,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateSelectionSort = () => {
     setAnimating(true);
+    const speed = ANIMATION_SPEED();
     const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
@@ -128,7 +129,7 @@ const SortAnimator = (dataSet: number[]) => {
             // The (i - 0.001) makes sure this executes
             // before the other timeouts
             // Yes, it is really jank :/
-          }, (i - 0.001) * ANIMATION_SPEED());
+          }, (i - 0.001) * speed);
           break;
         case 'compare':
           // Sets to comparison color
@@ -137,14 +138,14 @@ const SortAnimator = (dataSet: number[]) => {
             if (barOneIndex !== lastKeyIndex)
               barOneStyles.backgroundColor = KEY_COLOR;
             barTwoStyles.backgroundColor = COMPARISON_COLOR;
-          }, i * ANIMATION_SPEED());
+          }, i * speed);
           // Resets back to original color
           // eslint-disable-next-line no-loop-func
           setTimeout(() => {
             if (barOneIndex !== lastKeyIndex)
               barOneStyles.backgroundColor = PRIMARY_COLOR;
             barTwoStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1) * ANIMATION_SPEED());
+          }, (i + 1) * speed);
           break;
         case 'swap':
           setTimeout(() => {
@@ -155,7 +156,7 @@ const SortAnimator = (dataSet: number[]) => {
               barOneStyles.backgroundColor = PRIMARY_COLOR;
               sortedAnimation(dataBars);
             }
-          }, i * ANIMATION_SPEED());
+          }, i * speed);
           break;
         default:
           // This should in theory never print
@@ -167,6 +168,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateInsertionSort = () => {
     setAnimating(true);
+    const speed = ANIMATION_SPEED();
     const animations = InsertionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
@@ -176,18 +178,27 @@ const SortAnimator = (dataSet: number[]) => {
       const barOneStyles = dataBars[barOneIndex as number].style;
       const barTwoStyles = dataBars[(barOneIndex as number) + 1].style;
       switch (type) {
+        case 'key':
+          setTimeout(() => {
+            dataBars[(barOneIndex as number) - 1].style.backgroundColor =
+              PRIMARY_COLOR;
+            barOneStyles.backgroundColor = KEY_COLOR_TWO;
+          }, i * speed);
+          break;
         case 'compare':
           setTimeout(() => {
             barOneStyles.backgroundColor = COMPARISON_COLOR;
-            barTwoStyles.backgroundColor = KEY_COLOR;
-          }, i * ANIMATION_SPEED());
+            if (barTwoStyles.backgroundColor !== KEY_COLOR_TWO)
+              barTwoStyles.backgroundColor = KEY_COLOR;
+          }, i * speed);
           setTimeout(() => {
             barOneStyles.backgroundColor = KEY_COLOR;
-            barTwoStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1) * ANIMATION_SPEED());
+            if (barTwoStyles.backgroundColor !== KEY_COLOR_TWO)
+              barTwoStyles.backgroundColor = PRIMARY_COLOR;
+          }, (i + 1) * speed);
           setTimeout(() => {
             barOneStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 2) * ANIMATION_SPEED());
+          }, (i + 2) * speed);
           break;
         case 'swap':
           setTimeout(() => {
@@ -197,7 +208,7 @@ const SortAnimator = (dataSet: number[]) => {
             if (i === animations.length - 1) {
               sortedAnimation(dataBars);
             }
-          }, i * ANIMATION_SPEED());
+          }, i * speed);
           break;
         default:
           console.log('Unknown operator??????');
