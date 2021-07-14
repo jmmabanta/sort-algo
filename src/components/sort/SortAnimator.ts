@@ -13,7 +13,7 @@ const KEY_COLOR = 'magenta';
 const KEY_COLOR_TWO = 'yellow';
 const SORTED_COLOR = 'palegreen';
 
-let baseSpeed = 1;
+let baseSpeed = 2;
 
 const SortAnimator = (dataSet: number[]) => {
   /*

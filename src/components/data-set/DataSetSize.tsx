@@ -39,10 +39,10 @@ const DataSetSize = (props: DataProps) => {
         <b>Sort Speed: </b>
         <input
           type="range"
-          min={0.2}
-          max={2.0}
+          min={0.1}
+          max={1.0}
           step={0.1}
-          defaultValue={1}
+          defaultValue={0.5}
           onInput={props.setSpeed}
           onChange={props.setSpeed}
         ></input>
