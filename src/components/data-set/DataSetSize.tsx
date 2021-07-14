@@ -19,7 +19,7 @@ const DataSetSize = (props: DataProps) => {
           name="data_size"
           min={100}
           max={500}
-          step={10}
+          step={50}
           defaultValue={100}
           onInput={props.dataSize.handleChange}
           onChange={props.dataSize.handleChange}
