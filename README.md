@@ -12,9 +12,8 @@ _Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmi
 
 1. ~~Add input to determine randomized data set size~~ ✅
 2. ~~Visualize the data set (numbers for now)~~ ✅
-3. ~~Add selection~~ ✅ and insertion sort algorithm
-4. Display sorting as it happens to the displayed data set
-   - Selection Sort visualization is complete ✅
+3. ~~Add selection and insertion sort algorithm~~ ✅
+4. ~~Display sorting as it happens to the displayed data set~~ ✅
 5. Layout and aethethic overhaul
 6. Implement other sorting algorithms
    - Bubble Sort
