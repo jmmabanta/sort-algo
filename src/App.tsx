@@ -16,9 +16,11 @@ const App = () => {
       <h3>
         <i>*still a work in progress don't flame :(*</i>
       </h3>
+      <div className="inputs">
+        <DataSetSize dataSize={dataState} setSpeed={animState.setBaseSpeed} />
+        <SortDataButtons sortData={animState.sortData} />
+      </div>
       <DataSetDisplay dataSet={dataState.dataSet} />
-      <DataSetSize dataSize={dataState} setSpeed={animState.setBaseSpeed} />
-      <SortDataButtons sortData={animState.sortData} />
     </div>
   );
 };

@@ -12,14 +12,14 @@ const SortDataButtons = (props: ButtonProps) => {
           props.sortData('selection');
         }}
       >
-        Selection Sort Test
+        Selection Sort
       </button>
       <button
         onClick={() => {
           props.sortData('insertion');
         }}
       >
-        Insertion Sort Test
+        Insertion Sort
       </button>
     </div>
   );

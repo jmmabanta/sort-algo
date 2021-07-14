@@ -29,7 +29,7 @@ const DataSetSize = (props: DataProps) => {
         </button>
         <button
           id="undo_sort"
-          style={{ visibility: 'hidden' }}
+          style={{ display: 'none' }}
           onClick={props.dataSize.undoSort}
         >
           Undo Sort

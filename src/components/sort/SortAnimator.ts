@@ -32,15 +32,15 @@ const SortAnimator = (dataSet: number[]) => {
   useEffect(() => {
     const userInputs = document.getElementById('data_form') as HTMLElement;
     if (animating) {
-      userInputs.style.visibility = 'hidden';
+      userInputs.style.display = 'none';
     } else {
-      userInputs.style.visibility = 'visible';
+      userInputs.style.display = 'inline';
     }
   }, [animating]);
 
   const sortData = (algorithm?: AlgorithmType) => {
     const sortButtons = document.getElementById('sort_buttons') as HTMLElement;
-    sortButtons.style.visibility = 'hidden';
+    sortButtons.style.display = 'none';
     switch (algorithm) {
       case 'selection':
         animateSelectionSort();

@@ -17,7 +17,7 @@ export const setIsSorted = (value: boolean) => {
   isSorted = value;
   if (isSorted) {
     const undoSortButton = document.getElementById('undo_sort') as HTMLElement;
-    undoSortButton.style.visibility = 'visible';
+    undoSortButton.style.display = 'inline';
   }
 };
 
@@ -57,8 +57,8 @@ export const useDataState = (initialValue: number, height: number) => {
     const undoSortButton = document.getElementById('undo_sort') as HTMLElement;
     for (let i = 0; i < dataBars.length; i++)
       dataBars[i].style.backgroundColor = PRIMARY_COLOR;
-    sortButtons.style.visibility = 'visible';
-    undoSortButton.style.visibility = 'hidden';
+    sortButtons.style.display = 'inline';
+    undoSortButton.style.display = 'none';
     isSorted = false;
   };
 
