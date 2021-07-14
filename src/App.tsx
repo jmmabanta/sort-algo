@@ -12,12 +12,12 @@ const App = () => {
   dataState.setResetSorted(animState.resetSorted);
 
   return (
-    <div className="App">
-      <div id="inputs">
+    <div id="app">
+      <div id="inputs" className="show">
         <h1>Sorting Algorithms</h1>
-        <h3>
-          <i>*still a work in progress don't flame :(*</i>
-        </h3>
+        <p>
+          There are {dataState.dataSet.length} random elements in the data set.
+        </p>
         <DataSetSize
           dataSize={dataState}
           setSpeed={animState.setBaseSpeed}
@@ -29,7 +29,9 @@ const App = () => {
           isSorted={animState.isSorted}
         />
       </div>
-      <DataSetDisplay dataSet={dataState.dataSet} />
+      <div id="display">
+        <DataSetDisplay dataSet={dataState.dataSet} />
+      </div>
     </div>
   );
 };

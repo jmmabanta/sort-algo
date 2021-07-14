@@ -26,10 +26,13 @@ const SortAnimator = (dataSet: number[]) => {
   //Hides all forms of user interaction with the data set during animation
   useEffect(() => {
     const userInputs = document.getElementById('inputs') as HTMLElement;
+    const display = document.getElementById('display') as HTMLElement;
     if (animating) {
       userInputs.className = 'hide';
+      display.className = 'unblur';
     } else {
       userInputs.className = 'show';
+      display.className = 'blur';
     }
   }, [animating]);
 

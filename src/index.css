@@ -13,14 +13,30 @@ code {
     monospace;
 }
 
-.App {
+#app {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
-.data_bar {
-  display: inline-block;
-  background-color: cornflowerblue;
-  height: 45vh;
+/* INPUT FIELD */
+#inputs {
+  animation: fadeIn 0.5s linear;
+  z-index: 1;
+  position: absolute;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .hide {
@@ -31,4 +47,34 @@ code {
 .show {
   opacity: 1;
   transition: opacity 0.5s linear;
+}
+
+/* DATA BARS */
+#display {
+  animation: initialBlur 0.5s linear;
+  position: absolute;
+}
+
+@keyframes initialBlur {
+  from {
+    filter: blur(0em);
+  }
+  to {
+    filter: blur(0.5em);
+  }
+}
+
+.blur {
+  filter: blur(0.5em);
+  transition: filter 0.5s linear;
+}
+
+.unblur {
+  filter: blur(0em);
+  transition: filter 0.5s linear;
+}
+
+.data_bar {
+  display: inline-block;
+  background-color: cornflowerblue;
 }

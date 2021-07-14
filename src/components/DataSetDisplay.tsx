@@ -2,7 +2,7 @@ interface DataSetProps {
   dataSet: number[];
 }
 
-const MAX_HEIGHT = 45;
+const MAX_HEIGHT = 93;
 
 // Both calculateHeight and calculateWidth are used for CSS styling
 // Measured in vh and vw
@@ -15,7 +15,7 @@ const calculateWidth = (dataSize: number, maxWidth: number) => {
 };
 
 const DataSetDisplay = (props: DataSetProps) => {
-  let width = calculateWidth(props.dataSet.length, 75);
+  let width = calculateWidth(props.dataSet.length, 80);
   return (
     <div className="data_container">
       <div className="data_set">
@@ -33,7 +33,6 @@ const DataSetDisplay = (props: DataSetProps) => {
           );
         })}
       </div>
-      <p>There are {props.dataSet.length} random elements in the data set.</p>
     </div>
   );
 };
