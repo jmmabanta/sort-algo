@@ -8,8 +8,9 @@ export type AlgorithmType = 'selection' | 'insertion' | undefined;
 
 // Main Colors
 export const PRIMARY_COLOR = 'cornflowerblue';
-const COMPARISON_COLOR = 'red';
-const KEY_COLOR = 'fuchsia';
+const COMPARISON_COLOR = 'orangered';
+const KEY_COLOR = 'magenta';
+const KEY_COLOR_TWO = 'yellow';
 const SORTED_COLOR = 'palegreen';
 
 let baseSpeed = 1;
@@ -84,6 +85,9 @@ const SortAnimator = (dataSet: number[]) => {
 
   Sorting then utilizes each element of the animation array to modify the
   CSS styling of the bars to demonstrate the sorting.
+
+  Note: All animations use a bunch of setTimeouts
+    - Yes, I know it looks horrible, I just don't know any other alternative
   */
 
   // The final 'green' swipe of the data bars when things are done sorting
@@ -98,25 +102,45 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateSelectionSort = () => {
     setAnimating(true);
-    const startTime = new Date();
     const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
+    // Key: the element to be swapped with the minimum
+    let lastKeyIndex = 0;
+    dataBars[0].style.backgroundColor = KEY_COLOR_TWO;
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
       const barTwoStyles = dataBars[barTwoIndex as number].style;
       switch (type) {
+        case 'key':
+          // eslint-disable-next-line no-loop-func
+          setTimeout(() => {
+            if (lastKeyIndex !== (barOneIndex as number)) {
+              dataBars[lastKeyIndex as number].style.backgroundColor =
+                PRIMARY_COLOR;
+              barOneStyles.backgroundColor = KEY_COLOR_TWO;
+              lastKeyIndex = barOneIndex as number;
+            }
+            // The (i - 0.001) makes sure this executes
+            // before the other timeouts
+            // Yes, it is really jank :/
+          }, (i - 0.001) * ANIMATION_SPEED());
+          break;
         case 'compare':
           // Sets to comparison color
+          // eslint-disable-next-line no-loop-func
           setTimeout(() => {
-            barOneStyles.backgroundColor = COMPARISON_COLOR;
+            if (barOneIndex !== lastKeyIndex)
+              barOneStyles.backgroundColor = KEY_COLOR;
             barTwoStyles.backgroundColor = COMPARISON_COLOR;
           }, i * ANIMATION_SPEED());
           // Resets back to original color
+          // eslint-disable-next-line no-loop-func
           setTimeout(() => {
-            barOneStyles.backgroundColor = PRIMARY_COLOR;
+            if (barOneIndex !== lastKeyIndex)
+              barOneStyles.backgroundColor = PRIMARY_COLOR;
             barTwoStyles.backgroundColor = PRIMARY_COLOR;
           }, (i + 1) * ANIMATION_SPEED());
           break;
@@ -126,8 +150,7 @@ const SortAnimator = (dataSet: number[]) => {
             barOneStyles.height = barTwoStyles.height;
             barTwoStyles.height = barOneHeight;
             if (i === animations.length - 1) {
-              const endTime = new Date();
-              console.log(endTime.getTime() - startTime.getTime());
+              barOneStyles.backgroundColor = PRIMARY_COLOR;
               sortedAnimation(dataBars);
             }
           }, i * ANIMATION_SPEED());
@@ -146,7 +169,6 @@ const SortAnimator = (dataSet: number[]) => {
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
-    const startTime = new Date();
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
@@ -171,8 +193,6 @@ const SortAnimator = (dataSet: number[]) => {
             barOneStyles.height = barTwoStyles.height;
             barTwoStyles.height = barOneHeight;
             if (i === animations.length - 1) {
-              const endTime = new Date();
-              console.log(endTime.getTime() - startTime.getTime());
               sortedAnimation(dataBars);
             }
           }, i * ANIMATION_SPEED());
