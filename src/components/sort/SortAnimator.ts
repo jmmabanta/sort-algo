@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
@@ -15,11 +15,7 @@ const SORTED_COLOR = 'palegreen';
 let baseSpeed = 2;
 
 const SortAnimator = (dataSet: number[]) => {
-  /*
-  State essentially toggles visibility of slider
-  A band-aid fix that stops user from changing data set
-  While its being sorted
-  */
+  // States used to disable user input
   const [animating, setAnimating] = useState(false);
   const [isSorted, setIsSorted] = useState(false);
 
@@ -27,12 +23,16 @@ const SortAnimator = (dataSet: number[]) => {
     setIsSorted(false);
   };
 
-  /*
-  Hides all forms of user interaction with the data set during animation:
-    - Slider that controls size
-    - Buttons that sort the set
-  Currently unused, implement later when selection sort animation works.
-  */
+  //Hides all forms of user interaction with the data set during animation
+  useEffect(() => {
+    const userInputs = document.getElementById('inputs') as HTMLElement;
+    if (animating) {
+      userInputs.className = 'hide';
+    } else {
+      userInputs.className = 'show';
+    }
+  }, [animating]);
+
   const sortData = (algorithm?: AlgorithmType) => {
     switch (algorithm) {
       case 'selection':

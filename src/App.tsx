@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="inputs">
+      <div id="inputs">
         <h1>Sorting Algorithms</h1>
         <h3>
           <i>*still a work in progress don't flame :(*</i>

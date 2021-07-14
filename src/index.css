@@ -23,9 +23,12 @@ code {
   height: 45vh;
 }
 
-.inputs {
+.hide {
+  opacity: 0;
+  transition: opacity 0.5s linear;
 }
 
-.hide {
-  display: none;
+.show {
+  opacity: 1;
+  transition: opacity 0.5s linear;
 }
