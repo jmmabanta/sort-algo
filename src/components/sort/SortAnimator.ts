@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { setIsSorted } from '../data-set/DataSetState';
+import React, { useState } from 'react';
 
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
@@ -22,6 +21,11 @@ const SortAnimator = (dataSet: number[]) => {
   While its being sorted
   */
   const [animating, setAnimating] = useState(false);
+  const [isSorted, setIsSorted] = useState(false);
+
+  const resetSorted = () => {
+    setIsSorted(false);
+  };
 
   /*
   Hides all forms of user interaction with the data set during animation:
@@ -29,18 +33,7 @@ const SortAnimator = (dataSet: number[]) => {
     - Buttons that sort the set
   Currently unused, implement later when selection sort animation works.
   */
-  useEffect(() => {
-    const userInputs = document.getElementById('data_form') as HTMLElement;
-    if (animating) {
-      userInputs.style.display = 'none';
-    } else {
-      userInputs.style.display = 'inline';
-    }
-  }, [animating]);
-
   const sortData = (algorithm?: AlgorithmType) => {
-    const sortButtons = document.getElementById('sort_buttons') as HTMLElement;
-    sortButtons.style.display = 'none';
     switch (algorithm) {
       case 'selection':
         animateSelectionSort();
@@ -104,6 +97,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateSelectionSort = () => {
     setAnimating(true);
+    setIsSorted(true);
     const speed = ANIMATION_SPEED();
     const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
@@ -168,6 +162,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   const animateInsertionSort = () => {
     setAnimating(true);
+    setIsSorted(true);
     const speed = ANIMATION_SPEED();
     const animations = InsertionSort(dataSet);
     const dataBars = document.getElementsByClassName(
@@ -217,7 +212,7 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
-  return { sortData, setBaseSpeed };
+  return { sortData, setBaseSpeed, animating, isSorted, resetSorted };
 };
 
 export default SortAnimator;

@@ -11,20 +11,14 @@ const generateData = (size: number, height: number): number[] => {
   return data;
 };
 
-let isSorted = false;
-
-export const setIsSorted = (value: boolean) => {
-  isSorted = value;
-  if (isSorted) {
-    const undoSortButton = document.getElementById('undo_sort') as HTMLElement;
-    undoSortButton.style.display = 'inline';
-  }
-};
-
-export const getIsSorted = () => isSorted;
-
 export const useDataState = (initialValue: number, height: number) => {
   const [dataSet, setDataSet] = useState(generateData(initialValue, height));
+
+  let resetSorted: () => void;
+
+  const setResetSorted = (func: () => void) => {
+    resetSorted = func;
+  };
 
   // Used for direct user input in the field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,18 +43,13 @@ export const useDataState = (initialValue: number, height: number) => {
   };
 
   const resetStyling = () => {
-    if (!isSorted) return;
+    resetSorted();
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
-    const sortButtons = document.getElementById('sort_buttons') as HTMLElement;
-    const undoSortButton = document.getElementById('undo_sort') as HTMLElement;
     for (let i = 0; i < dataBars.length; i++)
       dataBars[i].style.backgroundColor = PRIMARY_COLOR;
-    sortButtons.style.display = 'inline';
-    undoSortButton.style.display = 'none';
-    isSorted = false;
   };
 
-  return { handleChange, regenerateNewData, undoSort, dataSet };
+  return { handleChange, regenerateNewData, undoSort, setResetSorted, dataSet };
 };

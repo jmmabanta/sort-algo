@@ -2,6 +2,7 @@ import { AlgorithmType } from './SortAnimator';
 
 interface ButtonProps {
   sortData: (algorithm?: AlgorithmType) => void;
+  isSorted: boolean;
 }
 
 const SortDataButtons = (props: ButtonProps) => {
@@ -11,6 +12,7 @@ const SortDataButtons = (props: ButtonProps) => {
         onClick={() => {
           props.sortData('selection');
         }}
+        disabled={props.isSorted}
       >
         Selection Sort
       </button>
@@ -18,6 +20,7 @@ const SortDataButtons = (props: ButtonProps) => {
         onClick={() => {
           props.sortData('insertion');
         }}
+        disabled={props.isSorted}
       >
         Insertion Sort
       </button>

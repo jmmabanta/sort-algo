@@ -22,3 +22,10 @@ code {
   background-color: cornflowerblue;
   height: 45vh;
 }
+
+.inputs {
+}
+
+.hide {
+  display: none;
+}

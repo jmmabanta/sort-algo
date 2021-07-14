@@ -7,6 +7,8 @@ interface DataProps {
     undoSort: () => void;
   };
   setSpeed: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isDisabled: boolean;
+  isSorted: boolean;
 }
 
 const DataSetSize = (props: DataProps) => {
@@ -23,14 +25,18 @@ const DataSetSize = (props: DataProps) => {
           defaultValue={100}
           onInput={props.dataSize.handleChange}
           onChange={props.dataSize.handleChange}
+          disabled={props.isDisabled}
         />
-        <button onClick={props.dataSize.regenerateNewData}>
+        <button
+          onClick={props.dataSize.regenerateNewData}
+          disabled={props.isDisabled}
+        >
           Make New Array
         </button>
         <button
           id="undo_sort"
-          style={{ display: 'none' }}
           onClick={props.dataSize.undoSort}
+          disabled={!props.isSorted || props.isDisabled}
         >
           Undo Sort
         </button>
@@ -45,6 +51,7 @@ const DataSetSize = (props: DataProps) => {
           defaultValue={0.5}
           onInput={props.setSpeed}
           onChange={props.setSpeed}
+          disabled={props.isDisabled}
         ></input>
       </div>
     </div>
