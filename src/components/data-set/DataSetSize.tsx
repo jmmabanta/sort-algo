@@ -4,6 +4,7 @@ interface DataProps {
   dataSize: {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     regenerateNewData: () => void;
+    undoSort: () => void;
   };
   setSpeed: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -25,6 +26,13 @@ const DataSetSize = (props: DataProps) => {
         />
         <button onClick={props.dataSize.regenerateNewData}>
           Make New Array
+        </button>
+        <button
+          id="undo_sort"
+          style={{ visibility: 'hidden' }}
+          onClick={props.dataSize.undoSort}
+        >
+          Undo Sort
         </button>
       </div>
       <div id="set_speed">

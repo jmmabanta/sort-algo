@@ -2,14 +2,12 @@ interface DataSetProps {
   dataSet: number[];
 }
 
+const MAX_HEIGHT = 45;
+
 // Both calculateHeight and calculateWidth are used for CSS styling
 // Measured in vh and vw
-const calculateHeight = (
-  dataSet: number[],
-  value: number,
-  maxHeight: number
-) => {
-  return (value * maxHeight) / Math.max(...dataSet);
+export const calculateHeight = (dataSet: number[], value: number) => {
+  return (value * MAX_HEIGHT) / Math.max(...dataSet);
 };
 
 const calculateWidth = (dataSize: number, maxWidth: number) => {
@@ -27,13 +25,11 @@ const DataSetDisplay = (props: DataSetProps) => {
               className="data_bar"
               key={index}
               style={{
-                height: `${calculateHeight(props.dataSet, value, 45)}vh`,
+                height: `${calculateHeight(props.dataSet, value)}vh`,
                 width: `${width}vw`,
                 margin: `0 ${width}vw`
               }}
-            >
-              {/* value */}
-            </div>
+            ></div>
           );
         })}
       </div>

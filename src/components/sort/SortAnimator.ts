@@ -39,7 +39,6 @@ const SortAnimator = (dataSet: number[]) => {
   }, [animating]);
 
   const sortData = (algorithm?: AlgorithmType) => {
-    setIsSorted(true);
     const sortButtons = document.getElementById('sort_buttons') as HTMLElement;
     sortButtons.style.visibility = 'hidden';
     switch (algorithm) {
@@ -95,7 +94,10 @@ const SortAnimator = (dataSet: number[]) => {
     for (let i = 0; i < dataBars.length; i++) {
       setTimeout(() => {
         dataBars[i].style.backgroundColor = SORTED_COLOR;
-        if (i === dataBars.length - 1) setAnimating(false);
+        if (i === dataBars.length - 1) {
+          setAnimating(false);
+          setIsSorted(true);
+        }
       }, i * (ANIMATION_SPEED() * 5));
     }
   };
