@@ -1,16 +1,45 @@
+:root {
+  --transition-time: 0.25s;
+  --blur-ammount: 0.5em;
+  --blur-brightness: 50%;
+  --bar-color: steelblue;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', 'Comic Sans MS';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 350;
+  color: white;
+  background-color: #202020;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+  font-family: inherit;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+h3,
+h4,
+h5 {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 #app {
@@ -25,9 +54,21 @@ code {
 
 /* INPUT FIELD */
 #inputs {
-  animation: fadeIn 0.5s linear;
+  animation: fadeIn var(--transition-time) linear;
   z-index: 1;
   position: absolute;
+  height: 90vh;
+  max-height: 480px;
+  width: 90vw;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#inputs > * {
+  margin: 1vh;
 }
 
 @keyframes fadeIn {
@@ -41,40 +82,46 @@ code {
 
 .hide {
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transition: opacity var(--transition-time) linear;
 }
 
 .show {
   opacity: 1;
-  transition: opacity 0.5s linear;
+  transition: opacity var(--transition-time) linear;
 }
 
 /* DATA BARS */
 #display {
-  animation: initialBlur 0.5s linear;
+  background-color: #444545;
+  animation: initialBlur var(--transition-time) linear;
   position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes initialBlur {
   from {
-    filter: blur(0em);
+    filter: blur(0em) brightness(0%);
   }
   to {
-    filter: blur(0.5em);
+    filter: blur(var(--blur-ammount)) brightness(var(--blur-brightness));
   }
 }
 
 .blur {
-  filter: blur(0.5em);
-  transition: filter 0.5s linear;
+  filter: blur(var(--blur-ammount)) brightness(var(--blur-brightness));
+  transition: filter var(--transition-time) linear;
 }
 
 .unblur {
-  filter: blur(0em);
-  transition: filter 0.5s linear;
+  filter: blur(0em) brightness(100%);
+  transition: filter var(--transition-time) linear;
 }
 
 .data_bar {
   display: inline-block;
-  background-color: cornflowerblue;
+  background-color: var(--bar-color);
 }

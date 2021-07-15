@@ -6,10 +6,10 @@ import InsertionSort from './algorithms/InsertionSort';
 export type AlgorithmType = 'selection' | 'insertion' | undefined;
 
 // Main Colors
-export const PRIMARY_COLOR = 'cornflowerblue';
-const COMPARISON_COLOR = 'orangered';
-const KEY_COLOR = 'magenta';
-const KEY_COLOR_TWO = 'yellow';
+export const PRIMARY_COLOR = 'steelblue';
+const COMPARISON_COLOR = 'gold';
+const KEY_COLOR = 'darkorchid';
+const KEY_COLOR_TWO = 'lightsalmon';
 const SORTED_COLOR = 'palegreen';
 
 let baseSpeed = 2;
@@ -94,7 +94,7 @@ const SortAnimator = (dataSet: number[]) => {
           setTimeout(() => {
             setAnimating(false);
             setIsSorted(true);
-          }, 2500);
+          }, 1500);
         }
       }, i * (ANIMATION_SPEED() * 5));
     }

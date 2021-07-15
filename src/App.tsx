@@ -15,17 +15,18 @@ const App = () => {
     <div id="app">
       <div id="inputs" className="show">
         <h1>Sorting Algorithms</h1>
-        <p>
+        <h3>
           There are {dataState.dataSet.length} random elements in the data set.
-        </p>
+        </h3>
         <DataSetSize
           dataSize={dataState}
-          setSpeed={animState.setBaseSpeed}
           isDisabled={animState.animating}
           isSorted={animState.isSorted}
         />
         <SortDataButtons
           sortData={animState.sortData}
+          setSpeed={animState.setBaseSpeed}
+          isDisabled={animState.animating}
           isSorted={animState.isSorted}
         />
       </div>
