@@ -15,6 +15,12 @@ html {
   }
 }
 
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -36,20 +42,25 @@ button {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 800;
 }
 
 h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 650;
 }
 
-h3,
-h4,
+h3 {
+  font-weight: 550;
+}
+
+h4 {
+  font-weight: 450;
+}
+
 h5 {
-  font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 #app {
@@ -79,6 +90,16 @@ h5 {
 
 #inputs > * {
   margin: 1vh;
+}
+
+#inputs hr {
+  width: 50%;
+  margin: 0;
+  border-top: 1px solid #fff;
+}
+
+#inputs a {
+  color: inherit;
 }
 
 @keyframes fadeIn {

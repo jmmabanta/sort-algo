@@ -11,7 +11,7 @@ const SortDataButtons = (props: ButtonProps) => {
   return (
     <div>
       <div id="set_speed">
-        Sort Speed:
+        <h3>Sort Speed:</h3>
         <div>
           <input
             type="range"

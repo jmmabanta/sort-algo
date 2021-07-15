@@ -14,7 +14,7 @@ const DataSetSize = (props: DataProps) => {
   return (
     <div id="data_form">
       <div id="set_size">
-        Generate Data:
+        <h3>Generate Data:</h3>
         <div>
           <input
             type="range"
