@@ -93,9 +93,10 @@ h5 {
 }
 
 #inputs hr {
-  width: 50%;
+  width: 75%;
   margin: 0;
-  border-top: 1px solid #fff;
+  border-top: 0.1vh solid #fff;
+  border-radius: 100px;
 }
 
 #inputs a {

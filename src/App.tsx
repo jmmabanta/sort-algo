@@ -34,7 +34,7 @@ const App = () => {
         </h4>
         <hr />
         <h5>
-          By: John Marcus Mabanta ·{' '}
+          © 2021 John Marcus Mabanta ·{' '}
           <a
             href="https://github.com/jmmabanta/sort-algo"
             target="_blank"
