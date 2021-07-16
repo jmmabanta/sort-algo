@@ -3,7 +3,7 @@
   --blur-ammount: 0.5em;
   --blur-brightness: 50%;
   --bar-color: steelblue;
-  --sort-button-color: lightgreen;
+  --sort-button-color: seagreen;
 }
 
 html {
@@ -68,7 +68,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 350;
   color: white;
-  text-shadow: 2px 2px 5px black;
   background-color: #202020;
 }
 
@@ -190,6 +189,8 @@ body {
   font-size: 1rem;
   border-radius: 5px;
   padding: 5% 0;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
 }
 
 .array_button button {
@@ -220,6 +221,7 @@ body {
 
 /* SLIDERS */
 .slider {
+  -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 3px;
@@ -235,7 +237,13 @@ body {
 }
 
 .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
   appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px black solid;
 }
 
 .slider::-moz-range-thumb {
@@ -244,15 +252,23 @@ body {
   height: 10px;
   border-radius: 50%;
   cursor: pointer;
-  border: 1px black solid;
+  border: 2px black solid;
+}
+
+.slider.data::-webkit-slider-thumb {
+  background-color: var(--bar-color);
 }
 
 .slider.data::-moz-range-thumb {
-  background-color: rgb(96, 188, 241); /* Brighter version of steelblue */
+  background-color: var(--bar-color);
+}
+
+.slider.sort::-webkit-slider-thumb {
+  background-color: var(--sort-button-color);
 }
 
 .slider.sort::-moz-range-thumb {
-  background-color: rgb(183, 255, 181); /* Brighter version of lightgreen */
+  background-color: var(--sort-button-color);
 }
 
 .slider:hover {
