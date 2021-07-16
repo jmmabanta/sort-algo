@@ -9,7 +9,12 @@ interface ButtonProps {
 
 const SortDataButtons = (props: ButtonProps) => {
   return (
-    <div className="input_section">
+    <div
+      className="input_section"
+      style={{
+        display: props.isSorted ? 'none' : 'inline'
+      }}
+    >
       <h3>Sort Speed:</h3>
       <div>
         <input
