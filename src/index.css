@@ -3,47 +3,16 @@
   --blur-ammount: 0.5em;
   --blur-brightness: 50%;
   --bar-color: steelblue;
+  --sort-button-color: palegreen;
 }
 
 html {
   font-size: 16px;
 }
 
-@media only screen and (max-width: 1024px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  html {
-    font-size: 12px;
-  }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', 'Comic Sans MS';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 350;
-  color: white;
-  background-color: #202020;
-}
-
-button {
-  font-family: inherit;
-}
-
 h1 {
   font-size: 4rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 h2 {
@@ -61,6 +30,41 @@ h4 {
 
 h5 {
   font-weight: 400;
+}
+
+@media only screen and (max-width: 1024px),
+  only screen and (max-height: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 480px), only screen and (max-height: 480px) {
+  html {
+    font-size: 12px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Mono', 'Comic Sans MS', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 350;
+  color: white;
+  background-color: #202020;
 }
 
 #app {
@@ -85,7 +89,7 @@ h5 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 #inputs > * {
@@ -122,6 +126,11 @@ h5 {
   transition: opacity var(--transition-time) linear;
 }
 
+.input_section {
+  width: 50%;
+  max-width: 360px;
+}
+
 /* DATA BARS */
 #display {
   background-color: #444545;
@@ -156,4 +165,54 @@ h5 {
 .data_bar {
   display: inline-block;
   background-color: var(--bar-color);
+}
+
+/* BUTTONS */
+.button_list {
+  display: flex;
+  flex-grow: 1;
+  width: 100%;
+  color: white;
+}
+
+.button_list button {
+  width: 100%;
+  background: none;
+  margin: 0.5rem;
+  color: white;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 5% 0;
+}
+
+.array_button button {
+  border: 2px var(--bar-color) solid;
+}
+
+.array_button :hover {
+  background-color: var(--bar-color);
+}
+
+.array_button :disabled {
+  display: none;
+}
+
+.sort_button button {
+  border: 2px var(--sort-button-color) solid;
+}
+
+.sort_button :hover {
+  background-color: rgb(100, 161, 100); /* A darker palegreen */
+}
+
+@media only screen and (max-width: 525px) {
+  .button_list {
+    flex-direction: column;
+  }
+}
+
+/* SLIDERS */
+.slider {
+  width: 100%;
 }

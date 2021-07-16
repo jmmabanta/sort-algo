@@ -9,23 +9,22 @@ interface ButtonProps {
 
 const SortDataButtons = (props: ButtonProps) => {
   return (
-    <div>
-      <div id="set_speed">
-        <h3>Sort Speed:</h3>
-        <div>
-          <input
-            type="range"
-            min={0.1}
-            max={1.0}
-            step={0.1}
-            defaultValue={0.5}
-            onInput={props.setSpeed}
-            onChange={props.setSpeed}
-            disabled={props.isDisabled}
-          ></input>{' '}
-        </div>
+    <div className="input_section">
+      <h3>Sort Speed:</h3>
+      <div>
+        <input
+          type="range"
+          className="slider"
+          min={0.1}
+          max={1.0}
+          step={0.1}
+          defaultValue={0.5}
+          onInput={props.setSpeed}
+          onChange={props.setSpeed}
+          disabled={props.isDisabled}
+        ></input>{' '}
       </div>
-      <div id="sort_buttons">
+      <div className="button_list sort_button">
         <button
           onClick={() => {
             props.sortData('selection');

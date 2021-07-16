@@ -12,22 +12,22 @@ interface DataProps {
 
 const DataSetSize = (props: DataProps) => {
   return (
-    <div id="data_form">
-      <div id="set_size">
-        <h3>Generate Data:</h3>
-        <div>
-          <input
-            type="range"
-            name="data_size"
-            min={100}
-            max={500}
-            step={50}
-            defaultValue={100}
-            onInput={props.dataSize.handleChange}
-            onChange={props.dataSize.handleChange}
-            disabled={props.isDisabled}
-          />
-        </div>
+    <div className="input_section">
+      <h3>Generate Data:</h3>
+      <div>
+        <input
+          type="range"
+          className="slider"
+          min={100}
+          max={500}
+          step={50}
+          defaultValue={100}
+          onInput={props.dataSize.handleChange}
+          onChange={props.dataSize.handleChange}
+          disabled={props.isDisabled}
+        />
+      </div>
+      <div className="button_list array_button">
         <button
           onClick={props.dataSize.regenerateNewData}
           disabled={props.isDisabled}
