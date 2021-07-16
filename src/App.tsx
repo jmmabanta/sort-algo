@@ -1,7 +1,7 @@
 import DataSetSize from './components/data-set/DataSetInputs';
 import { useDataState } from './components/data-set/DataSetState';
 import DataSetDisplay from './components/DataSetDisplay';
-import SortDataButtons from './components/sort/SortDataButtons';
+import SortDataButtons from './components/sort/SortDataInputs';
 import SortAnimator from './components/sort/SortAnimator';
 
 const App = () => {
@@ -32,7 +32,6 @@ const App = () => {
         <h4>
           <i>WARNING: Animation contains flashing lights</i>
         </h4>
-        <hr />
         <h5>
           © 2021 John Marcus Mabanta ·{' '}
           <a

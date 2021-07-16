@@ -14,19 +14,17 @@ const DataSetSize = (props: DataProps) => {
   return (
     <div className="input_section">
       <h3>Generate Data:</h3>
-      <div>
-        <input
-          type="range"
-          className="slider"
-          min={100}
-          max={500}
-          step={50}
-          defaultValue={100}
-          onInput={props.dataSize.handleChange}
-          onChange={props.dataSize.handleChange}
-          disabled={props.isDisabled}
-        />
-      </div>
+      <input
+        type="range"
+        className="slider data"
+        min={100}
+        max={500}
+        step={50}
+        defaultValue={100}
+        onInput={props.dataSize.handleChange}
+        onChange={props.dataSize.handleChange}
+        disabled={props.isDisabled}
+      />
       <div className="button_list array_button">
         <button
           onClick={props.dataSize.regenerateNewData}

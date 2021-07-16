@@ -10,7 +10,7 @@ export const PRIMARY_COLOR = 'steelblue';
 const COMPARISON_COLOR = 'gold';
 const KEY_COLOR = 'darkorchid';
 const KEY_COLOR_TWO = 'lightsalmon';
-const SORTED_COLOR = 'palegreen';
+const SORTED_COLOR = 'lightgreen';
 
 let baseSpeed = 2;
 
