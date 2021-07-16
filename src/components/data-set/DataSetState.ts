@@ -11,6 +11,9 @@ const generateData = (size: number, height: number): number[] => {
   return data;
 };
 
+// The increment in which the data size grows
+const INCREMENT = 25;
+
 export const useDataState = (initialValue: number, height: number) => {
   const [dataSet, setDataSet] = useState(generateData(initialValue, height));
 
@@ -22,7 +25,9 @@ export const useDataState = (initialValue: number, height: number) => {
 
   // Used for direct user input in the field
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newSize = parseInt(e.target.value);
+    const input = parseFloat(e.target.value);
+    const newSize = Math.ceil(input / INCREMENT) * INCREMENT;
+    console.log(newSize);
     setDataSet((oldData) => generateData(newSize, height));
     resetStyling();
   };

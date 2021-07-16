@@ -21,7 +21,7 @@ const SortDataButtons = (props: ButtonProps) => {
         className="slider sort"
         min={0.1}
         max={1.0}
-        step={0.1}
+        step={0.00001}
         defaultValue={0.5}
         onInput={props.setSpeed}
         onChange={props.setSpeed}
