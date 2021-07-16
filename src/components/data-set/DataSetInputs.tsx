@@ -22,7 +22,7 @@ const DataSetSize = (props: DataProps) => {
         defaultValue={100}
         onInput={props.dataSize.handleChange}
         onChange={props.dataSize.handleChange}
-        disabled={props.isDisabled}
+        disabled={props.isSorted}
       />
       <div className="button_list array_button">
         <button
