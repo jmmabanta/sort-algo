@@ -10,7 +10,7 @@ interface ButtonProps {
 const SortDataButtons = (props: ButtonProps) => {
   return (
     <div
-      className="input_section"
+      className="input_section sort_section"
       style={{
         display: props.isSorted ? 'none' : 'inline'
       }}
@@ -44,6 +44,7 @@ const SortDataButtons = (props: ButtonProps) => {
         >
           Insertion Sort
         </button>
+        <button>Merge Sort</button>
       </div>
     </div>
   );
