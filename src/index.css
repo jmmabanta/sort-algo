@@ -96,10 +96,10 @@ body {
   justify-content: center;
 }
 
-#inputs hr {
-  width: 75%;
-  margin: 0;
-  border-top: 0.1vh solid #fff;
+hr {
+  width: 100%;
+  margin-top: 1vh;
+  border-top: 1px solid #fff;
   border-radius: 100px;
 }
 
@@ -128,13 +128,8 @@ body {
 
 .input_section {
   margin-top: 1vh;
-  width: 100%;
-  max-width: none;
-}
-
-.input_section.sort_section {
-  width: 100%;
-  max-width: none;
+  width: 75%;
+  max-width: 525px;
 }
 
 /* DATA BARS */

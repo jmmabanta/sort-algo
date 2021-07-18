@@ -18,6 +18,7 @@ const App = () => {
         <h2>
           There are {dataState.dataSet.length} random elements in the data set.
         </h2>
+        <hr />
         <DataSetSize
           dataSize={dataState}
           isDisabled={animState.animating}
