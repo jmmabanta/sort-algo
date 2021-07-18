@@ -87,6 +87,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   // The final 'green' swipe of the data bars when things are done sorting
   const sortedAnimation = (dataBars: HTMLCollectionOf<HTMLElement>) => {
+    const animSpeed = ANIMATION_SPEED() < 50 ? ANIMATION_SPEED() : 50;
     for (let i = 0; i < dataBars.length; i++) {
       setTimeout(() => {
         dataBars[i].style.backgroundColor = SORTED_COLOR;
@@ -96,7 +97,7 @@ const SortAnimator = (dataSet: number[]) => {
             setIsSorted(true);
           }, 1500);
         }
-      }, i * (ANIMATION_SPEED() * 5));
+      }, i * animSpeed);
     }
   };
 

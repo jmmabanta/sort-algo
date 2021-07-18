@@ -17,7 +17,7 @@ const DataSetSize = (props: DataProps) => {
       <input
         type="range"
         className="slider data"
-        min={100}
+        min={25}
         max={500}
         defaultValue={100}
         onInput={props.dataSize.handleChange}

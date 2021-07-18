@@ -2,7 +2,7 @@ interface DataSetProps {
   dataSet: number[];
 }
 
-const MAX_HEIGHT = 93;
+const MAX_HEIGHT = 96;
 
 // Both calculateHeight and calculateWidth are used for CSS styling
 // Measured in vh and vw
