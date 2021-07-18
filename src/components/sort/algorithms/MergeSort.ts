@@ -6,21 +6,24 @@
 export const MergeSort = (array: number[]) => {
   const sortedArray = array.slice(); // Makes sure OG array is not mutated
   const temp = new Array<number>(sortedArray.length);
-  mergeSortHelper(sortedArray, 0, sortedArray.length - 1, temp);
-  return sortedArray;
+  const animations: (string | number)[] = [];
+  if (sortedArray.length <= 1) return animations;
+  mergeSortHelper(sortedArray, 0, sortedArray.length - 1, temp, animations);
+  return animations;
 };
 
 const mergeSortHelper = (
   arr: number[],
   low: number,
   high: number,
-  temp: number[]
+  temp: number[],
+  anim: (string | number)[]
 ) => {
   if (low < high) {
     const mid = Math.floor((low + high) / 2);
-    mergeSortHelper(arr, low, mid, temp);
-    mergeSortHelper(arr, mid + 1, high, temp);
-    merge(arr, low, mid, high, temp);
+    mergeSortHelper(arr, low, mid, temp, anim);
+    mergeSortHelper(arr, mid + 1, high, temp, anim);
+    merge(arr, low, mid, high, temp, anim);
   }
 };
 
@@ -29,7 +32,8 @@ const merge = (
   low: number,
   mid: number,
   high: number,
-  temp: number[]
+  temp: number[],
+  anim: (string | number)[]
 ) => {
   let i = low;
   let j = mid + 1;
