@@ -27,7 +27,6 @@ export const useDataState = (initialValue: number, height: number) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = parseFloat(e.target.value);
     const newSize = Math.ceil(input / INCREMENT) * INCREMENT;
-    console.log(newSize);
     setDataSet((oldData) => generateData(newSize, height));
     resetStyling();
   };
