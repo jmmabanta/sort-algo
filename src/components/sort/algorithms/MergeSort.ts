@@ -4,7 +4,7 @@
 // * Originally in Java, adapted for TypeScript
 // (also basically the same from Clement's visualizer/AlgoExpert.io)
 
-export const MergeSort = (array: number[]) => {
+const MergeSort = (array: number[]) => {
   const animations: (string | number)[][] = [];
   if (array.length <= 1) return animations;
   const sortedArray = array.slice(); // makes sure og array is not mutated
@@ -68,3 +68,5 @@ const merge = (
     k++;
   }
 };
+
+export default MergeSort;

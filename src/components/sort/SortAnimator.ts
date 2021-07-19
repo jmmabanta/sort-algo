@@ -4,7 +4,7 @@ import { calculateHeight } from '../DataSetDisplay';
 
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
-import { MergeSort } from './algorithms/MergeSort';
+import MergeSort from './algorithms/MergeSort';
 
 export type AlgorithmType = 'selection' | 'insertion' | 'merge' | undefined;
 
