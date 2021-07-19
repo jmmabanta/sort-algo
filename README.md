@@ -14,10 +14,11 @@ _Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmi
 2. ~~Visualize the data set (numbers for now)~~ ✅
 3. ~~Add selection and insertion sort algorithm~~ ✅
 4. ~~Display sorting as it happens to the displayed data set~~ ✅
-5. Layout and aethethic overhaul
-6. Implement other sorting algorithms
+5. ~~Layout and aethethic overhaul~~ ✅
+6. Implement other sorting algorithms:
+   - ~~Merge Sort~~ ✅
    - Bubble Sort
-   - Merge Sort
+   - Quick Sort
    - Other...
 
 ---
