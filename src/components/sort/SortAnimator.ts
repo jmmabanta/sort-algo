@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
+import { MergeSort } from './algorithms/MergeSort';
 
-export type AlgorithmType = 'selection' | 'insertion' | undefined;
+export type AlgorithmType = 'selection' | 'insertion' | 'merge' | undefined;
 
 // Main Colors
 export const PRIMARY_COLOR = 'steelblue';
@@ -216,6 +217,17 @@ const SortAnimator = (dataSet: number[]) => {
           break;
       }
     }
+  };
+
+  const animateMergeSort = () => {
+    setAnimating(true);
+    setIsSorted(true);
+    const speed = ANIMATION_SPEED();
+    const animations = MergeSort(dataSet);
+    const dataBars = document.getElementsByClassName(
+      'data_bar'
+    ) as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < animations.length; i++) {}
   };
 
   return { sortData, setBaseSpeed, animating, isSorted, resetSorted };
