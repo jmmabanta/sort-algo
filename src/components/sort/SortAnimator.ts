@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { calculateHeight } from '../DataSetDisplay';
+
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
 import { MergeSort } from './algorithms/MergeSort';
@@ -8,12 +10,15 @@ export type AlgorithmType = 'selection' | 'insertion' | 'merge' | undefined;
 
 // Main Colors
 export const PRIMARY_COLOR = 'steelblue';
-const COMPARISON_COLOR = 'gold';
-const KEY_COLOR = 'darkorchid';
-const KEY_COLOR_TWO = 'lightsalmon';
+const COMPARISON_COLOR = 'yellow';
+const KEY_COLOR = 'magenta';
+const KEY_COLOR_TWO = 'crimson';
 const SORTED_COLOR = 'seagreen';
 
 let baseSpeed = 2;
+
+const clamp = (num: number, min: number, max: number) =>
+  Math.min(Math.max(num, min), max);
 
 const SortAnimator = (dataSet: number[]) => {
   // States used to disable user input
@@ -44,6 +49,9 @@ const SortAnimator = (dataSet: number[]) => {
         break;
       case 'insertion':
         animateInsertionSort();
+        break;
+      case 'merge':
+        animateMergeSort();
         break;
       default:
         setIsSorted(false);
@@ -88,7 +96,7 @@ const SortAnimator = (dataSet: number[]) => {
 
   // The final 'green' swipe of the data bars when things are done sorting
   const sortedAnimation = (dataBars: HTMLCollectionOf<HTMLElement>) => {
-    const animSpeed = ANIMATION_SPEED() < 50 ? ANIMATION_SPEED() : 50;
+    const animSpeed = clamp(ANIMATION_SPEED(), 1, 50);
     for (let i = 0; i < dataBars.length; i++) {
       setTimeout(() => {
         dataBars[i].style.backgroundColor = SORTED_COLOR;
@@ -207,9 +215,7 @@ const SortAnimator = (dataSet: number[]) => {
             const barOneHeight = barOneStyles.height;
             barOneStyles.height = barTwoStyles.height;
             barTwoStyles.height = barOneHeight;
-            if (i === animations.length - 1) {
-              sortedAnimation(dataBars);
-            }
+            if (i === animations.length - 1) sortedAnimation(dataBars);
           }, i * speed);
           break;
         default:
@@ -222,12 +228,44 @@ const SortAnimator = (dataSet: number[]) => {
   const animateMergeSort = () => {
     setAnimating(true);
     setIsSorted(true);
-    const speed = ANIMATION_SPEED();
+    const speed = ANIMATION_SPEED() * (dataSet.length / 50);
     const animations = MergeSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
-    for (let i = 0; i < animations.length; i++) {}
+    for (let i = 0; i < animations.length; i++) {
+      const [type, barOneIndex, barTwoIndex] = animations[i];
+      const barOneStyles = dataBars[barOneIndex as number].style;
+      switch (type) {
+        case 'compare':
+          const barTwoStyles = dataBars[barTwoIndex as number].style;
+          setTimeout(() => {
+            barOneStyles.backgroundColor = KEY_COLOR_TWO;
+            barTwoStyles.backgroundColor = COMPARISON_COLOR;
+          }, i * speed);
+          setTimeout(() => {
+            barOneStyles.backgroundColor = PRIMARY_COLOR;
+            barTwoStyles.backgroundColor = PRIMARY_COLOR;
+          }, (i + 1.5) * speed);
+          break;
+        case 'swap':
+          setTimeout(() => {
+            barOneStyles.backgroundColor = KEY_COLOR;
+            barOneStyles.height = `${calculateHeight(
+              dataSet,
+              barTwoIndex as number
+            )}vh`;
+            if (i === animations.length - 1) sortedAnimation(dataBars);
+          }, i * speed);
+          setTimeout(() => {
+            barOneStyles.backgroundColor = PRIMARY_COLOR;
+          }, (i + 1.5) * speed);
+          break;
+        default:
+          console.log('Unknown operator??????');
+          break;
+      }
+    }
   };
 
   return { sortData, setBaseSpeed, animating, isSorted, resetSorted };

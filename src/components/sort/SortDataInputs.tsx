@@ -44,7 +44,14 @@ const SortDataButtons = (props: ButtonProps) => {
         >
           Insertion Sort
         </button>
-        <button>Merge Sort</button>
+        <button
+          onClick={() => {
+            props.sortData('merge');
+          }}
+          disabled={props.isSorted}
+        >
+          Merge Sort
+        </button>
       </div>
     </div>
   );
