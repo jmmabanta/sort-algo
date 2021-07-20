@@ -1,7 +1,5 @@
 :root {
   --transition-time: 0.25s;
-  --blur-ammount: 0.5em;
-  --blur-brightness: 50%;
   --bar-color: steelblue;
   --sort-button-color: seagreen;
 }
@@ -11,7 +9,7 @@ html {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 500;
 }
 
@@ -33,14 +31,14 @@ h5 {
   font-weight: 400;
 }
 
-@media only screen and (max-width: 1024px),
-  only screen and (max-height: 640px) {
+@media only screen and (max-width: 1280px),
+  only screen and (max-height: 720px) {
   html {
     font-size: 14px;
   }
 }
 
-@media only screen and (max-width: 640px), only screen and (max-height: 480px) {
+@media only screen and (max-width: 960px), only screen and (max-height: 640px) {
   html {
     font-size: 12px;
   }
@@ -69,12 +67,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 350;
   color: white;
-  background-color: #202020;
+  background-color: #444545;
 }
 
 #app {
   position: absolute;
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   align-items: center;
@@ -84,17 +83,11 @@ body {
 
 /* INPUT FIELD */
 #inputs {
-  animation: fadeIn var(--transition-time) linear;
   z-index: 1;
-  position: absolute;
-  height: 90vh;
-  max-height: 480px;
-  width: 90vw;
-  max-width: 700px;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 hr {
@@ -108,25 +101,6 @@ hr {
   color: inherit;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.hide {
-  opacity: 0;
-  transition: opacity var(--transition-time) linear;
-}
-
-.show {
-  opacity: 1;
-  transition: opacity var(--transition-time) linear;
-}
-
 .input_section {
   margin-top: 1vh;
   width: 75%;
@@ -136,32 +110,11 @@ hr {
 /* DATA BARS */
 #display {
   background-color: #444545;
-  animation: initialBlur var(--transition-time) linear;
-  position: absolute;
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-@keyframes initialBlur {
-  from {
-    filter: blur(0em) brightness(0%);
-  }
-  to {
-    filter: blur(var(--blur-ammount)) brightness(var(--blur-brightness));
-  }
-}
-
-.blur {
-  filter: blur(var(--blur-ammount)) brightness(var(--blur-brightness));
-  transition: filter var(--transition-time) linear;
-}
-
-.unblur {
-  filter: blur(0em) brightness(100%);
-  transition: filter var(--transition-time) linear;
 }
 
 .data_bar {
@@ -186,7 +139,7 @@ hr {
   font-family: inherit;
   font-size: 1rem;
   border-radius: 5px;
-  padding: 3vh 0;
+  padding: 1vh 0;
   transition: 0.2s;
   -webkit-transition: 0.2s;
 }
@@ -197,10 +150,6 @@ hr {
 
 .array_button :hover {
   background-color: var(--bar-color);
-}
-
-.array_button :disabled {
-  display: none;
 }
 
 .sort_button button {
@@ -228,10 +177,6 @@ hr {
   opacity: 0.8;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-}
-
-.slider:disabled {
-  display: none;
 }
 
 .slider::-webkit-slider-thumb {

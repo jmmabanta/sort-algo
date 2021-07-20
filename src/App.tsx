@@ -13,12 +13,26 @@ const App = () => {
 
   return (
     <div id="app">
+      <div id="display">
+        <DataSetDisplay dataSet={dataState.dataSet} />
+      </div>
       <div id="inputs" className="show">
-        <h1>Sorting Algorithms</h1>
-        <h2>
-          There are {dataState.dataSet.length} random elements in the data set.
-        </h2>
-        <hr />
+        <div>
+          <h1>Sorting Algorithms</h1>
+          <h4>
+            <i>WARNING: Animation contains flashing lights</i>
+          </h4>
+          <h5>
+            © 2021 John Marcus Mabanta ·{' '}
+            <a
+              href="https://github.com/jmmabanta/sort-algo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source Code
+            </a>
+          </h5>
+        </div>
         <DataSetSize
           dataSize={dataState}
           isDisabled={animState.animating}
@@ -30,22 +44,6 @@ const App = () => {
           isDisabled={animState.animating}
           isSorted={animState.isSorted}
         />
-        <h4>
-          <i>WARNING: Animation contains flashing lights</i>
-        </h4>
-        <h5>
-          © 2021 John Marcus Mabanta ·{' '}
-          <a
-            href="https://github.com/jmmabanta/sort-algo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Source Code
-          </a>
-        </h5>
-      </div>
-      <div id="display">
-        <DataSetDisplay dataSet={dataState.dataSet} />
       </div>
     </div>
   );

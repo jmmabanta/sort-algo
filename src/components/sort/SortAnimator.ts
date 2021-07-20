@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { calculateHeight } from '../DataSetDisplay';
 
@@ -28,19 +28,6 @@ const SortAnimator = (dataSet: number[]) => {
   const resetSorted = () => {
     setIsSorted(false);
   };
-
-  //Hides all forms of user interaction with the data set during animation
-  useEffect(() => {
-    const userInputs = document.getElementById('inputs') as HTMLElement;
-    const display = document.getElementById('display') as HTMLElement;
-    if (animating) {
-      userInputs.className = 'hide';
-      display.className = 'unblur';
-    } else {
-      userInputs.className = 'show';
-      display.className = 'blur';
-    }
-  }, [animating]);
 
   const sortData = (algorithm?: AlgorithmType) => {
     switch (algorithm) {
