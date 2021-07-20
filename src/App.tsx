@@ -13,6 +13,9 @@ const App = () => {
 
   return (
     <div id="app">
+      <h3>
+        There are {dataState.dataSet.length} random elements in the data set
+      </h3>
       <div id="display">
         <DataSetDisplay dataSet={dataState.dataSet} />
       </div>

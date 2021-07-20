@@ -35,6 +35,10 @@ const DataSetSize = (props: DataProps) => {
           id="undo_sort"
           onClick={props.dataSize.undoSort}
           disabled={!props.isSorted || props.isDisabled}
+          style={{
+            display:
+              !props.isSorted || props.isDisabled ? 'none' : 'inline-block'
+          }}
         >
           Undo Sort
         </button>
