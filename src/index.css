@@ -103,8 +103,12 @@ hr {
 
 .input_section {
   margin-top: 1vh;
-  width: 40%;
+  width: 25%;
   max-width: 480px;
+}
+
+.input_section:disabled {
+  display: none;
 }
 
 /* DATA BARS */
@@ -144,6 +148,11 @@ hr {
   -webkit-transition: 0.2s;
 }
 
+.button_list select {
+  width: 100%;
+  margin: 1vh 0;
+}
+
 .array_button button {
   border: 2px var(--bar-color) solid;
 }
@@ -156,7 +165,7 @@ hr {
   border: 2px var(--sort-button-color) solid;
 }
 
-.sort_button :hover {
+.sort_button button:hover {
   background-color: var(--sort-button-color);
 }
 

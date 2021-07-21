@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { AlgorithmType } from './SortAnimator';
 
 interface ButtonProps {
@@ -8,6 +9,12 @@ interface ButtonProps {
 }
 
 const SortDataInputs = (props: ButtonProps) => {
+  const [selectedAlgo, setSelectedAlgo] = useState('selection');
+
+  const changeAlgo = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedAlgo(e.target.value);
+  };
+
   return (
     <div className="input_section sort_section">
       <h3>Sort Speed:</h3>
@@ -23,7 +30,12 @@ const SortDataInputs = (props: ButtonProps) => {
         disabled={props.isDisabled}
       ></input>
       <div className="button_list sort_button">
-        <select name="algos" id="algo-drop">
+        <select
+          name="algos"
+          id="algo-drop"
+          value={selectedAlgo}
+          onChange={changeAlgo}
+        >
           <optgroup label="O(n²)">
             <option value="selection">Selection Sort</option>
             <option value="insertion">Insertion Sort</option>
@@ -32,7 +44,12 @@ const SortDataInputs = (props: ButtonProps) => {
             <option value="merge">Merge Sort</option>
           </optgroup>
         </select>
-        <button disabled={props.isDisabled}>Sort Data</button>
+        <button
+          onClick={() => props.sortData(selectedAlgo as AlgorithmType)}
+          disabled={props.isDisabled}
+        >
+          Sort Data
+        </button>
       </div>
     </div>
   );
