@@ -10,7 +10,7 @@ interface DataProps {
   isSorted: boolean;
 }
 
-const DataSetSize = (props: DataProps) => {
+const DataSetInputs = (props: DataProps) => {
   return (
     <div className="input_section">
       <h3>Generate Data:</h3>
@@ -47,4 +47,4 @@ const DataSetSize = (props: DataProps) => {
   );
 };
 
-export default DataSetSize;
+export default DataSetInputs;

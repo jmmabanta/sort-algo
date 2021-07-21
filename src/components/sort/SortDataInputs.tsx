@@ -7,7 +7,7 @@ interface ButtonProps {
   isDisabled: boolean;
 }
 
-const SortDataButtons = (props: ButtonProps) => {
+const SortDataInputs = (props: ButtonProps) => {
   return (
     <div className="input_section sort_section">
       <h3>Sort Speed:</h3>
@@ -23,33 +23,19 @@ const SortDataButtons = (props: ButtonProps) => {
         disabled={props.isDisabled}
       ></input>{' '}
       <div className="button_list sort_button">
-        <button
-          onClick={() => {
-            props.sortData('selection');
-          }}
-          disabled={props.isSorted}
-        >
-          Selection Sort
-        </button>
-        <button
-          onClick={() => {
-            props.sortData('insertion');
-          }}
-          disabled={props.isSorted}
-        >
-          Insertion Sort
-        </button>
-        <button
-          onClick={() => {
-            props.sortData('merge');
-          }}
-          disabled={props.isSorted}
-        >
-          Merge Sort
-        </button>
+        <select name="algos" id="algo-drop">
+          <optgroup label="O(n²)">
+            <option value="selection">Selection Sort</option>
+            <option value="insertion">Insertion Sort</option>
+          </optgroup>
+          <optgroup label="O(n·log(n))">
+            <option value="merge">Merge Sort</option>
+          </optgroup>
+        </select>
+        <button disabled={props.isDisabled}>Sort Data</button>
       </div>
     </div>
   );
 };
 
-export default SortDataButtons;
+export default SortDataInputs;

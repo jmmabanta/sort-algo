@@ -1,7 +1,7 @@
-import DataSetSize from './components/data-set/DataSetInputs';
+import DataSetInputs from './components/data-set/DataSetInputs';
 import { useDataState } from './components/data-set/DataSetState';
 import DataSetDisplay from './components/DataSetDisplay';
-import SortDataButtons from './components/sort/SortDataInputs';
+import SortDataInputs from './components/sort/SortDataInputs';
 import SortAnimator from './components/sort/SortAnimator';
 
 const App = () => {
@@ -36,12 +36,12 @@ const App = () => {
             </a>
           </h5>
         </div>
-        <DataSetSize
+        <DataSetInputs
           dataSize={dataState}
           isDisabled={animState.animating}
           isSorted={animState.isSorted}
         />
-        <SortDataButtons
+        <SortDataInputs
           sortData={animState.sortData}
           setSpeed={animState.setBaseSpeed}
           isDisabled={animState.animating}
