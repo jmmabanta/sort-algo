@@ -21,7 +21,7 @@ const SortDataInputs = (props: ButtonProps) => {
         onInput={props.setSpeed}
         onChange={props.setSpeed}
         disabled={props.isDisabled}
-      ></input>{' '}
+      ></input>
       <div className="button_list sort_button">
         <select name="algos" id="algo-drop">
           <optgroup label="O(n²)">
