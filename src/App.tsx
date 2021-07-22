@@ -13,14 +13,14 @@ const App = () => {
 
   return (
     <div id="app">
-      <h3>
+      <h3 style={{ zIndex: 2 }}>
         There are {dataState.dataSet.length} random elements in the data set
       </h3>
       <div id="display">
         <DataSetDisplay dataSet={dataState.dataSet} />
       </div>
-      <div id="inputs" className="show">
-        <div>
+      <div id="toolbar" className={animState.animating ? 'hide' : 'show'}>
+        <div id="title">
           <h1>Sorting Algorithms</h1>
           <h4>
             <i>WARNING: Animation contains flashing lights</i>

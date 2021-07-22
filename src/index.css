@@ -31,28 +31,6 @@ h5 {
   font-weight: 400;
 }
 
-@media only screen and (max-width: 1280px),
-  only screen and (max-height: 720px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media only screen and (max-width: 960px), only screen and (max-height: 640px) {
-  html {
-    font-size: 12px;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
-  h2 {
-    font-size: 1.25rem;
-  }
-  h3 {
-    font-size: 1rem;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -81,13 +59,18 @@ body {
   text-align: center;
 }
 
-/* INPUT FIELD */
-#inputs {
+/* TOOLBAR */
+#toolbar {
   z-index: 1;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  transition: all 0.5s linear;
+}
+
+#title {
+  flex-grow: 0;
 }
 
 hr {
@@ -97,18 +80,14 @@ hr {
   border-radius: 100px;
 }
 
-#inputs a {
+#toolbar a {
   color: inherit;
 }
 
 .input_section {
-  margin-top: 1vh;
   width: 25%;
   max-width: 480px;
-}
-
-.input_section:disabled {
-  display: none;
+  margin: 0;
 }
 
 /* DATA BARS */
@@ -169,12 +148,6 @@ hr {
   background-color: var(--sort-button-color);
 }
 
-@media only screen and (max-width: 525px) {
-  .button_list {
-    flex-direction: column;
-  }
-}
-
 /* SLIDERS */
 .slider {
   -webkit-appearance: none;
@@ -233,4 +206,53 @@ hr {
 
 .slider.sort {
   background-color: var(--sort-button-color);
+}
+
+/* Media Queries */
+@media only screen and (max-width: 1280px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 860px), only screen and (max-height: 540px) {
+  #toolbar {
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000ab;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s linear;
+  }
+  .input_section {
+    width: 75%;
+    max-width: 360px;
+    margin-top: 1.5vh;
+  }
+  #toolbar.show {
+    opacity: 1;
+    transition: opacity 0.2s linear;
+  }
+  #toolbar.hide {
+    opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 480px), only screen and (max-height: 360px) {
+  html {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
 }

@@ -16,7 +16,10 @@ const SortDataInputs = (props: ButtonProps) => {
   };
 
   return (
-    <div className="input_section sort_section">
+    <div
+      className="input_section sort_section"
+      style={{ display: props.isDisabled ? 'none' : 'inline' }}
+    >
       <h3>Sort Speed:</h3>
       <input
         type="range"
@@ -46,7 +49,7 @@ const SortDataInputs = (props: ButtonProps) => {
         </select>
         <button
           onClick={() => props.sortData(selectedAlgo as AlgorithmType)}
-          disabled={props.isDisabled}
+          disabled={props.isDisabled || props.isSorted}
         >
           Sort Data
         </button>

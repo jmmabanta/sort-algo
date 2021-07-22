@@ -88,8 +88,10 @@ const SortAnimator = (dataSet: number[]) => {
       setTimeout(() => {
         dataBars[i].style.backgroundColor = SORTED_COLOR;
         if (i === dataBars.length - 1) {
-          setAnimating(false);
-          setIsSorted(true);
+          setTimeout(() => {
+            setAnimating(false);
+            setIsSorted(true);
+          }, 1000);
         }
       }, i * animSpeed);
     }

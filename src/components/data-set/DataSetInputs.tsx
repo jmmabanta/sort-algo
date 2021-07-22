@@ -12,7 +12,10 @@ interface DataProps {
 
 const DataSetInputs = (props: DataProps) => {
   return (
-    <div className="input_section">
+    <div
+      className="input_section"
+      style={{ display: props.isDisabled ? 'none' : 'inline' }}
+    >
       <h3>Generate Data:</h3>
       <input
         type="range"
@@ -22,7 +25,7 @@ const DataSetInputs = (props: DataProps) => {
         defaultValue={100}
         onInput={props.dataSize.handleChange}
         onChange={props.dataSize.handleChange}
-        disabled={props.isSorted}
+        disabled={props.isDisabled}
       />
       <div className="button_list array_button">
         <button
