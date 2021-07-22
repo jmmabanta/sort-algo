@@ -10,7 +10,11 @@ const BubbleSort = (dataSet: number[]) => {
     let didSwap = false;
 
     for (let j = 0; j < dataSize - i - 1; j++) {
+      animations.push(['compare', j]);
+
       if (sortedData[j] > sortedData[j + 1]) {
+        animations.push(['swap', j]);
+
         const temp = sortedData[j];
         sortedData[j] = sortedData[j + 1];
         sortedData[j + 1] = temp;

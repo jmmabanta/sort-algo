@@ -3,11 +3,17 @@ import React, { useState } from 'react';
 
 import { calculateHeight } from '../DataSetDisplay';
 
+import BubbleSort from './algorithms/BubbleSort';
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
 import MergeSort from './algorithms/MergeSort';
 
-export type AlgorithmType = 'selection' | 'insertion' | 'merge' | undefined;
+export type AlgorithmType =
+  | 'bubble'
+  | 'selection'
+  | 'insertion'
+  | 'merge'
+  | undefined;
 
 // Main Colors
 export const PRIMARY_COLOR = 'steelblue';
@@ -32,6 +38,9 @@ const SortAnimator = (dataSet: number[]) => {
 
   const sortData = (algorithm?: AlgorithmType) => {
     switch (algorithm) {
+      case 'bubble':
+        animateBubbleSort();
+        break;
       case 'selection':
         animateSelectionSort();
         break;
@@ -43,7 +52,7 @@ const SortAnimator = (dataSet: number[]) => {
         break;
       default:
         setIsSorted(false);
-        console.log('No algorithm specified :/');
+        console.error('No algorithm specified :/');
         break;
     }
   };
@@ -83,7 +92,7 @@ const SortAnimator = (dataSet: number[]) => {
   */
 
   // The final 'green' swipe of the data bars when things are done sorting
-  const sortedAnimation = (dataBars: HTMLCollectionOf<HTMLElement>) => {
+  const finishSorting = (dataBars: HTMLCollectionOf<HTMLElement>) => {
     const animSpeed = clamp(ANIMATION_SPEED(), 1, 50);
 
     for (let i = 0; i < dataBars.length; i++) {
@@ -96,6 +105,50 @@ const SortAnimator = (dataSet: number[]) => {
           }, 1000);
         }
       }, i * animSpeed);
+    }
+  };
+
+  const animateBubbleSort = () => {
+    setAnimating(true);
+    setIsSorted(true);
+
+    const speed = ANIMATION_SPEED();
+    const animations = BubbleSort(dataSet);
+    const dataBars = document.getElementsByClassName(
+      'data_bar'
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    for (let i = 0; i < animations.length; i++) {
+      const [type, barOneIndex] = animations[i];
+      const barOneStyles = dataBars[barOneIndex as number].style;
+      const barTwoStyles =
+        dataBars[
+          (barOneIndex as number) + 1 <= dataBars.length - 1
+            ? (barOneIndex as number) + 1
+            : 0
+        ].style;
+      switch (type) {
+        case 'compare':
+          setTimeout(() => {
+            barTwoStyles.backgroundColor = KEY_COLOR_TWO;
+            barOneStyles.backgroundColor = COMPARISON_COLOR;
+          }, i * speed);
+          setTimeout(() => {
+            barOneStyles.backgroundColor = PRIMARY_COLOR;
+            if (i === animations.length - 1) finishSorting(dataBars);
+          }, (i + 2) * speed);
+          break;
+        case 'swap':
+          setTimeout(() => {
+            const barOneHeight = barOneStyles.height;
+            barOneStyles.height = barTwoStyles.height;
+            barTwoStyles.height = barOneHeight;
+          }, i * speed);
+          break;
+        default:
+          console.error('Unknown operator??????');
+          break;
+      }
     }
   };
 
@@ -151,13 +204,13 @@ const SortAnimator = (dataSet: number[]) => {
             barTwoStyles.height = barOneHeight;
             if (i === animations.length - 1) {
               barOneStyles.backgroundColor = PRIMARY_COLOR;
-              sortedAnimation(dataBars);
+              finishSorting(dataBars);
             }
           }, i * speed);
           break;
         default:
           // This should in theory never print
-          console.log('Unknown operator??????');
+          console.error('Unknown operator??????');
           break;
       }
     }
@@ -205,11 +258,11 @@ const SortAnimator = (dataSet: number[]) => {
             const barOneHeight = barOneStyles.height;
             barOneStyles.height = barTwoStyles.height;
             barTwoStyles.height = barOneHeight;
-            if (i === animations.length - 1) sortedAnimation(dataBars);
+            if (i === animations.length - 1) finishSorting(dataBars);
           }, i * speed);
           break;
         default:
-          console.log('Unknown operator??????');
+          console.error('Unknown operator??????');
           break;
       }
     }
@@ -247,14 +300,14 @@ const SortAnimator = (dataSet: number[]) => {
               dataSet,
               barTwoIndex as number
             )}vh`;
-            if (i === animations.length - 1) sortedAnimation(dataBars);
+            if (i === animations.length - 1) finishSorting(dataBars);
           }, i * speed);
           setTimeout(() => {
             barOneStyles.backgroundColor = PRIMARY_COLOR;
           }, (i + 1.5) * speed);
           break;
         default:
-          console.log('Unknown operator??????');
+          console.error('Unknown operator??????');
           break;
       }
     }

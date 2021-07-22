@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 const SortDataInputs = (props: ButtonProps) => {
-  const [selectedAlgo, setSelectedAlgo] = useState('selection');
+  const [selectedAlgo, setSelectedAlgo] = useState('bubble');
 
   const changeAlgo = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedAlgo(e.target.value);
@@ -40,6 +40,7 @@ const SortDataInputs = (props: ButtonProps) => {
           onChange={changeAlgo}
         >
           <optgroup label="O(n²)">
+            <option value="bubble">Bubble Sort</option>
             <option value="selection">Selection Sort</option>
             <option value="insertion">Insertion Sort</option>
           </optgroup>
