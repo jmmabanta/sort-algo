@@ -6,10 +6,14 @@
 
 const MergeSort = (array: number[]) => {
   const animations: (string | number)[][] = [];
+
   if (array.length <= 1) return animations;
-  const sortedArray = array.slice(); // makes sure og array is not mutated
+
+  const sortedArray = array.slice();
   const temp = array.slice();
+
   mergeSortHelper(sortedArray, 0, sortedArray.length - 1, temp, animations);
+
   return animations;
 };
 
@@ -42,6 +46,7 @@ const merge = (
 
   while (i <= mid && j <= high) {
     anim.push(['compare', i, j]);
+
     if (temp[i] < temp[j]) {
       anim.push(['swap', k, temp[i]]);
       arr[k] = temp[i];
@@ -51,6 +56,7 @@ const merge = (
       arr[k] = temp[j];
       j++;
     }
+
     k++;
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 import React, { useState } from 'react';
 
 import { calculateHeight } from '../DataSetDisplay';
@@ -84,6 +85,7 @@ const SortAnimator = (dataSet: number[]) => {
   // The final 'green' swipe of the data bars when things are done sorting
   const sortedAnimation = (dataBars: HTMLCollectionOf<HTMLElement>) => {
     const animSpeed = clamp(ANIMATION_SPEED(), 1, 50);
+
     for (let i = 0; i < dataBars.length; i++) {
       setTimeout(() => {
         dataBars[i].style.backgroundColor = SORTED_COLOR;
@@ -100,21 +102,22 @@ const SortAnimator = (dataSet: number[]) => {
   const animateSelectionSort = () => {
     setAnimating(true);
     setIsSorted(true);
+
     const speed = ANIMATION_SPEED();
     const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
-    // Key: the element to be swapped with the minimum
+
     let lastKeyIndex = 0;
     dataBars[0].style.backgroundColor = KEY_COLOR_TWO;
+
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
       const barTwoStyles = dataBars[barTwoIndex as number].style;
       switch (type) {
         case 'key':
-          // eslint-disable-next-line no-loop-func
           setTimeout(() => {
             if (lastKeyIndex !== (barOneIndex as number)) {
               dataBars[lastKeyIndex as number].style.backgroundColor =
@@ -129,14 +132,12 @@ const SortAnimator = (dataSet: number[]) => {
           break;
         case 'compare':
           // Sets to comparison color
-          // eslint-disable-next-line no-loop-func
           setTimeout(() => {
             if (barOneIndex !== lastKeyIndex)
               barOneStyles.backgroundColor = KEY_COLOR;
             barTwoStyles.backgroundColor = COMPARISON_COLOR;
           }, i * speed);
           // Resets back to original color
-          // eslint-disable-next-line no-loop-func
           setTimeout(() => {
             if (barOneIndex !== lastKeyIndex)
               barOneStyles.backgroundColor = PRIMARY_COLOR;
@@ -165,11 +166,13 @@ const SortAnimator = (dataSet: number[]) => {
   const animateInsertionSort = () => {
     setAnimating(true);
     setIsSorted(true);
+
     const speed = ANIMATION_SPEED();
     const animations = InsertionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
+
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
@@ -215,11 +218,13 @@ const SortAnimator = (dataSet: number[]) => {
   const animateMergeSort = () => {
     setAnimating(true);
     setIsSorted(true);
+
     const speed = ANIMATION_SPEED() * (dataSet.length / 50);
     const animations = MergeSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
+
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;

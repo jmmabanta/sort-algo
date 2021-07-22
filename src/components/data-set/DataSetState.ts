@@ -27,6 +27,7 @@ export const useDataState = (initialValue: number, height: number) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = parseFloat(e.target.value);
     const newSize = Math.ceil(input / INCREMENT) * INCREMENT;
+
     setDataSet((oldData) => generateData(newSize, height));
     resetStyling();
   };
@@ -38,9 +39,11 @@ export const useDataState = (initialValue: number, height: number) => {
 
   const undoSort = () => {
     resetStyling();
+
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
+
     for (let i = 0; i < dataBars.length; i++) {
       dataBars[i].style.height = `${calculateHeight(dataSet, dataSet[i])}vh`;
     }
@@ -48,9 +51,11 @@ export const useDataState = (initialValue: number, height: number) => {
 
   const resetStyling = () => {
     resetSorted();
+
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
+
     for (let i = 0; i < dataBars.length; i++)
       dataBars[i].style.backgroundColor = PRIMARY_COLOR;
   };
