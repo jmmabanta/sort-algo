@@ -130,6 +130,7 @@ hr {
 .button_list select {
   width: 100%;
   margin: 1vh 0;
+  padding: 1vh 0;
 }
 
 .array_button button {

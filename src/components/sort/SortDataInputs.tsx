@@ -50,6 +50,9 @@ const SortDataInputs = (props: ButtonProps) => {
         <button
           onClick={() => props.sortData(selectedAlgo as AlgorithmType)}
           disabled={props.isDisabled || props.isSorted}
+          style={{
+            display: props.isDisabled || props.isSorted ? 'none' : 'inline'
+          }}
         >
           Sort Data
         </button>
