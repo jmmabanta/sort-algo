@@ -46,6 +46,7 @@ const SortDataInputs = (props: ButtonProps) => {
           </optgroup>
           <optgroup label="O(n·log(n))">
             <option value="merge">Merge Sort</option>
+            <option value="quick">Quick Sort (random pivots)</option>
           </optgroup>
         </select>
         <button

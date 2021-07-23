@@ -13,6 +13,7 @@ export type AlgorithmType =
   | 'selection'
   | 'insertion'
   | 'merge'
+  | 'quick'
   | undefined;
 
 // Main Colors
@@ -49,6 +50,9 @@ const SortAnimator = (dataSet: number[]) => {
         break;
       case 'merge':
         animateMergeSort();
+        break;
+      case 'quick':
+        console.error("Hasn't been programmed yet :/");
         break;
       default:
         setIsSorted(false);
