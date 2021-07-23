@@ -7,6 +7,7 @@ import BubbleSort from './algorithms/BubbleSort';
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
 import MergeSort from './algorithms/MergeSort';
+import QuickSortLomuto from './algorithms/QuickSortLomuto';
 
 export type AlgorithmType =
   | 'bubble'
@@ -52,7 +53,7 @@ const SortAnimator = (dataSet: number[]) => {
         animateMergeSort();
         break;
       case 'quick':
-        console.error("Hasn't been programmed yet :/");
+        animateQuickSort();
         break;
       default:
         setIsSorted(false);
@@ -309,6 +310,67 @@ const SortAnimator = (dataSet: number[]) => {
           setTimeout(() => {
             barOneStyles.backgroundColor = PRIMARY_COLOR;
           }, (i + 1.5) * speed);
+          break;
+        default:
+          console.error('Unknown operator??????');
+          break;
+      }
+    }
+  };
+
+  const animateQuickSort = () => {
+    setAnimating(true);
+    setIsSorted(true);
+
+    const speed = ANIMATION_SPEED() * (dataSet.length / 50);
+    const animations = QuickSortLomuto(dataSet);
+    const dataBars = document.getElementsByClassName(
+      'data_bar'
+    ) as HTMLCollectionOf<HTMLElement>;
+
+    let lastKeyIndex = 0;
+    for (let i = 0; i < animations.length; i++) {
+      const [type, barOneIndex, barTwoIndex] = animations[i];
+      const barOneStyles = dataBars[barOneIndex as number].style;
+      const barTwoStyles = dataBars[barTwoIndex as number].style;
+      switch (type) {
+        case 'key':
+          setTimeout(() => {
+            if (lastKeyIndex !== barOneIndex) {
+              dataBars[lastKeyIndex as number].style.backgroundColor =
+                PRIMARY_COLOR;
+              barOneStyles.backgroundColor = KEY_COLOR_TWO;
+              lastKeyIndex = barOneIndex as number;
+            }
+          }, i * speed);
+          break;
+        case 'swap':
+          setTimeout(() => {
+            if ((barOneIndex as number) !== lastKeyIndex)
+              barOneStyles.backgroundColor = KEY_COLOR;
+            if ((barTwoIndex as number) !== lastKeyIndex)
+              barTwoStyles.backgroundColor = COMPARISON_COLOR;
+          }, i * speed);
+          setTimeout(() => {
+            if ((barOneIndex as number) !== lastKeyIndex)
+              barOneStyles.backgroundColor = COMPARISON_COLOR;
+            if ((barTwoIndex as number) !== lastKeyIndex)
+              barTwoStyles.backgroundColor = KEY_COLOR;
+            const barOneHeight = barOneStyles.height;
+            barOneStyles.height = barTwoStyles.height;
+            barTwoStyles.height = barOneHeight;
+          }, (i + 1) * speed);
+          setTimeout(() => {
+            if ((barOneIndex as number) !== lastKeyIndex)
+              barOneStyles.backgroundColor = PRIMARY_COLOR;
+            if ((barTwoIndex as number) !== lastKeyIndex)
+              barTwoStyles.backgroundColor = PRIMARY_COLOR;
+            if (i === animations.length - 1) {
+              dataBars[lastKeyIndex as number].style.backgroundColor =
+                PRIMARY_COLOR;
+              finishSorting(dataBars);
+            }
+          }, (i + 2) * speed);
           break;
         default:
           console.error('Unknown operator??????');

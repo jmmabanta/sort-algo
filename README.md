@@ -18,7 +18,7 @@ _Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmi
 6. Implement other sorting algorithms:
    - ~~Merge Sort~~ ✅
    - ~~Bubble Sort~~ ✅
-   - Quick Sort
+   - ~~Quick Sort~~ ✅
    - Other...
 
 ---

@@ -1,4 +1,5 @@
-const QuickSort = (dataSet: number[]) => {
+// Code adapted from https://www.geeksforgeeks.org/quicksort-using-random-pivoting/
+const QuickSortLomuto = (dataSet: number[]) => {
   const animations: (string | number)[][] = [];
 
   if (dataSet.length <= 1) return animations;
@@ -43,6 +44,7 @@ const partitionData = (
 ) => {
   // Pivot point is random
   const pivotIndex = Math.floor(Math.random() * (high - low + 1)) + low;
+  anim.push(['key', pivotIndex, pivotIndex]);
 
   // Random pivot is moved to the last element of the list
   swapValues(dataSet, pivotIndex, high, anim);
@@ -53,8 +55,8 @@ const partitionData = (
   for (let j = low; j < high; j++) {
     // If current element is smaller/equal to pivot
     if (dataSet[j] < pivot) {
-      i++;
       // Swap them
+      i++;
       swapValues(dataSet, i, j, anim);
     }
   }
@@ -65,4 +67,4 @@ const partitionData = (
   return i + 1;
 };
 
-export default QuickSort;
+export default QuickSortLomuto;
