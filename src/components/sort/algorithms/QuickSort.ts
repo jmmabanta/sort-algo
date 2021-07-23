@@ -1,5 +1,7 @@
 // Code adapted from https://www.geeksforgeeks.org/quicksort-using-random-pivoting/
-const QuickSortLomuto = (dataSet: number[]) => {
+type QuickSortTypes = 'lomuto' | 'hoare';
+
+const QuickSort = (dataSet: number[], type: QuickSortTypes = 'lomuto') => {
   const animations: (string | number)[][] = [];
 
   if (dataSet.length <= 1) return animations;
@@ -67,4 +69,4 @@ const partitionData = (
   return i + 1;
 };
 
-export default QuickSortLomuto;
+export default QuickSort;

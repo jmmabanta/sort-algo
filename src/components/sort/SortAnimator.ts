@@ -7,7 +7,7 @@ import BubbleSort from './algorithms/BubbleSort';
 import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
 import MergeSort from './algorithms/MergeSort';
-import QuickSortLomuto from './algorithms/QuickSortLomuto';
+import QuickSort from './algorithms/QuickSort';
 
 export type AlgorithmType =
   | 'bubble'
@@ -323,7 +323,7 @@ const SortAnimator = (dataSet: number[]) => {
     setIsSorted(true);
 
     const speed = ANIMATION_SPEED() * (dataSet.length / 50);
-    const animations = QuickSortLomuto(dataSet);
+    const animations = QuickSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
