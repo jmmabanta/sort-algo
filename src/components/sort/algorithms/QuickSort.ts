@@ -1,31 +1,4 @@
-// Code adapted from https://www.geeksforgeeks.org/quicksort-using-random-pivoting/
-type QuickSortTypes = 'lomuto' | 'hoare';
-
-const QuickSort = (dataSet: number[], type: QuickSortTypes = 'lomuto') => {
-  const animations: (string | number)[][] = [];
-
-  if (dataSet.length <= 1) return animations;
-
-  const sortedData = dataSet.slice();
-  quickSortHelper(sortedData, 0, sortedData.length - 1, animations);
-
-  return animations;
-};
-
-const quickSortHelper = (
-  dataSet: number[],
-  low: number,
-  high: number,
-  anim: (string | number)[][]
-) => {
-  if (low < high) {
-    const partitionIndex = partitionData(dataSet, low, high, anim);
-
-    quickSortHelper(dataSet, low, partitionIndex - 1, anim);
-    quickSortHelper(dataSet, partitionIndex + 1, high, anim);
-  }
-};
-
+// Helper Methods
 const swapValues = (
   dataSet: number[],
   i: number,
@@ -38,14 +11,45 @@ const swapValues = (
   dataSet[j] = temp;
 };
 
-const partitionData = (
+const getRandomPivotIndex = (low: number, high: number) =>
+  Math.floor(Math.random() * (high - low + 1)) + low;
+
+// Code adapted from https://www.geeksforgeeks.org/quicksort-using-random-pivoting/
+const QuickSort = (dataSet: number[], isLomuto: boolean) => {
+  const animations: (string | number)[][] = [];
+
+  if (dataSet.length <= 1) return animations;
+
+  const sortedData = dataSet.slice();
+
+  if (isLomuto) lomutoHelper(sortedData, 0, sortedData.length - 1, animations);
+
+  return animations;
+};
+
+// LOMUTO PARTIONING
+const lomutoHelper = (
+  dataSet: number[],
+  low: number,
+  high: number,
+  anim: (string | number)[][]
+) => {
+  if (low < high) {
+    const partitionIndex = partitionDataLomuto(dataSet, low, high, anim);
+
+    lomutoHelper(dataSet, low, partitionIndex - 1, anim);
+    lomutoHelper(dataSet, partitionIndex + 1, high, anim);
+  }
+};
+
+const partitionDataLomuto = (
   dataSet: number[],
   low: number,
   high: number,
   anim: (string | number)[][]
 ) => {
   // Pivot point is random
-  const pivotIndex = Math.floor(Math.random() * (high - low + 1)) + low;
+  const pivotIndex = getRandomPivotIndex(low, high);
   anim.push(['key', pivotIndex, pivotIndex]);
 
   // Random pivot is moved to the last element of the list

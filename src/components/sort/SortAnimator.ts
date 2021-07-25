@@ -14,7 +14,8 @@ export type AlgorithmType =
   | 'selection'
   | 'insertion'
   | 'merge'
-  | 'quick'
+  | 'quick_lom'
+  | 'quick_hor'
   | undefined;
 
 // Main Colors
@@ -52,8 +53,8 @@ const SortAnimator = (dataSet: number[]) => {
       case 'merge':
         animateMergeSort();
         break;
-      case 'quick':
-        animateQuickSort();
+      case 'quick_lom':
+        animateQuickSort(true);
         break;
       default:
         setIsSorted(false);
@@ -318,12 +319,12 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
-  const animateQuickSort = () => {
+  const animateQuickSort = (isLomuto: boolean) => {
     setAnimating(true);
     setIsSorted(true);
 
     const speed = ANIMATION_SPEED() * (dataSet.length / 50);
-    const animations = QuickSort(dataSet);
+    const animations = QuickSort(dataSet, isLomuto);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
