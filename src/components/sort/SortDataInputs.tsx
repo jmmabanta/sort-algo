@@ -49,9 +49,9 @@ const SortDataInputs = (props: ButtonProps) => {
             <option value="quick_lom">
               Quick Sort (Lomuto - Random Points)
             </option>
-            <option value="quick_hor">
+            {/* <option value="quick_hor">
               Quick Sort (Hoare - Random Points)
-            </option>
+            </option> */}
           </optgroup>
         </select>
         <button
