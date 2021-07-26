@@ -155,6 +155,19 @@ const SortAnimator = (dataSet: number[]) => {
 
     let lastKeyIndex = 0;
 
+    let localComparisons = 0;
+    let localSwaps = 0;
+
+    // Instead of updating state immediately after a swap/compare
+    //      * will cause componenet re-renders
+    // It will update at a set frequency instead that scales with the size
+    // of the data set.
+    const statUpdateSpeed = dataSet.length * 1.5;
+    const updateStats = setInterval(() => {
+      setComparisons(localComparisons);
+      setSwaps(localSwaps);
+    }, statUpdateSpeed);
+
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
@@ -177,16 +190,21 @@ const SortAnimator = (dataSet: number[]) => {
               barOneStyles.backgroundColor = KEY_COLOR_TWO;
               lastKeyIndex = barOneIndex as number;
             }
-            if (i === animations.length - 1) finishSorting(dataBars);
+            if (i === animations.length - 1) {
+              setComparisons(localComparisons);
+              setSwaps(localSwaps);
+              finishSorting(dataBars);
+              clearInterval(updateStats);
+            }
           }, i * speed);
           break;
         case 'compare':
           setTimeout(() => {
+            localComparisons++;
             if (barOneIndex !== lastKeyIndex)
               barOneStyles.backgroundColor = COMPARISON_COLOR;
             if (barTwoIndex !== lastKeyIndex)
               barTwoStyles.backgroundColor = KEY_COLOR;
-            setComparisons((c) => c + 1);
           }, i * speed);
           setTimeout(() => {
             if (barOneIndex !== lastKeyIndex)
@@ -196,12 +214,16 @@ const SortAnimator = (dataSet: number[]) => {
             if (i === animations.length - 1) {
               dataBars[lastKeyIndex as number].style.backgroundColor =
                 PRIMARY_COLOR;
+              setComparisons(localComparisons);
+              setSwaps(localSwaps);
               finishSorting(dataBars);
+              clearInterval(updateStats);
             }
           }, (i + 1) * speed);
           break;
         case 'swap':
           setTimeout(() => {
+            localSwaps++;
             if (hasValidBarTwo) {
               const barOneHeight = barOneStyles.height;
               barOneStyles.height = barTwoStyles.height;
@@ -210,11 +232,13 @@ const SortAnimator = (dataSet: number[]) => {
               const newHeight = calculateHeight(dataSet, barTwoIndex as number);
               barOneStyles.height = `${newHeight}vh`;
             }
-            setSwaps((s) => s + 1);
             if (i === animations.length - 1) {
               dataBars[lastKeyIndex as number].style.backgroundColor =
                 PRIMARY_COLOR;
+              setComparisons(localComparisons);
+              setSwaps(localSwaps);
               finishSorting(dataBars);
+              clearInterval(updateStats);
             }
           }, i * speed);
           break;

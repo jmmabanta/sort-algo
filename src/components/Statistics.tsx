@@ -11,7 +11,7 @@ const Statistics = (props: StatisticsProps) => {
     <div className="statistics">
       <h3>There are {props.length} random elements in the data set</h3>
       <h4>
-        Comparisons: {props.statistics.comparisons} | Swaps/Insertions:{' '}
+        Comparisons: {props.statistics.comparisons} | Swaps & Insertions:{' '}
         {props.statistics.swaps}
       </h4>
     </div>
