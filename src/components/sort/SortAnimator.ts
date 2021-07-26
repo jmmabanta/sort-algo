@@ -35,6 +35,10 @@ const SortAnimator = (dataSet: number[]) => {
   const [animating, setAnimating] = useState(false);
   const [isSorted, setIsSorted] = useState(false);
 
+  // States used for statistics
+  const [comparisons, setComparisons] = useState(0);
+  const [swaps, setSwaps] = useState(0);
+
   const resetSorted = () => {
     setIsSorted(false);
   };
@@ -180,6 +184,7 @@ const SortAnimator = (dataSet: number[]) => {
               barOneStyles.backgroundColor = COMPARISON_COLOR;
             if (barTwoIndex !== lastKeyIndex)
               barTwoStyles.backgroundColor = KEY_COLOR;
+            setComparisons((c) => c + 1);
           }, i * speed);
           setTimeout(() => {
             if (barOneIndex !== lastKeyIndex)
@@ -203,6 +208,7 @@ const SortAnimator = (dataSet: number[]) => {
               const newHeight = calculateHeight(dataSet, barTwoIndex as number);
               barOneStyles.height = `${newHeight}vh`;
             }
+            setSwaps((s) => s + 1);
             if (i === animations.length - 1) {
               dataBars[lastKeyIndex as number].style.backgroundColor =
                 PRIMARY_COLOR;
@@ -217,7 +223,25 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
-  return { sortData, setBaseSpeed, animating, isSorted, resetSorted };
+  // Grouping things for better readability
+  const statistics = {
+    comparisons,
+    swaps
+  };
+
+  const functions = {
+    sortData,
+    setBaseSpeed,
+    resetSorted
+  };
+
+  const properties = {
+    animating,
+    isSorted,
+    statistics
+  };
+
+  return { functions, properties };
 };
 
 export default SortAnimator;

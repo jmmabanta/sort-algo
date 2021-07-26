@@ -1,5 +1,11 @@
+import Statistics from './Statistics';
+
 interface DataSetProps {
   dataSet: number[];
+  statistics: {
+    comparisons: number;
+    swaps: number;
+  };
 }
 
 const MAX_HEIGHT = 72;
@@ -18,12 +24,7 @@ const DataSetDisplay = (props: DataSetProps) => {
   let width = calculateWidth(props.dataSet.length, 85);
   return (
     <div className="data_container">
-      <div className="statistics">
-        <h3>
-          There are {props.dataSet.length} random elements in the data set
-        </h3>
-        <h4>Comparisons: 69420 | Swaps: 69420</h4>
-      </div>
+      <Statistics statistics={props.statistics} length={props.dataSet.length} />
       <div className="data_set">
         {props.dataSet.map((value, index) => {
           return (

@@ -60,5 +60,13 @@ export const useDataState = (initialValue: number, height: number) => {
       dataBars[i].style.backgroundColor = PRIMARY_COLOR;
   };
 
-  return { handleChange, regenerateNewData, undoSort, setResetSorted, dataSet };
+  // Organizing things
+  const functions = {
+    handleChange,
+    regenerateNewData,
+    undoSort,
+    setResetSorted
+  };
+
+  return { functions, dataSet };
 };
