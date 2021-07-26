@@ -44,6 +44,8 @@ const merge = (
   let j = mid + 1;
   let k = low;
 
+  anim.push(['key', mid]);
+
   while (i <= mid && j <= high) {
     anim.push(['compare', i, j]);
 

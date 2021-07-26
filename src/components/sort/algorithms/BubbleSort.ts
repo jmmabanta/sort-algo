@@ -23,6 +23,8 @@ const BubbleSort = (dataSet: number[]) => {
       }
     }
 
+    animations.push(['key', dataSize - i - 1]);
+
     if (!didSwap) return animations;
   }
 

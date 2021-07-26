@@ -42,31 +42,44 @@ const SortAnimator = (dataSet: number[]) => {
   const sortData = (algorithm?: AlgorithmType) => {
     setAnimating(true);
     setIsSorted(true);
+
+    let animations: (string | number)[][] = [];
+
+    // Higher value -> Slower animation
+    // slowFactor of 1 is the base speed for selectionSort
+    // Increases for O(nlogn) algos as they are too quick to match speeds
+    let slowFactor = 1;
+
     switch (algorithm) {
       case 'bubble':
-        animateBubbleSort();
+        animations = BubbleSort(dataSet);
+        slowFactor = 0.5;
         break;
       case 'selection':
-        animateSelectionSort();
+        animations = SelectionSort(dataSet);
         break;
       case 'insertion':
-        animateInsertionSort();
+        animations = InsertionSort(dataSet);
         break;
       case 'merge':
-        animateMergeSort();
+        animations = MergeSort(dataSet);
+        slowFactor = 5;
         break;
       case 'quick_lom':
-        animateQuickSort(true);
+        animations = QuickSort(dataSet, true);
+        slowFactor = 5;
         break;
       case 'quick_hor':
-        animateQuickSort(false);
+        animations = QuickSort(dataSet, false);
+        slowFactor = 5;
         break;
       default:
         setIsSorted(false);
         setAnimating(false);
         console.error('No algorithm specified :/');
-        break;
+        return;
     }
+    animateSort(animations, slowFactor);
   };
 
   const setBaseSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,11 +103,15 @@ const SortAnimator = (dataSet: number[]) => {
   An animation array is a 2D array that contains the steps
   done in animating the sorting.
 
-  Each element is array that containes the following values:
+  Each element is an array that containes the following values:
     - type: string = The kind of operator it is
-      - For example, in selection sort: type can be 'compare' or 'swap'
-    - indexOne: number = The first bar
-    - indexTwo: number = The second bar
+        - 'key': Highlights a certain value (pivot, mid point, leading bar, etc.)
+        - 'compare': Highlights two bars which are being compared against each other
+        - 'swap': Swaps heights between bars
+            * for merge sort, only the first bar height is changed
+    - indexOne: number = The index of the first bar
+    - indexTwo: number = The index of the second bar
+        * indexTwo may be a duplicate for 'key' operations as only one bar is needed
 
   Sorting then utilizes each element of the animation array to modify the
   CSS styling of the bars to demonstrate the sorting.
@@ -120,210 +137,23 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
-  const animateBubbleSort = () => {
-    const speed = ANIMATION_SPEED();
-    const animations = BubbleSort(dataSet);
-    const dataBars = document.getElementsByClassName(
-      'data_bar'
-    ) as HTMLCollectionOf<HTMLElement>;
+  const animateSort = (
+    animations: (string | number)[][],
+    slowFactor: number
+  ) => {
+    const speed = ANIMATION_SPEED() * slowFactor;
 
-    for (let i = 0; i < animations.length; i++) {
-      const [type, barOneIndex] = animations[i];
-      const barOneStyles = dataBars[barOneIndex as number].style;
-      const barTwoStyles =
-        dataBars[
-          (barOneIndex as number) + 1 <= dataBars.length - 1
-            ? (barOneIndex as number) + 1
-            : 0
-        ].style;
-      switch (type) {
-        case 'compare':
-          setTimeout(() => {
-            barTwoStyles.backgroundColor = KEY_COLOR_TWO;
-            barOneStyles.backgroundColor = COMPARISON_COLOR;
-          }, i * speed);
-          setTimeout(() => {
-            barOneStyles.backgroundColor = PRIMARY_COLOR;
-            if (i === animations.length - 1) finishSorting(dataBars);
-          }, (i + 2) * speed);
-          break;
-        case 'swap':
-          setTimeout(() => {
-            const barOneHeight = barOneStyles.height;
-            barOneStyles.height = barTwoStyles.height;
-            barTwoStyles.height = barOneHeight;
-          }, i * speed);
-          break;
-        default:
-          console.error('Unknown operator??????');
-          break;
-      }
-    }
-  };
-
-  const animateSelectionSort = () => {
-    const speed = ANIMATION_SPEED();
-    const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
       'data_bar'
     ) as HTMLCollectionOf<HTMLElement>;
 
     let lastKeyIndex = 0;
-    dataBars[0].style.backgroundColor = KEY_COLOR_TWO;
 
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
-      const barTwoStyles = dataBars[barTwoIndex as number].style;
-      switch (type) {
-        case 'key':
-          setTimeout(() => {
-            if (lastKeyIndex !== (barOneIndex as number)) {
-              dataBars[lastKeyIndex as number].style.backgroundColor =
-                PRIMARY_COLOR;
-              barOneStyles.backgroundColor = KEY_COLOR_TWO;
-              lastKeyIndex = barOneIndex as number;
-            }
-            // The (i - 0.001) makes sure this executes
-            // before the other timeouts
-            // Yes, it is really jank :/
-          }, (i - 0.001) * speed);
-          break;
-        case 'compare':
-          // Sets to comparison color
-          setTimeout(() => {
-            if (barOneIndex !== lastKeyIndex)
-              barOneStyles.backgroundColor = KEY_COLOR;
-            barTwoStyles.backgroundColor = COMPARISON_COLOR;
-          }, i * speed);
-          // Resets back to original color
-          setTimeout(() => {
-            if (barOneIndex !== lastKeyIndex)
-              barOneStyles.backgroundColor = PRIMARY_COLOR;
-            barTwoStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1) * speed);
-          break;
-        case 'swap':
-          setTimeout(() => {
-            const barOneHeight = barOneStyles.height;
-            barOneStyles.height = barTwoStyles.height;
-            barTwoStyles.height = barOneHeight;
-            if (i === animations.length - 1) {
-              barOneStyles.backgroundColor = PRIMARY_COLOR;
-              finishSorting(dataBars);
-            }
-          }, i * speed);
-          break;
-        default:
-          // This should in theory never print
-          console.error('Unknown operator??????');
-          break;
-      }
-    }
-  };
 
-  const animateInsertionSort = () => {
-    const speed = ANIMATION_SPEED();
-    const animations = InsertionSort(dataSet);
-    const dataBars = document.getElementsByClassName(
-      'data_bar'
-    ) as HTMLCollectionOf<HTMLElement>;
-
-    for (let i = 0; i < animations.length; i++) {
-      const [type, barOneIndex] = animations[i];
-      const barOneStyles = dataBars[barOneIndex as number].style;
-      const barTwoStyles = dataBars[(barOneIndex as number) + 1].style;
-      switch (type) {
-        case 'key':
-          setTimeout(() => {
-            dataBars[(barOneIndex as number) - 1].style.backgroundColor =
-              PRIMARY_COLOR;
-            barOneStyles.backgroundColor = KEY_COLOR_TWO;
-          }, i * speed);
-          break;
-        case 'compare':
-          setTimeout(() => {
-            barOneStyles.backgroundColor = COMPARISON_COLOR;
-            if (barTwoStyles.backgroundColor !== KEY_COLOR_TWO)
-              barTwoStyles.backgroundColor = KEY_COLOR;
-          }, i * speed);
-          setTimeout(() => {
-            barOneStyles.backgroundColor = KEY_COLOR;
-            if (barTwoStyles.backgroundColor !== KEY_COLOR_TWO)
-              barTwoStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1) * speed);
-          setTimeout(() => {
-            barOneStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 2) * speed);
-          break;
-        case 'swap':
-          setTimeout(() => {
-            const barOneHeight = barOneStyles.height;
-            barOneStyles.height = barTwoStyles.height;
-            barTwoStyles.height = barOneHeight;
-            if (i === animations.length - 1) finishSorting(dataBars);
-          }, i * speed);
-          break;
-        default:
-          console.error('Unknown operator??????');
-          break;
-      }
-    }
-  };
-
-  const animateMergeSort = () => {
-    const speed = ANIMATION_SPEED() * (dataSet.length / 25);
-    const animations = MergeSort(dataSet);
-    const dataBars = document.getElementsByClassName(
-      'data_bar'
-    ) as HTMLCollectionOf<HTMLElement>;
-
-    for (let i = 0; i < animations.length; i++) {
-      const [type, barOneIndex, barTwoIndex] = animations[i];
-      const barOneStyles = dataBars[barOneIndex as number].style;
-      switch (type) {
-        case 'compare':
-          const barTwoStyles = dataBars[barTwoIndex as number].style;
-          setTimeout(() => {
-            barOneStyles.backgroundColor = KEY_COLOR_TWO;
-            barTwoStyles.backgroundColor = COMPARISON_COLOR;
-          }, i * speed);
-          setTimeout(() => {
-            barOneStyles.backgroundColor = PRIMARY_COLOR;
-            barTwoStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1.5) * speed);
-          break;
-        case 'swap':
-          setTimeout(() => {
-            barOneStyles.backgroundColor = KEY_COLOR;
-            barOneStyles.height = `${calculateHeight(
-              dataSet,
-              barTwoIndex as number
-            )}vh`;
-            if (i === animations.length - 1) finishSorting(dataBars);
-          }, i * speed);
-          setTimeout(() => {
-            barOneStyles.backgroundColor = PRIMARY_COLOR;
-          }, (i + 1.5) * speed);
-          break;
-        default:
-          console.error('Unknown operator??????');
-          break;
-      }
-    }
-  };
-
-  const animateQuickSort = (isLomuto: boolean) => {
-    const speed = ANIMATION_SPEED();
-    const animations = QuickSort(dataSet, isLomuto);
-    const dataBars = document.getElementsByClassName(
-      'data_bar'
-    ) as HTMLCollectionOf<HTMLElement>;
-
-    let lastKeyIndex = 0;
-    for (let i = 0; i < animations.length; i++) {
-      const [type, barOneIndex, barTwoIndex] = animations[i];
-      const barOneStyles = dataBars[barOneIndex as number].style;
+      // Used to check if a bartwo actually exists
       const hasValidBarTwo =
         (barTwoIndex as number) < dataSet.length &&
         Number.isInteger(barTwoIndex as number);
@@ -331,6 +161,7 @@ const SortAnimator = (dataSet: number[]) => {
         dataBars[
           hasValidBarTwo ? (barTwoIndex as number) : (barOneIndex as number)
         ].style;
+
       switch (type) {
         case 'key':
           setTimeout(() => {
@@ -359,7 +190,7 @@ const SortAnimator = (dataSet: number[]) => {
                 PRIMARY_COLOR;
               finishSorting(dataBars);
             }
-          }, (i + 2) * speed);
+          }, (i + 1) * speed);
           break;
         case 'swap':
           setTimeout(() => {
