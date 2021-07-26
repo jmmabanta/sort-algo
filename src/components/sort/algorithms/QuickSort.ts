@@ -52,7 +52,7 @@ const lomutoPartition = (
   // Partitioning uses the last element (high index) of a section as the pivot
   // Here, the last element is swapped with a random element
   const randIndex = getRandomPivotIndex(low, high);
-  anim.push(['key', randIndex, randIndex]);
+  anim.push(['key', randIndex]);
   swapValues(dataSet, randIndex, high, anim);
   const pivot = dataSet[high];
 
@@ -100,7 +100,7 @@ const hoarePartition = (
   const randIndex = getRandomPivotIndex(low, high);
   swapValues(dataSet, randIndex, low, anim);
   const pivot = dataSet[low];
-  anim.push(['key', randIndex, randIndex]);
+  anim.push(['key', randIndex]);
 
   // Hoare partitioning uses two pointers: i and j;
   // That start from left and right and converge until

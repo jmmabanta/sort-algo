@@ -6,7 +6,7 @@ const SelectionSort = (dataSet: number[]) => {
 
   for (let i = 0; i < sortedData.length - 1; i++) {
     let minIndex = i;
-    animations.push(['key', i, 0]);
+    animations.push(['key', i]);
 
     for (let j = i + 1; j < sortedData.length; j++) {
       if (sortedData[j] < sortedData[minIndex]) minIndex = j;
