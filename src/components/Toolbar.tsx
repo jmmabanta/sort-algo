@@ -2,6 +2,7 @@ import React from 'react';
 import DataSetInputs from './data-set/DataSetInputs';
 import { AlgorithmType } from './sort/SortAnimator';
 import SortDataInputs from './sort/SortDataInputs';
+import TitleCard from './sort/TitleCard';
 
 type ToolbarProps = {
   dataState: {
@@ -29,22 +30,7 @@ const Toolbar = (props: ToolbarProps) => {
       id="toolbar"
       className={props.animState.properties.animating ? 'hide' : 'show'}
     >
-      <div id="title">
-        <h1>Sorting Algorithms</h1>
-        <h4>
-          <i>WARNING: Animation contains flashing lights</i>
-        </h4>
-        <h5>
-          © 2021 John Marcus Mabanta ·{' '}
-          <a
-            href="https://github.com/jmmabanta/sort-algo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Source Code
-          </a>
-        </h5>
-      </div>
+      <TitleCard />
       <DataSetInputs
         dataSize={props.dataState.functions}
         isDisabled={props.animState.properties.animating}
