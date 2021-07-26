@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
 import React, { useState } from 'react';
 
-import { calculateHeight } from '../DataSetDisplay';
+import { calculateHeight } from '../data-set/DataSetDisplay';
 
 import BubbleSort from './algorithms/BubbleSort';
 import SelectionSort from './algorithms/SelectionSort';

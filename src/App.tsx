@@ -1,5 +1,5 @@
 import { useDataState } from './components/data-set/DataSetState';
-import DataSetDisplay from './components/DataSetDisplay';
+import DataSetDisplay from './components/data-set/DataSetDisplay';
 import SortAnimator from './components/sort/SortAnimator';
 import Toolbar from './components/Toolbar';
 

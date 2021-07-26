@@ -2,7 +2,7 @@ import React from 'react';
 import DataSetInputs from './data-set/DataSetInputs';
 import { AlgorithmType } from './sort/SortAnimator';
 import SortDataInputs from './sort/SortDataInputs';
-import TitleCard from './sort/TitleCard';
+import TitleCard from './TitleCard';
 
 type ToolbarProps = {
   dataState: {

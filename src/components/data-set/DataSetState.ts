@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PRIMARY_COLOR } from '../sort/SortAnimator';
-import { calculateHeight } from '../DataSetDisplay';
+import { calculateHeight } from './DataSetDisplay';
 
 // Generates random data
 const generateData = (size: number, height: number): number[] => {
