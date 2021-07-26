@@ -171,6 +171,7 @@ const SortAnimator = (dataSet: number[]) => {
               barOneStyles.backgroundColor = KEY_COLOR_TWO;
               lastKeyIndex = barOneIndex as number;
             }
+            if (i === animations.length - 1) finishSorting(dataBars);
           }, i * speed);
           break;
         case 'compare':
