@@ -40,6 +40,8 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   const sortData = (algorithm?: AlgorithmType) => {
+    setAnimating(true);
+    setIsSorted(true);
     switch (algorithm) {
       case 'bubble':
         animateBubbleSort();
@@ -61,6 +63,7 @@ const SortAnimator = (dataSet: number[]) => {
         break;
       default:
         setIsSorted(false);
+        setAnimating(false);
         console.error('No algorithm specified :/');
         break;
     }
@@ -118,9 +121,6 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   const animateBubbleSort = () => {
-    setAnimating(true);
-    setIsSorted(true);
-
     const speed = ANIMATION_SPEED();
     const animations = BubbleSort(dataSet);
     const dataBars = document.getElementsByClassName(
@@ -162,9 +162,6 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   const animateSelectionSort = () => {
-    setAnimating(true);
-    setIsSorted(true);
-
     const speed = ANIMATION_SPEED();
     const animations = SelectionSort(dataSet);
     const dataBars = document.getElementsByClassName(
@@ -226,9 +223,6 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   const animateInsertionSort = () => {
-    setAnimating(true);
-    setIsSorted(true);
-
     const speed = ANIMATION_SPEED();
     const animations = InsertionSort(dataSet);
     const dataBars = document.getElementsByClassName(
@@ -278,9 +272,6 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   const animateMergeSort = () => {
-    setAnimating(true);
-    setIsSorted(true);
-
     const speed = ANIMATION_SPEED() * (dataSet.length / 25);
     const animations = MergeSort(dataSet);
     const dataBars = document.getElementsByClassName(
@@ -323,10 +314,7 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   const animateQuickSort = (isLomuto: boolean) => {
-    setAnimating(true);
-    setIsSorted(true);
-
-    const speed = ANIMATION_SPEED() * (dataSet.length / 25);
+    const speed = ANIMATION_SPEED();
     const animations = QuickSort(dataSet, isLomuto);
     const dataBars = document.getElementsByClassName(
       'data_bar'
@@ -336,8 +324,24 @@ const SortAnimator = (dataSet: number[]) => {
     for (let i = 0; i < animations.length; i++) {
       const [type, barOneIndex, barTwoIndex] = animations[i];
       const barOneStyles = dataBars[barOneIndex as number].style;
-      const barTwoStyles = dataBars[barTwoIndex as number].style;
+      const hasValidBarTwo =
+        (barTwoIndex as number) < dataSet.length &&
+        Number.isInteger(barTwoIndex as number);
+      const barTwoStyles =
+        dataBars[
+          hasValidBarTwo ? (barTwoIndex as number) : (barOneIndex as number)
+        ].style;
       switch (type) {
+        case 'key':
+          setTimeout(() => {
+            if (lastKeyIndex !== barOneIndex) {
+              dataBars[lastKeyIndex as number].style.backgroundColor =
+                PRIMARY_COLOR;
+              barOneStyles.backgroundColor = KEY_COLOR_TWO;
+              lastKeyIndex = barOneIndex as number;
+            }
+          }, i * speed);
+          break;
         case 'compare':
           setTimeout(() => {
             if (barOneIndex !== lastKeyIndex)
@@ -357,21 +361,16 @@ const SortAnimator = (dataSet: number[]) => {
             }
           }, (i + 2) * speed);
           break;
-        case 'key':
-          setTimeout(() => {
-            if (lastKeyIndex !== barOneIndex) {
-              dataBars[lastKeyIndex as number].style.backgroundColor =
-                PRIMARY_COLOR;
-              barOneStyles.backgroundColor = KEY_COLOR_TWO;
-              lastKeyIndex = barOneIndex as number;
-            }
-          }, i * speed);
-          break;
         case 'swap':
           setTimeout(() => {
-            const barOneHeight = barOneStyles.height;
-            barOneStyles.height = barTwoStyles.height;
-            barTwoStyles.height = barOneHeight;
+            if (hasValidBarTwo) {
+              const barOneHeight = barOneStyles.height;
+              barOneStyles.height = barTwoStyles.height;
+              barTwoStyles.height = barOneHeight;
+            } else {
+              const newHeight = calculateHeight(dataSet, barTwoIndex as number);
+              barOneStyles.height = `${newHeight}vh`;
+            }
             if (i === animations.length - 1) {
               dataBars[lastKeyIndex as number].style.backgroundColor =
                 PRIMARY_COLOR;

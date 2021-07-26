@@ -9,14 +9,14 @@ const InsertionSort = (dataSet: number[]) => {
     let j = i - 1;
 
     if (i < sortedData.length - 1) animations.push(['key', i]);
-    animations.push(['compare', j]);
+    animations.push(['compare', j, j + 1]);
 
     while (j >= 0 && sortedData[j] > key) {
-      animations.push(['swap', j]);
+      animations.push(['swap', j, j + 1]);
       sortedData[j + 1] = sortedData[j];
       sortedData[j] = key;
       j--;
-      if (sortedData[j] > key) animations.push(['compare', j]);
+      if (sortedData[j] > key) animations.push(['compare', j, j + 1]);
     }
   }
 
