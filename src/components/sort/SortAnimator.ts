@@ -41,6 +41,8 @@ const SortAnimator = (dataSet: number[]) => {
 
   const resetSorted = () => {
     setIsSorted(false);
+    setComparisons(0);
+    setSwaps(0);
   };
 
   const sortData = (algorithm?: AlgorithmType) => {
