@@ -34,6 +34,7 @@ h5 {
 * {
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 body {
@@ -91,18 +92,24 @@ hr {
 }
 
 /* DATA BARS */
-#display {
-  background-color: #444545;
-  width: 100%;
-  height: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .data_bar {
   display: inline-block;
   background-color: var(--bar-color);
+}
+
+.data_container {
+  background-color: #444545;
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.statistics {
+  order: 0;
 }
 
 /* BUTTONS */
@@ -152,77 +159,16 @@ hr {
 
 /* SLIDERS */
 .slider {
-  -webkit-appearance: none;
-  appearance: none;
   width: 100%;
-  height: 3px;
-  outline: none;
-  border-radius: 10px;
-  opacity: 0.8;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px black solid;
-}
-
-.slider::-moz-range-thumb {
-  appearance: none;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px black solid;
-}
-
-.slider.data::-webkit-slider-thumb {
-  background-color: var(--bar-color);
-}
-
-.slider.data::-moz-range-thumb {
-  background-color: var(--bar-color);
-}
-
-.slider.sort::-webkit-slider-thumb {
-  background-color: var(--sort-button-color);
-}
-
-.slider.sort::-moz-range-thumb {
-  background-color: var(--sort-button-color);
-}
-
-.slider:hover {
-  opacity: 1;
-}
-
-.slider.data {
-  background-color: var(--bar-color);
-}
-
-.slider.sort {
-  background-color: var(--sort-button-color);
 }
 
 /* Media Queries */
-@media only screen and (max-width: 1280px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-}
-
-@media only screen and (max-width: 860px), only screen and (max-height: 540px) {
+@media only screen and (max-width: 860px), only screen and (max-height: 568px) {
   #toolbar {
     z-index: 1;
     width: 100vw;
     height: 100vh;
-    background-color: #000000ab;
+    background-color: #000000a6;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -242,9 +188,12 @@ hr {
   #toolbar.hide {
     opacity: 0;
   }
+  .statistics {
+    z-index: 2;
+  }
 }
 
-@media only screen and (max-width: 480px), only screen and (max-height: 360px) {
+@media only screen and (max-width: 480px), only screen and (max-height: 480px) {
   html {
     font-size: 14px;
   }
@@ -256,5 +205,14 @@ hr {
   }
   h3 {
     font-size: 1rem;
+  }
+  .statistics {
+    order: 1;
+  }
+}
+
+@media only screen and (max-height: 400px) {
+  .statistics {
+    z-index: 0;
   }
 }
