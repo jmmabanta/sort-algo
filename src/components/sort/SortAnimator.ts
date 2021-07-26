@@ -176,13 +176,14 @@ const SortAnimator = (dataSet: number[]) => {
       const hasValidBarTwo =
         (barTwoIndex as number) < dataSet.length &&
         Number.isInteger(barTwoIndex as number);
+      // If barTwoIndex is not, default barTwo to barOne
       const barTwoStyles =
         dataBars[
           hasValidBarTwo ? (barTwoIndex as number) : (barOneIndex as number)
         ].style;
 
       switch (type) {
-        case 'key':
+        case 'key': // Highlight the key
           setTimeout(() => {
             if (lastKeyIndex !== barOneIndex) {
               dataBars[lastKeyIndex as number].style.backgroundColor =
@@ -198,7 +199,7 @@ const SortAnimator = (dataSet: number[]) => {
             }
           }, i * speed);
           break;
-        case 'compare':
+        case 'compare': // Color the two bars being compared
           setTimeout(() => {
             localComparisons++;
             if (barOneIndex !== lastKeyIndex)
@@ -221,7 +222,7 @@ const SortAnimator = (dataSet: number[]) => {
             }
           }, (i + 1) * speed);
           break;
-        case 'swap':
+        case 'swap': // Swap heights of the two bars
           setTimeout(() => {
             localSwaps++;
             if (hasValidBarTwo) {
@@ -229,6 +230,10 @@ const SortAnimator = (dataSet: number[]) => {
               barOneStyles.height = barTwoStyles.height;
               barTwoStyles.height = barOneHeight;
             } else {
+              // For merge sort which does not involve swapping,
+              // and the fact it refrences a temp array for swaps,
+              // barOne's height is instead directly changed to the value
+              // held by temp array (stored as barTwoIndex)
               const newHeight = calculateHeight(dataSet, barTwoIndex as number);
               barOneStyles.height = `${newHeight}vh`;
             }
