@@ -190,7 +190,7 @@ const SortAnimator = (dataSet: number[]) => {
                 PRIMARY_COLOR;
               finishSorting(dataBars);
             }
-          }, (i + 2) * speed);
+          }, (i + 1) * speed);
           break;
         case 'swap':
           setTimeout(() => {
