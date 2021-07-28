@@ -118,12 +118,12 @@ hr {
   flex-grow: 1;
   width: 100%;
   color: white;
+  justify-content: space-evenly;
 }
 
 .button_list button {
   width: 100%;
   background: none;
-  margin: 0.5rem;
   color: white;
   text-shadow: inherit;
   font-family: inherit;
@@ -151,6 +151,7 @@ hr {
 
 .sort_button button {
   border: 2px var(--sort-button-color) solid;
+  margin-left: 0.5rem;
 }
 
 .sort_button button:hover {

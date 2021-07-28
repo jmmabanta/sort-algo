@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlgorithmType } from './SortAnimator';
+import SortButtons from './SortButtons';
 
 interface ButtonProps {
   setSpeed: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -32,34 +33,11 @@ const SortDataInputs = (props: ButtonProps) => {
         onChange={props.setSpeed}
         disabled={props.isDisabled}
       ></input>
-      <div className="button_list sort_button">
-        <select
-          name="algos"
-          id="algo-drop"
-          value={selectedAlgo}
-          onChange={changeAlgo}
-        >
-          <optgroup label="O(n²)">
-            <option value="bubble">Bubble Sort</option>
-            <option value="selection">Selection Sort</option>
-            <option value="insertion">Insertion Sort</option>
-          </optgroup>
-          <optgroup label="O(n·log(n))">
-            <option value="merge">Merge Sort</option>
-            <option value="quick_lom">Quick Sort (Lomuto Partitioning)</option>
-            <option value="quick_hor">Quick Sort (Hoare Partitioning)</option>
-          </optgroup>
-        </select>
-        <button
-          onClick={() => props.sortData(selectedAlgo as AlgorithmType)}
-          disabled={props.isDisabled || props.isSorted}
-          style={{
-            display: props.isDisabled || props.isSorted ? 'none' : 'inline'
-          }}
-        >
-          Sort Data
-        </button>
-      </div>
+      <SortButtons
+        selectedAlgo={selectedAlgo}
+        changeAlgo={changeAlgo}
+        sortProps={props}
+      />
     </div>
   );
 };
