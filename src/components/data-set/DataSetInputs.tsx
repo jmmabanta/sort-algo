@@ -40,7 +40,8 @@ const DataSetInputs = (props: DataProps) => {
           disabled={!props.isSorted || props.isDisabled}
           style={{
             display:
-              !props.isSorted || props.isDisabled ? 'none' : 'inline-block'
+              !props.isSorted || props.isDisabled ? 'none' : 'inline-block',
+            marginLeft: '1rem'
           }}
         >
           Undo Sort

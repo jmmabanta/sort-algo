@@ -21,7 +21,7 @@ const App = () => {
       <Toolbar
         dataState={dataState}
         animState={animState}
-        toggleInfoBox={infoState.toggleInfoBox}
+        infoState={infoState}
       />
       <InfoBox infoState={infoState} />
     </div>

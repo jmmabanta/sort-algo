@@ -2,14 +2,17 @@ import React from 'react';
 import { AlgorithmType } from './SortAnimator';
 
 type SortButtonsProps = {
-  selectedAlgo: string;
+  selectedAlgo: AlgorithmType;
   changeAlgo: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   sortProps: {
     sortData: (algorithm?: AlgorithmType) => void;
     isSorted: boolean;
     isDisabled: boolean;
+    infoState: {
+      toggleInfoBox: (enabled?: boolean) => void;
+      setAlgo: (algo: AlgorithmType) => void;
+    };
   };
-  toggleInfoBox: (enabled?: boolean) => void;
 };
 
 const SortButtons = (props: SortButtonsProps) => {
@@ -32,11 +35,16 @@ const SortButtons = (props: SortButtonsProps) => {
           <option value="quick_hor">Quick Sort (Hoare Partitioning)</option>
         </optgroup>
       </select>
-      <button onClick={() => props.toggleInfoBox()}>Algo Info</button>
       <button
-        onClick={() =>
-          props.sortProps.sortData(props.selectedAlgo as AlgorithmType)
-        }
+        onClick={() => {
+          props.sortProps.infoState.setAlgo(props.selectedAlgo);
+          props.sortProps.infoState.toggleInfoBox();
+        }}
+      >
+        Algo Info
+      </button>
+      <button
+        onClick={() => props.sortProps.sortData(props.selectedAlgo)}
         disabled={props.sortProps.isDisabled || props.sortProps.isSorted}
         style={{
           display:

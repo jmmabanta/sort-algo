@@ -7,14 +7,18 @@ interface ButtonProps {
   sortData: (algorithm?: AlgorithmType) => void;
   isSorted: boolean;
   isDisabled: boolean;
-  toggleInfoBox: (enabled?: boolean) => void;
+  infoState: {
+    toggleInfoBox: (enabled?: boolean) => void;
+    setAlgo: (algo: AlgorithmType) => void;
+  };
 }
 
 const SortDataInputs = (props: ButtonProps) => {
-  const [selectedAlgo, setSelectedAlgo] = useState('bubble');
+  const [selectedAlgo, setSelectedAlgo] = useState<AlgorithmType>('bubble');
 
   const changeAlgo = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedAlgo(e.target.value);
+    props.infoState.setAlgo(e.target.value as AlgorithmType);
+    setSelectedAlgo(e.target.value as AlgorithmType);
   };
 
   return (
@@ -38,7 +42,6 @@ const SortDataInputs = (props: ButtonProps) => {
         selectedAlgo={selectedAlgo}
         changeAlgo={changeAlgo}
         sortProps={props}
-        toggleInfoBox={props.toggleInfoBox}
       />
     </div>
   );
