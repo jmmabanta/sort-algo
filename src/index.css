@@ -166,9 +166,9 @@ hr {
 /* INFO BOX */
 #infobox {
   position: absolute;
-  width: 69%;
+  width: 70%;
   max-width: 1366px;
-  height: 69%;
+  height: 70%;
   max-height: 768px;
   z-index: 3;
   display: flex;
