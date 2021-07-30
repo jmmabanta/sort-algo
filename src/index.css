@@ -136,8 +136,8 @@ hr {
 
 .button_list select {
   width: 100%;
-  margin: 1vh 0;
-  padding: 1vh 0;
+  margin: 0.5vh 0;
+  padding: 0.5vh 0;
   font-family: inherit;
 }
 
@@ -166,9 +166,9 @@ hr {
 /* INFO BOX */
 #infobox {
   position: absolute;
-  width: 70%;
+  width: 69%;
   max-width: 1366px;
-  height: 70%;
+  height: 69%;
   max-height: 768px;
   z-index: 3;
   display: flex;
@@ -197,7 +197,7 @@ hr {
 }
 
 /* Media Queries */
-@media only screen and (max-width: 860px), only screen and (max-height: 568px) {
+@media only screen and (max-width: 936px), only screen and (max-height: 568px) {
   #toolbar {
     z-index: 1;
     width: 100vw;
