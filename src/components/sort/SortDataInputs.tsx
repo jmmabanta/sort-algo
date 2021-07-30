@@ -7,6 +7,7 @@ interface ButtonProps {
   sortData: (algorithm?: AlgorithmType) => void;
   isSorted: boolean;
   isDisabled: boolean;
+  toggleInfoBox: (enabled?: boolean) => void;
 }
 
 const SortDataInputs = (props: ButtonProps) => {
@@ -37,6 +38,7 @@ const SortDataInputs = (props: ButtonProps) => {
         selectedAlgo={selectedAlgo}
         changeAlgo={changeAlgo}
         sortProps={props}
+        toggleInfoBox={props.toggleInfoBox}
       />
     </div>
   );

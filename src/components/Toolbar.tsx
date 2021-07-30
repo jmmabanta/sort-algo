@@ -22,6 +22,7 @@ type ToolbarProps = {
       isSorted: boolean;
     };
   };
+  toggleInfoBox: (enabled?: boolean) => void;
 };
 
 const Toolbar = (props: ToolbarProps) => {
@@ -41,6 +42,7 @@ const Toolbar = (props: ToolbarProps) => {
         setSpeed={props.animState.functions.setBaseSpeed}
         isDisabled={props.animState.properties.animating}
         isSorted={props.animState.properties.isSorted}
+        toggleInfoBox={props.toggleInfoBox}
       />
     </div>
   );

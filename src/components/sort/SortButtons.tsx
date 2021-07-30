@@ -9,6 +9,7 @@ type SortButtonsProps = {
     isSorted: boolean;
     isDisabled: boolean;
   };
+  toggleInfoBox: (enabled?: boolean) => void;
 };
 
 const SortButtons = (props: SortButtonsProps) => {
@@ -31,9 +32,7 @@ const SortButtons = (props: SortButtonsProps) => {
           <option value="quick_hor">Quick Sort (Hoare Partitioning)</option>
         </optgroup>
       </select>
-      <button onClick={() => alert('TODO: Add algorithm information box')}>
-        Algo Info
-      </button>
+      <button onClick={() => props.toggleInfoBox()}>Algo Info</button>
       <button
         onClick={() =>
           props.sortProps.sortData(props.selectedAlgo as AlgorithmType)
