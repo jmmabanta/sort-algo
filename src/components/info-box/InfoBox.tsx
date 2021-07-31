@@ -1,9 +1,9 @@
-import { AlgorithmType } from '../sort/SortAnimator';
+import AlgoInfo from './AlgoInfo';
 
 type InfoBoxProps = {
   infoState: {
     isEnabled: boolean;
-    algoInfo: AlgorithmType;
+    algoInfo: string;
     toggleInfoBox: (enabled?: boolean) => void;
   };
 };
@@ -14,14 +14,15 @@ const InfoBox = (props: InfoBoxProps) => {
       id="infobox"
       style={{ display: props.infoState.isEnabled ? 'flex' : 'none' }}
     >
-      <h1>TODO: Finish Info Box</h1>
-      <p>Display info for: {props.infoState.algoInfo}</p>
-      <br />
-      <button onClick={() => props.infoState.toggleInfoBox(false)}>
-        Close Info Box
-      </button>
+      <div id="wikipedia">
+        <iframe
+          src={AlgoInfo[props.infoState.algoInfo].url}
+          title={AlgoInfo[props.infoState.algoInfo].name}
+        ></iframe>
+      </div>
+      <button onClick={() => props.infoState.toggleInfoBox(false)}>X</button>
+      <h2>{AlgoInfo[props.infoState.algoInfo].name} Info</h2>
     </div>
   );
 };
-
 export default InfoBox;

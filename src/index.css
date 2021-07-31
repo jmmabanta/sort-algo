@@ -186,14 +186,29 @@ hr {
   font-family: inherit;
   font-size: 1rem;
   border-radius: 5px;
-  padding: 1vh 1vw;
+  padding: 0.5vh 0.5vw;
   transition: 0.2s;
   -webkit-transition: 0.2s;
   border: 2px #444545 solid;
+  position: absolute;
+  top: 2%;
+  right: 1%;
 }
 
 #infobox button:hover {
   background-color: #444545;
+}
+
+#wikipedia {
+  width: 90%;
+  height: 80%;
+  margin-bottom: 3vh;
+}
+
+#wikipedia iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 
 /* Media Queries */
