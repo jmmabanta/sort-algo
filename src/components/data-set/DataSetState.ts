@@ -14,7 +14,7 @@ const generateData = (size: number, height: number): number[] => {
 // The increment in which the data size grows
 const INCREMENT = 25;
 
-export const useDataState = (initialValue: number, height: number) => {
+const DataSetState = (initialValue: number, height: number) => {
   const [dataSet, setDataSet] = useState(generateData(initialValue, height));
 
   let resetSorted: () => void;
@@ -70,3 +70,5 @@ export const useDataState = (initialValue: number, height: number) => {
 
   return { functions, dataSet };
 };
+
+export default DataSetState;
