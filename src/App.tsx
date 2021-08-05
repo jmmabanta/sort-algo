@@ -5,7 +5,14 @@ import Toolbar from './components/Toolbar';
 import InfoBox from './components/info-box/InfoBox';
 import InfoBoxState from './components/info-box/InfoBoxState';
 
+/**
+ * Renders the entire webpage.
+ * It also stores all of the state variables needed by these components
+ * (passed via props)
+ * @returns The HTML of the full page
+ */
 const App = () => {
+  // Don't change the value 45, it just works :/
   const dataState = DataSetState(100, 45);
   const animState = SortAnimator(dataState.dataSet);
   const infoState = InfoBoxState();

@@ -27,9 +27,22 @@ const SORTED_COLOR = 'seagreen';
 
 let baseSpeed = 2;
 
+/**
+ * Clamps a number between a range of values:
+ * (Can't go over or under a certain range).
+ * @param num Value to be clamped.
+ * @param min Minimum value.
+ * @param max Maximum value.
+ * @returns The value, num, clamped within a certain range.
+ */
 const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max);
 
+/**
+ * Animates the sorting and manages the animation state.
+ * @param dataSet The current data set.
+ * @returns A collection of useful properties and functions.
+ */
 const SortAnimator = (dataSet: number[]) => {
   // States used to disable user input
   const [animating, setAnimating] = useState(false);
@@ -39,12 +52,37 @@ const SortAnimator = (dataSet: number[]) => {
   const [comparisons, setComparisons] = useState(0);
   const [swaps, setSwaps] = useState(0);
 
+  /**
+   * Resets the data set back to its original unsorted state.
+   */
   const resetSorted = () => {
     setIsSorted(false);
     setComparisons(0);
     setSwaps(0);
   };
 
+  /**
+   * Sets the speed of animation via slider.
+   * @param e The slider event.
+   */
+  const setBaseSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
+    baseSpeed = 1 / parseFloat(e.target.value);
+  };
+
+  /**
+   * Scales animation speed appropriately with the data set size.
+   * such that it takes the same time regardless of size.
+   * @returns The animation speed to be used.
+   */
+  const ANIMATION_SPEED = () => {
+    const multiplier = dataSet.length / 100;
+    return baseSpeed / (multiplier * multiplier);
+  };
+
+  /**
+   * Calls the appropriate sorting algorithm and begins animating.
+   * @param algorithm The algorithm to be used for sorting.
+   */
   const sortData = (algorithm?: AlgorithmType) => {
     setAnimating(true);
     setIsSorted(true);
@@ -80,24 +118,13 @@ const SortAnimator = (dataSet: number[]) => {
         slowFactor = 5;
         break;
       default:
+        // Should in theory never happen
         setIsSorted(false);
         setAnimating(false);
         console.error('No algorithm specified :/');
         return;
     }
     animateSort(animations, slowFactor);
-  };
-
-  const setBaseSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
-    baseSpeed = 1 / parseFloat(e.target.value);
-  };
-
-  // Speed of animation (in ms)
-  // Base speed is the speed in which a dataSet of length 100
-  // goes at, and is then scaled to larger sizes
-  const ANIMATION_SPEED = () => {
-    const multiplier = dataSet.length / 100;
-    return baseSpeed / (multiplier * multiplier);
   };
 
   /*
@@ -111,13 +138,16 @@ const SortAnimator = (dataSet: number[]) => {
 
   Each element is an array that containes the following values:
     - type: string = The kind of operator it is
-        - 'key': Highlights a certain value (pivot, mid point, leading bar, etc.)
-        - 'compare': Highlights two bars which are being compared against each other
+        - 'key': Highlights a certain value
+            (pivot, mid point, leading bar, etc.)
+        - 'compare': Highlights two bars which are
+            being compared against each other
         - 'swap': Swaps heights between bars
             * for merge sort, only the first bar height is changed
     - indexOne: number = The index of the first bar
     - indexTwo: number = The index of the second bar
-        * indexTwo may be a duplicate for 'key' operations as only one bar is needed
+        * indexTwo may be a duplicate for 'key' operations,
+            as only one bar is needed
 
   Sorting then utilizes each element of the animation array to modify the
   CSS styling of the bars to demonstrate the sorting.
@@ -126,7 +156,10 @@ const SortAnimator = (dataSet: number[]) => {
     - Yes, I know it looks horrible, I just don't know any other alternative
   */
 
-  // The final 'green' swipe of the data bars when things are done sorting
+  /**
+   * The final 'green swipe' animation after being sorted.
+   * @param dataBars An array containing the HTMLElements of the data bars.
+   */
   const finishSorting = (dataBars: HTMLCollectionOf<HTMLElement>) => {
     const animSpeed = clamp(ANIMATION_SPEED(), 1, 50);
 
@@ -143,6 +176,11 @@ const SortAnimator = (dataSet: number[]) => {
     }
   };
 
+  /**
+   *
+   * @param animations The animations array returned by a sorting algo.
+   * @param slowFactor Slows the speed of animation (Greater value -> Slower).
+   */
   const animateSort = (
     animations: (string | number)[][],
     slowFactor: number
@@ -159,7 +197,7 @@ const SortAnimator = (dataSet: number[]) => {
     let localSwaps = 0;
 
     // Instead of updating state immediately after a swap/compare
-    //      * will cause componenet re-renders
+    //    * will cause componenet re-renders
     // It will update at a set frequency instead that scales with the size
     // of the data set.
     const statUpdateSpeed = dataSet.length * 1.5;
