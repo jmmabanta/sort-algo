@@ -177,9 +177,9 @@ const SortAnimator = (dataSet: number[]) => {
   };
 
   /**
-   *
+   * Animates the sorting algorithm
    * @param animations The animations array returned by a sorting algo.
-   * @param slowFactor Slows the speed of animation (Greater value -> Slower).
+   * @param slowFactor Slows the speed of animation (Greater value = Slower).
    */
   const animateSort = (
     animations: (string | number)[][],
