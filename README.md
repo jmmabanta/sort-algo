@@ -19,13 +19,26 @@ _Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmi
    - ~~Merge Sort~~ ✅
    - ~~Bubble Sort~~ ✅
    - ~~Quick Sort~~ ✅
-   - Heap Sort
+   - ~~Heap Sort~~ ✅
+
+---
+
+Currently, I feel that this project is complete. Of course, I could always add more algorithms, but I'll leave that for some other time :)
 
 ---
 
 ## Available Scripts
 
 _For anyone who somehow finds this and for some god forsaken reason decided to clone and run this barebones project for nothing._
+
+### Requirements
+
+- NodeJS
+- Yarn (though you can still use npm)
+
+### `yarn | yarn install`
+
+**IMPORTANT:** Installs all the necessary dependancies for the project to run.
 
 ### `yarn start`
 
@@ -39,7 +52,7 @@ Builds app for production in the `build` folder.
 
 ### `yarn deploy`
 
-Deploys the production build into the public GitHub pages site for all to see!\
+Deploys the production build into the public GitHub pages site for all to see!
 
 **NOTES:**
 
