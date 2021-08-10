@@ -5,6 +5,10 @@ type AlgoInfoType = {
   };
 };
 
+/**
+ * Contains the wikipedia links to be displayed for each
+ * sorting algorithm.
+ */
 const AlgoInfo: AlgoInfoType = {
   bubble: {
     name: 'Bubble Sort',

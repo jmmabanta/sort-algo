@@ -1,3 +1,9 @@
+/**
+ * Bubble sorts a deep copy of the original data set.
+ * @param dataSet The current data set.
+ * @returns An 2D animations array that contains the information
+ * necessary for SortAnimator.ts to animating the algorithm.
+ */
 const BubbleSort = (dataSet: number[]) => {
   const animations: (string | number)[][] = [];
 
@@ -7,8 +13,11 @@ const BubbleSort = (dataSet: number[]) => {
   const dataSize = sortedData.length;
 
   for (let i = 0; i < dataSize - 1; i++) {
+    // For fast bubble sort, if it goes through an array pass
+    // without swapping, then it means the data set is fully sorted.
     let didSwap = false;
 
+    // Loop through the unsorted part of the data set.
     for (let j = 0; j < dataSize - i - 1; j++) {
       animations.push(['compare', j, j + 1]);
 
@@ -23,8 +32,11 @@ const BubbleSort = (dataSet: number[]) => {
       }
     }
 
+    // Highlights the last sorted element in the data set.
     animations.push(['key', dataSize - i - 1]);
 
+    // If a pass if completed without swapping, immedietely return
+    // as sorting is finished.
     if (!didSwap) return animations;
   }
 

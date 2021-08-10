@@ -11,7 +11,6 @@ interface DataProps {
 }
 
 /**
- * Renders the section that manipulates the data set.
  * @param props Necessary functions and state variables.
  * @returns The slider and buttons that affect the data set.
  */

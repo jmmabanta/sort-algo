@@ -8,6 +8,12 @@ type InfoBoxProps = {
   };
 };
 
+/**
+ * @param props Contains the state variables of InfoBoxState,
+ * and a function to turn off the info box.
+ * @returns An information box that includes a wikipedia iframe
+ * of the currently selected sorting algorithm.
+ */
 const InfoBox = (props: InfoBoxProps) => {
   return (
     <div

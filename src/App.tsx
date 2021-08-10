@@ -6,9 +6,6 @@ import InfoBox from './components/info-box/InfoBox';
 import InfoBoxState from './components/info-box/InfoBoxState';
 
 /**
- * Renders the entire webpage.
- * It also stores all of the state variables needed by these components
- * (passed via props)
  * @returns The HTML of the full page
  */
 const App = () => {

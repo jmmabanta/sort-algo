@@ -10,16 +10,32 @@ interface DataSetProps {
 
 const MAX_HEIGHT = 72;
 
-// Both calculateHeight and calculateWidth are used for CSS styling
-// Measured in vh and vw
+/**
+ * Calculates the height for a given data point and its respective bar.
+ * @param dataSet The current data set.
+ * @param value The value of the element within the data set.
+ * @returns A height value (in vh) to be applied to the data bar in CSS.
+ */
 export const calculateHeight = (dataSet: number[], value: number) => {
   return (value * MAX_HEIGHT) / Math.max(...dataSet);
 };
 
+/**
+ * Calculates the width for each data bar.
+ * @param dataSize The number of points in the data set.
+ * @param maxWidth The maximum width (in vw) of the whold bar graph.
+ * @returns A width value (in vw) to be applied to the data bar in CSS.
+ */
 const calculateWidth = (dataSize: number, maxWidth: number) => {
   return maxWidth / (1.1 * (dataSize - 1));
 };
 
+/**
+ * Generates the 'bar graph'/display of data points.
+ * @param props Contains information about the data set,
+ * as well as the number of comparisons and swaps during sorting.
+ * @returns A bar graph representing all of the data points in the set.
+ */
 const DataSetDisplay = (props: DataSetProps) => {
   let width = calculateWidth(props.dataSet.length, 85);
   return (

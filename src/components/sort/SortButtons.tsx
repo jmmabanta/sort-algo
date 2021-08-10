@@ -15,6 +15,12 @@ type SortButtonsProps = {
   };
 };
 
+/**
+ * @param props Contains multiple functions triggered by the slider,
+ * as well as properties (selectedAlgo, isSorted & isDisabled) to
+ * determine behavior.
+ * @returns The input box that contains inputs which manipulate sorting.
+ */
 const SortButtons = (props: SortButtonsProps) => {
   return (
     <div className="button_list sort_button">

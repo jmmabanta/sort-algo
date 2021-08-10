@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { AlgorithmType } from '../sort/SortAnimator';
 
+/**
+ * Manages the current algorithm selected in order to display
+ * their information in the info box.
+ * @returns An object which contains both states, and functions
+ * to modify these states.
+ */
 const InfoBoxState = () => {
   const [isEnabled, setEnabled] = useState(false);
   const [algoInfo, setAlgoInfo] = useState('bubble');

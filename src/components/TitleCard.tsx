@@ -1,3 +1,6 @@
+/**
+ * @returns A simple title card.
+ */
 const TitleCard = () => {
   return (
     <div id="title">

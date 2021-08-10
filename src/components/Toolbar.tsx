@@ -28,6 +28,12 @@ type ToolbarProps = {
   };
 };
 
+/**
+ * @param props Contains all of the functions and state necessary to
+ * add functionality to all of the input fields.
+ * @returns A toolbar of user inputs, found at the bottom of the screen,
+ * or front and center on smaller screens.
+ */
 const Toolbar = (props: ToolbarProps) => {
   return (
     <div

@@ -1,3 +1,9 @@
+/**
+ * Selection sorts a deep copy of the data set.
+ * @param dataSet The current data set.
+ * @returns A 2D animations array containing the information
+ * needed for SortAnimator.ts to animate the algorithm.
+ */
 const SelectionSort = (dataSet: number[]) => {
   const sortedData = dataSet.slice();
   const animations: (string | number)[][] = [];
@@ -6,6 +12,7 @@ const SelectionSort = (dataSet: number[]) => {
 
   for (let i = 0; i < sortedData.length - 1; i++) {
     let minIndex = i;
+    // Highlight the division between the sorted and unsorted sets.
     animations.push(['key', i]);
 
     for (let j = i + 1; j < sortedData.length; j++) {
