@@ -1,3 +1,5 @@
+import { swap } from './HelperMethods';
+
 /**
  * Selection sorts a deep copy of the data set.
  * @param dataSet The current data set.
@@ -20,11 +22,7 @@ const SelectionSort = (dataSet: number[]) => {
       animations.push(['compare', minIndex, j]);
     }
 
-    animations.push(['swap', i, minIndex]);
-
-    let temp = sortedData[i];
-    sortedData[i] = sortedData[minIndex];
-    sortedData[minIndex] = temp;
+    swap(sortedData, i, minIndex, animations);
   }
 
   return animations;

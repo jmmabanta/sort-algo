@@ -1,3 +1,5 @@
+import { swap } from './HelperMethods';
+
 /**
  * Bubble sorts a deep copy of the original data set.
  * @param dataSet The current data set.
@@ -22,12 +24,7 @@ const BubbleSort = (dataSet: number[]) => {
       animations.push(['compare', j, j + 1]);
 
       if (sortedData[j] > sortedData[j + 1]) {
-        animations.push(['swap', j, j + 1]);
-
-        const temp = sortedData[j];
-        sortedData[j] = sortedData[j + 1];
-        sortedData[j + 1] = temp;
-
+        swap(sortedData, j, j + 1, animations);
         didSwap = true;
       }
     }
