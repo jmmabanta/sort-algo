@@ -39,6 +39,7 @@ const SortButtons = (props: SortButtonsProps) => {
           <option value="merge">Merge Sort</option>
           <option value="quick_lom">Quick Sort (Lomuto Partitioning)</option>
           <option value="quick_hor">Quick Sort (Hoare Partitioning)</option>
+          <option value="heap">Heap Sort</option>
         </optgroup>
       </select>
       <button

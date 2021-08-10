@@ -6,7 +6,7 @@
  * @param j Index of the other element to be swapped.
  * @param anim The 2D animations array to push swap animations into.
  */
-const swapValues = (
+const swap = (
   dataSet: number[],
   i: number,
   j: number,
@@ -95,7 +95,7 @@ const lomutoPartition = (
   // Here, the last element is swapped with a random element
   const randIndex = getRandomPivotIndex(low, high);
   anim.push(['key', randIndex]);
-  swapValues(dataSet, randIndex, high, anim);
+  swap(dataSet, randIndex, high, anim);
   const pivot = dataSet[high];
 
   let i = low - 1; // Index of smallest value immediately left of the pivot
@@ -106,7 +106,7 @@ const lomutoPartition = (
     if (dataSet[j] < pivot) {
       i++; // Increment the index of the smallest value
       anim.push(['compare', i, j]);
-      swapValues(dataSet, i, j, anim); // Swap
+      swap(dataSet, i, j, anim); // Swap
     }
   }
 
@@ -114,7 +114,7 @@ const lomutoPartition = (
   // which should be the first element bigger than the pivot,
   // with the pivot which is now placed at the high index.
   anim.push(['compare', i + 1, high]);
-  swapValues(dataSet, i + 1, high, anim);
+  swap(dataSet, i + 1, high, anim);
 
   return i + 1;
 };
@@ -162,7 +162,7 @@ const hoarePartition = (
   // Partitioning uses the first element (low index) of a section as the pivot
   // Here, the last element is swapped with a random element
   const randIndex = getRandomPivotIndex(low, high);
-  swapValues(dataSet, randIndex, low, anim);
+  swap(dataSet, randIndex, low, anim);
   const pivot = dataSet[low];
   anim.push(['key', randIndex]);
 
@@ -192,7 +192,7 @@ const hoarePartition = (
 
     // Swap the greater-than-pivot left element
     // with the smaller-than-pivot right element
-    swapValues(dataSet, left, right, anim);
+    swap(dataSet, left, right, anim);
   }
 };
 

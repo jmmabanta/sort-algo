@@ -8,6 +8,7 @@ import SelectionSort from './algorithms/SelectionSort';
 import InsertionSort from './algorithms/InsertionSort';
 import MergeSort from './algorithms/MergeSort';
 import QuickSort from './algorithms/QuickSort';
+import HeapSort from './algorithms/HeapSort';
 
 export type AlgorithmType =
   | 'bubble'
@@ -116,6 +117,10 @@ const SortAnimator = (dataSet: number[]) => {
         break;
       case 'quick_hor':
         animations = QuickSort(dataSet, false);
+        slowFactor = 5;
+        break;
+      case 'heap':
+        animations = HeapSort(dataSet);
         slowFactor = 5;
         break;
       default:

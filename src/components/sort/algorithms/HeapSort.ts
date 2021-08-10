@@ -1,23 +1,43 @@
+/**
+ * Swaps two elements in an array
+ * and push that animation into the animation array.
+ * @param dataSet An array.
+ * @param i Index of one element to be swapped.
+ * @param j Index of the other element to be swapped.
+ * @param anim The 2D animations array to push swap animations into.
+ */
+const swap = (
+  dataSet: number[],
+  i: number,
+  j: number,
+  anim: (string | number)[][]
+) => {
+  anim.push(['swap', i, j]);
+  const temp = dataSet[i];
+  dataSet[i] = dataSet[j];
+  dataSet[j] = temp;
+};
+
 const HeapSort = (dataSet: number[]) => {
+  const animations: (string | number)[][] = [];
+
   const sortedSet = dataSet.slice();
   let heapSize = sortedSet.length;
-  if (heapSize <= 1) return sortedSet;
+  if (heapSize <= 1) return animations;
 
   // Generate the initial max heap.
   for (let i = Math.floor(heapSize / 2) - 1; i >= 0; i--) {
-    generateMaxHeap(sortedSet, heapSize, i);
+    generateMaxHeap(sortedSet, heapSize, i, animations);
   }
 
   // Move the root of the tree (largest element) to the very end
   // of the data set, and generate another max heap with
   // the remaining elements.
   for (let i = heapSize - 1; i > 0; i--) {
-    const temp = sortedSet[i];
-    sortedSet[i] = sortedSet[0];
-    sortedSet[0] = temp;
-    generateMaxHeap(sortedSet, i, 0);
+    swap(sortedSet, i, 0, animations);
+    generateMaxHeap(sortedSet, i, 0, animations);
   }
-  return sortedSet;
+  return animations;
 };
 
 /**
@@ -26,8 +46,14 @@ const HeapSort = (dataSet: number[]) => {
  * @param dataSet The deep copy of the data set.
  * @param size The size of the heap/unsorted section.
  * @param idx The index of the parent node.
+ * @param anim The 2D animations array.
  */
-const generateMaxHeap = (dataSet: number[], size: number, idx: number) => {
+const generateMaxHeap = (
+  dataSet: number[],
+  size: number,
+  idx: number,
+  anim: (string | number)[][]
+) => {
   const left = idx * 2 + 1; // Left node index.
   const right = idx * 2 + 2; // Right node index.
   let largest = idx; // Parent node (which should be largest in a max heap).
@@ -39,12 +65,9 @@ const generateMaxHeap = (dataSet: number[], size: number, idx: number) => {
   // Swaps a root node with its child node
   // if its child is larger than its parent.
   if (largest !== idx) {
-    const temp = dataSet[idx];
-    dataSet[idx] = dataSet[largest];
-    dataSet[largest] = temp;
-
+    swap(dataSet, idx, largest, anim);
     // Recursively build the max heap from top (root) to bottom
-    generateMaxHeap(dataSet, size, largest);
+    generateMaxHeap(dataSet, size, largest, anim);
   }
 };
 
