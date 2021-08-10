@@ -4,7 +4,7 @@ import { swap } from './HelperMethods';
  * Bubble sorts a deep copy of the original data set.
  * @param dataSet The current data set.
  * @returns An 2D animations array that contains the information
- * necessary for SortAnimator.ts to animating the algorithm.
+ * necessary for SortAnimator.ts to animating bubble sort.
  */
 const BubbleSort = (dataSet: number[]) => {
   const animations: (string | number)[][] = [];

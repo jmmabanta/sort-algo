@@ -1,3 +1,5 @@
+// A list of functions commonly used in these algorithms:
+
 /**
  * Swaps two elements in an array
  * and push that animation into the animation array.

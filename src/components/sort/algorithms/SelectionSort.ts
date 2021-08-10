@@ -4,7 +4,7 @@ import { swap } from './HelperMethods';
  * Selection sorts a deep copy of the data set.
  * @param dataSet The current data set.
  * @returns A 2D animations array containing the information
- * needed for SortAnimator.ts to animate the algorithm.
+ * needed for SortAnimator.ts to animate selection sort.
  */
 const SelectionSort = (dataSet: number[]) => {
   const sortedData = dataSet.slice();

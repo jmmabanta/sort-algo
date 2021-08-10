@@ -18,7 +18,7 @@ const getRandomPivotIndex = (low: number, high: number) =>
  * @param isLomuto Switch between Lomuto's partitioning scheme, or Hoare's
  * partitioning scheme.
  * @returns A 2D animations array containing the information
- * needed for SortAnimator.ts to animate the algorithm.
+ * needed for SortAnimator.ts to animate quick sort.
  */
 const QuickSort = (dataSet: number[], isLomuto: boolean) => {
   const animations: (string | number)[][] = [];

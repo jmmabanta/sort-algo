@@ -8,7 +8,7 @@
  * Merge sorts a deep copy of the data set.
  * @param dataSet The current data set.
  * @returns A 2D animations array containing the information
- * needed for SortAnimator.ts to animate the algorithm.
+ * needed for SortAnimator.ts to animate merge sort.
  */
 const MergeSort = (dataSet: number[]) => {
   const animations: (string | number)[][] = [];

@@ -1,5 +1,11 @@
 import { swap } from './HelperMethods';
 
+/**
+ * Heap sorts a deep copy of the data set.
+ * @param dataSet The current data set.
+ * @returns A 2D animations array containing the information
+ * needed for SortAnimator.ts to animate heap sort.
+ */
 const HeapSort = (dataSet: number[]) => {
   const animations: (string | number)[][] = [];
 
