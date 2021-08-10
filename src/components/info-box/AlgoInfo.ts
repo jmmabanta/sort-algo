@@ -33,6 +33,10 @@ const AlgoInfo: AlgoInfoType = {
   quick_hor: {
     name: 'Quick Sort',
     url: 'https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme'
+  },
+  heap: {
+    name: 'Heap Sort',
+    url: 'https://en.wikipedia.org/wiki/Heapsort'
   }
 };
 

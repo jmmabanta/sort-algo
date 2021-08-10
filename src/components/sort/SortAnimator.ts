@@ -16,6 +16,7 @@ export type AlgorithmType =
   | 'merge'
   | 'quick_lom'
   | 'quick_hor'
+  | 'heap'
   | undefined;
 
 // Main Colors
