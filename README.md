@@ -19,7 +19,7 @@ _Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmi
    - ~~Merge Sort~~ ✅
    - ~~Bubble Sort~~ ✅
    - ~~Quick Sort~~ ✅
-   - Other...
+   - Heap Sort
 
 ---
 
