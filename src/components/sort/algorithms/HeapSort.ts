@@ -16,6 +16,7 @@ const HeapSort = (dataSet: number[]) => {
   // of the data set, and generate another max heap with
   // the remaining elements.
   for (let i = heapSize - 1; i > 0; i--) {
+    animations.push(['key', i]);
     swap(sortedSet, i, 0, animations);
     generateMaxHeap(sortedSet, i, 0, animations);
   }
@@ -40,9 +41,19 @@ const generateMaxHeap = (
   const right = idx * 2 + 2; // Right node index.
   let largest = idx; // Parent node (which should be largest in a max heap).
 
+  const compareAnimation: (string | number)[] = ['compare'];
+
   // Finds a child node that is greater than its parent.
-  if (left < size && dataSet[left] > dataSet[largest]) largest = left;
-  if (right < size && dataSet[right] > dataSet[largest]) largest = right;
+  if (left < size) {
+    compareAnimation.push(left);
+    if (dataSet[left] > dataSet[largest]) largest = left;
+  }
+  if (right < size) {
+    compareAnimation.push(right);
+    if (dataSet[right] > dataSet[largest]) largest = right;
+  }
+
+  if (compareAnimation.length > 1) anim.push(compareAnimation);
 
   // Swaps a root node with its child node
   // if its child is larger than its parent.
