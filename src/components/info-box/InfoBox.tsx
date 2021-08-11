@@ -15,19 +15,23 @@ type InfoBoxProps = {
  * of the currently selected sorting algorithm.
  */
 const InfoBox = (props: InfoBoxProps) => {
+  const algorithm = AlgoInfo[props.infoState.algoInfo];
   return (
     <div
       id="infobox"
       style={{ display: props.infoState.isEnabled ? 'flex' : 'none' }}
     >
       <div id="wikipedia">
-        <iframe
-          src={AlgoInfo[props.infoState.algoInfo].url}
-          title={AlgoInfo[props.infoState.algoInfo].name}
-        ></iframe>
+        <iframe src={algorithm.url} title={algorithm.name}></iframe>
       </div>
       <button onClick={() => props.infoState.toggleInfoBox(false)}>X</button>
-      <h2>{AlgoInfo[props.infoState.algoInfo].name} Info</h2>
+      <h2>{algorithm.name} Info</h2>
+      <h4>
+        <i>
+          Worst Case: {algorithm.worst} · Average Case: {algorithm.avg} · Best
+          Case: {algorithm.best}
+        </i>
+      </h4>
     </div>
   );
 };
