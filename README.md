@@ -3,7 +3,7 @@
 ### [Click Here to View](http://jmmabanta.github.io/sort-algo)
 
 A Typescript sorting algorithm visualization tool made with create-react-app.\
-_Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmihailescu/Sorting-Visualizer)_\
+_Inspired by [Clément Mihailescu's own visualizer](https://github.com/clementmihailescu/Sorting-Visualizer)_
 
 ---
 
