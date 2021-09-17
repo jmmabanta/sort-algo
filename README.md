@@ -27,9 +27,6 @@ Currently, I feel that this project is complete. Of course, I could always add m
 ---
 
 ## Available Scripts
-
-_For anyone who somehow finds this and for some god forsaken reason decided to clone and run this barebones project for nothing._
-
 ### Requirements
 
 - NodeJS
